@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+/* CS Night Design Tokens */
+:root {
+  --navy: #0A1628;
+  --navy-dark: #050B14;
+  --navy-mid: #0D1A2A;
+  --navy-deep: #112236;
+  --navy-light: #142840;
+  --gold: #C89B3C;
+  --gold-light: #E5C06B;
+  --gold-pale: #FFD700;
+  --gold-dark: #8B6914;
+  --cream: #F5EDD8;
+  --blue-secondary: #8BA3BF;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-gold: var(--gold);
+  --color-cream: var(--cream);
+  --color-blue-secondary: var(--blue-secondary);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--navy);
+  color: var(--cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ornamental divider component */
+.ornamental-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.ornamental-divider::before,
+.ornamental-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(200, 155, 60, 0.5));
+}
+
+.ornamental-divider::after {
+  background: linear-gradient(to left, transparent, rgba(200, 155, 60, 0.5));
+}
