@@ -1,0 +1,288 @@
+export function About() {
+  return (
+    <section
+      id="about"
+      className="relative py-32 px-4 bg-linear-to-b from-[#0A1628] via-[#0D1A2A] to-[#0A1628] overflow-hidden"
+    >
+      {/* Opera House Background */}
+      <div className="absolute inset-0 z-0 opacity-10">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://images.unsplash.com/photo-1759336153678-62c16336c872?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Curtain Effects */}
+      <div className="absolute left-0 top-0 bottom-0 w-1/4 z-[1] pointer-events-none">
+        <div className="w-full h-full bg-linear-to-r from-[#0A1628] via-[#0D2840]/60 to-transparent" />
+      </div>
+      <div className="absolute right-0 top-0 bottom-0 w-1/4 z-[1] pointer-events-none">
+        <div className="w-full h-full bg-linear-to-l from-[#0A1628] via-[#0D2840]/60 to-transparent" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Title */}
+        <div className="text-center mb-20">
+          <p
+            className="text-xs uppercase tracking-[0.4em] mb-4"
+            style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+          >
+            — An Exclusive Evening —
+          </p>
+          <h2
+            className="text-6xl md:text-8xl mb-6 relative inline-block"
+            style={{
+              fontFamily: "Playfair Display, serif",
+              color: "#C89B3C",
+              fontWeight: 700,
+              textShadow: `0 0 40px rgba(200, 155, 60, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.8)`,
+            }}
+          >
+            About the Night
+            <div className="absolute -bottom-2 left-0 right-0 h-[3px] bg-linear-to-r from-transparent via-[#C89B3C] to-transparent" />
+          </h2>
+        </div>
+
+        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-start">
+          {/* Left Column — Invitation Letter */}
+          <div className="space-y-8 relative">
+            <div className="relative">
+              <span
+                className="float-left text-9xl leading-none mr-4 mt-2"
+                style={{
+                  fontFamily: "Playfair Display, serif",
+                  color: "#C89B3C",
+                  textShadow: "0 0 30px rgba(200, 155, 60, 0.6)",
+                }}
+              >
+                C
+              </span>
+              <p
+                className="text-xl md:text-2xl leading-relaxed"
+                style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
+              >
+                S Night is not just another university event—it&apos;s the most prestigious grand ball of the year,
+                exclusively crafted for Computer Science students and their distinguished guests.
+              </p>
+            </div>
+
+            <p className="text-lg md:text-xl leading-relaxed" style={{ color: "#F5EDD8" }}>
+              Step into an evening where elegance meets innovation, where the brightest minds in CS gather under crystal
+              chandeliers to celebrate community, achievement, and the timeless art of connection.
+            </p>
+
+            <p
+              className="text-lg md:text-xl leading-relaxed italic"
+              style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+            >
+              Behind every mask lies a story waiting to unfold. This is your invitation to be part of something
+              unforgettable—a night where tradition and technology dance together in perfect harmony.
+            </p>
+
+            {/* Pearl Divider */}
+            <div className="flex items-center gap-3 py-6">
+              <div className="flex-1 h-px bg-linear-to-r from-transparent to-[#C89B3C]/50" />
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={i}
+                  className="w-2 h-2 rounded-full bg-[#F5EDD8] shadow-[0_0_10px_rgba(245,237,216,0.6)]"
+                  style={{ opacity: 0.3 + i * 0.15 }}
+                />
+              ))}
+              <div className="flex-1 h-px bg-linear-to-l from-transparent to-[#C89B3C]/50" />
+            </div>
+
+            {/* Limited Seats Card */}
+            <div
+              className="relative overflow-hidden"
+              style={{ border: "1px solid rgba(200,155,60,0.35)", background: "rgba(200,155,60,0.04)" }}
+            >
+              {/* Corner accents */}
+              <svg className="absolute top-0 left-0 w-8 h-8" viewBox="0 0 100 100">
+                <path d="M0,0 L60,0 L60,10 L10,10 L10,60 L0,60 Z" fill="#C89B3C" opacity="0.6" />
+              </svg>
+              <svg className="absolute bottom-0 right-0 w-8 h-8" viewBox="0 0 100 100">
+                <path d="M100,100 L40,100 L40,90 L90,90 L90,40 L100,40 Z" fill="#C89B3C" opacity="0.6" />
+              </svg>
+
+              <div className="px-8 py-6 flex items-center gap-6">
+                {/* Icon */}
+                <div className="shrink-0 w-14 h-14 border border-[#C89B3C]/50 flex items-center justify-center bg-[#C89B3C]/10">
+                  <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="#C89B3C" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+                  </svg>
+                </div>
+
+                {/* Text */}
+                <div>
+                  <p
+                    className="text-xs uppercase tracking-[0.3em] mb-1"
+                    style={{ color: "#8BA3BF" }}
+                  >
+                    Capacity
+                  </p>
+                  <p
+                    className="text-2xl leading-tight"
+                    style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+                  >
+                    200 Seats Only
+                  </p>
+                  <p
+                    className="text-sm mt-1 italic"
+                    style={{ color: "#F5EDD8", opacity: 0.7, fontFamily: "Playfair Display, serif" }}
+                  >
+                    Limited seats available — reserve yours early.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column — Formal Invitation Card */}
+          <div className="relative lg:sticky lg:top-8 lg:-mt-8">
+            <div
+              className="relative bg-linear-to-b from-[#0D1A2A] via-[#0A1628] to-[#0D1A2A] shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden"
+              style={{ border: "1px solid rgba(200,155,60,0.4)" }}
+            >
+              {/* Inner glow */}
+              <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(200,155,60,0.08)] pointer-events-none" />
+
+              {/* Top decorative band */}
+              <div className="h-1 w-full bg-linear-to-r from-transparent via-[#C89B3C] to-transparent" />
+
+              {/* Corner Flourishes */}
+              <svg className="absolute top-0 left-0 w-12 h-12" viewBox="0 0 100 100">
+                <path d="M0,0 L60,0 L60,8 L8,8 L8,60 L0,60 Z" fill="#C89B3C" opacity="0.7" />
+              </svg>
+              <svg className="absolute top-0 right-0 w-12 h-12" viewBox="0 0 100 100">
+                <path d="M100,0 L40,0 L40,8 L92,8 L92,60 L100,60 Z" fill="#C89B3C" opacity="0.7" />
+              </svg>
+              <svg className="absolute bottom-0 left-0 w-12 h-12" viewBox="0 0 100 100">
+                <path d="M0,100 L60,100 L60,92 L8,92 L8,40 L0,40 Z" fill="#C89B3C" opacity="0.7" />
+              </svg>
+              <svg className="absolute bottom-0 right-0 w-12 h-12" viewBox="0 0 100 100">
+                <path d="M100,100 L40,100 L40,92 L92,92 L92,40 L100,40 Z" fill="#C89B3C" opacity="0.7" />
+              </svg>
+
+              {/* Card content — centered invitation typography */}
+              <div className="px-10 py-12 text-center space-y-0">
+                <p
+                  className="text-xs uppercase tracking-[0.35em] mb-6"
+                  style={{ color: "#8BA3BF", fontFamily: "Playfair Display, serif" }}
+                >
+                  The ACM-CS Community
+                </p>
+                <p
+                  className="text-sm italic mb-2"
+                  style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.8 }}
+                >
+                  cordially invites you to
+                </p>
+
+                <h3
+                  className="text-4xl tracking-wider my-5"
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    color: "#C89B3C",
+                    fontWeight: 700,
+                    textShadow: "0 0 30px rgba(200, 155, 60, 0.5)",
+                  }}
+                >
+                  CS Night 2026
+                </h3>
+
+                {/* Ornamental divider */}
+                <div className="flex items-center justify-center gap-3 my-6">
+                  <div className="w-16 h-px bg-linear-to-r from-transparent to-[#C89B3C]/60" />
+                  <div className="w-1.5 h-1.5 rotate-45 bg-[#C89B3C]" />
+                  <div className="w-16 h-px bg-linear-to-l from-transparent to-[#C89B3C]/60" />
+                </div>
+
+                <p
+                  className="text-base italic mb-8"
+                  style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.75 }}
+                >
+                  A Masquerade Grand Ball
+                </p>
+
+                {/* Details block */}
+                <div className="space-y-5 border-t border-b border-[#C89B3C]/20 py-8 my-2">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Date</p>
+                    <p
+                      className="text-2xl"
+                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", fontWeight: 600 }}
+                    >
+                      June 27, 2026
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-10 h-px bg-[#C89B3C]/30" />
+                    <div className="w-1 h-1 rounded-full bg-[#C89B3C]/50" />
+                    <div className="w-10 h-px bg-[#C89B3C]/30" />
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Time</p>
+                    <p
+                      className="text-2xl"
+                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", fontWeight: 600 }}
+                    >
+                      5:00 PM onwards
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-10 h-px bg-[#C89B3C]/30" />
+                    <div className="w-1 h-1 rounded-full bg-[#C89B3C]/50" />
+                    <div className="w-10 h-px bg-[#C89B3C]/30" />
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Venue</p>
+                    <p
+                      className="text-2xl"
+                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", fontWeight: 600 }}
+                    >
+                      17th Floor Gymnasium
+                    </p>
+                  </div>
+                </div>
+
+                {/* Dress Code */}
+                <div className="pt-6">
+                  <p className="text-[10px] uppercase tracking-[0.35em] mb-3" style={{ color: "#8BA3BF" }}>
+                    Dress Code
+                  </p>
+                  <p
+                    className="text-2xl"
+                    style={{
+                      fontFamily: "Playfair Display, serif",
+                      color: "#C89B3C",
+                      fontWeight: 700,
+                      textShadow: "0 0 20px rgba(200, 155, 60, 0.4)",
+                    }}
+                  >
+                    Formal Attire
+                  </p>
+                  <p
+                    className="text-base mt-1 italic"
+                    style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.7 }}
+                  >
+                    Masks Required
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom decorative band */}
+              <div className="h-1 w-full bg-linear-to-r from-transparent via-[#C89B3C] to-transparent" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
