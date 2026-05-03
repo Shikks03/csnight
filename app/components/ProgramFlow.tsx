@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, forwardRef } from "react";
 
 type Moment = { timeRange: string; title: string; description: string };
 
@@ -59,6 +59,19 @@ const actGroups: Act[] = [
 ];
 
 export function ProgramFlow() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const handleToggle = (index: number) => {
+    const next = openIndex === index ? null : index;
+    setOpenIndex(next);
+    if (next !== null && typeof window !== "undefined" && window.innerWidth < 768) {
+      setTimeout(() => {
+        cardRefs.current[next]?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
+  };
+
   return (
     <section id="program" className="relative py-32 px-4 bg-[#0A1628] overflow-hidden">
       <div className="max-w-5xl mx-auto">
@@ -84,25 +97,67 @@ export function ProgramFlow() {
           </p>
         </div>
 
-        {/* Act cards — static collapsed grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {actGroups.map((act) => (
-            <CollapsedActCard key={act.numeral} act={act} />
-          ))}
-        </div>
+        {/* Act cards — layout switches when one is open */}
+        {openIndex === null ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {actGroups.map((act, i) => (
+              <ActCard
+                key={act.numeral}
+                act={act}
+                index={i}
+                isOpen={false}
+                onToggle={handleToggle}
+                ref={(el) => { cardRefs.current[i] = el; }}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col gap-6">
+            <ActCard
+              act={actGroups[openIndex]}
+              index={openIndex}
+              isOpen={true}
+              onToggle={handleToggle}
+              ref={(el) => { cardRefs.current[openIndex] = el; }}
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {actGroups
+                .map((act, i) => ({ act, i }))
+                .filter(({ i }) => i !== openIndex)
+                .map(({ act, i }) => (
+                  <ActCard
+                    key={act.numeral}
+                    act={act}
+                    index={i}
+                    isOpen={false}
+                    onToggle={handleToggle}
+                    ref={(el) => { cardRefs.current[i] = el; }}
+                  />
+                ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-function CollapsedActCard({ act }: { act: Act }) {
+const ActCard = forwardRef<
+  HTMLDivElement,
+  { act: Act; index: number; isOpen: boolean; onToggle: (i: number) => void }
+>(function ActCard({ act, index, isOpen, onToggle }, ref) {
   return (
     <div
-      className="px-8 py-8 border border-[#C89B3C]/40 cursor-pointer"
+      ref={ref}
+      onClick={() => onToggle(index)}
+      className={`
+        border cursor-pointer transition-colors duration-300
+        ${isOpen ? "border-[#C89B3C]/70" : "border-[#C89B3C]/40 hover:border-[#C89B3C]/70"}
+      `}
       style={{ background: "#0C1829" }}
     >
-      {/* Desktop layout */}
-      <div className="hidden md:block">
+      {/* Card header — desktop */}
+      <div className="hidden md:block px-8 pt-8 pb-0">
         <p
           className="text-7xl leading-none mb-4"
           style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C" }}
@@ -122,23 +177,30 @@ function CollapsedActCard({ act }: { act: Act }) {
           {act.title}
         </h3>
         <p
-          className="text-base italic mb-5"
+          className="text-base italic"
           style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.7 }}
         >
           {act.mood}
         </p>
-        <div className="border-t border-[#C89B3C]/30 pt-4">
-          <p
-            className="text-xs tracking-wide"
-            style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
-          >
-            View moments ↓
-          </p>
+        <div className="border-t border-[#C89B3C]/30 mt-5 pt-4 pb-4 flex items-center justify-between">
+          {!isOpen ? (
+            <p className="text-xs tracking-wide" style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}>
+              View moments ↓
+            </p>
+          ) : (
+            <p
+              className="text-xs tracking-wide"
+              style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+              onClick={(e) => { e.stopPropagation(); onToggle(index); }}
+            >
+              × Close
+            </p>
+          )}
         </div>
       </div>
 
-      {/* Mobile layout */}
-      <div className="md:hidden flex items-start justify-between">
+      {/* Card header — mobile */}
+      <div className="md:hidden px-6 py-6 flex items-start justify-between">
         <div className="flex items-center gap-4 flex-1 min-w-0">
           <p
             className="text-5xl leading-none shrink-0"
@@ -168,12 +230,76 @@ function CollapsedActCard({ act }: { act: Act }) {
           </div>
         </div>
         <span
-          className="text-lg shrink-0 ml-4 mt-1 transition-transform duration-300"
+          className={`text-xl shrink-0 ml-4 mt-1 transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
           style={{ color: "#C89B3C" }}
         >
           ›
         </span>
       </div>
+
+      {/* Expanded moment rows — animated with grid-rows trick */}
+      <div
+        className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="px-8 pb-8">
+            {act.moments.map((moment, mi) => (
+              <div
+                key={mi}
+                className="py-4 border-t border-[#C89B3C]/20 first:border-t-0"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Desktop moment row */}
+                <div className="hidden md:flex items-baseline gap-4">
+                  <p
+                    className="text-xs uppercase tracking-[0.25em] shrink-0 w-36"
+                    style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+                  >
+                    {moment.timeRange}
+                  </p>
+                  <div>
+                    <p
+                      className="text-base font-semibold"
+                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
+                    >
+                      {moment.title}
+                    </p>
+                    <p
+                      className="text-sm italic mt-0.5"
+                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.6 }}
+                    >
+                      {moment.description}
+                    </p>
+                  </div>
+                </div>
+                {/* Mobile moment row */}
+                <div className="md:hidden">
+                  <p
+                    className="text-xs uppercase tracking-[0.25em] mb-1"
+                    style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+                  >
+                    {moment.timeRange}
+                  </p>
+                  <p
+                    className="text-base font-semibold"
+                    style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
+                  >
+                    {moment.title}
+                  </p>
+                  <p
+                    className="text-sm italic mt-0.5"
+                    style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.6 }}
+                  >
+                    {moment.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+});
