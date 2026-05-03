@@ -86,8 +86,8 @@ export function ProgramFlow() {
 
         {/* Act cards — static collapsed grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {actGroups.map((act, i) => (
-            <CollapsedActCard key={i} act={act} />
+          {actGroups.map((act) => (
+            <CollapsedActCard key={act.numeral} act={act} />
           ))}
         </div>
       </div>
@@ -116,7 +116,7 @@ function CollapsedActCard({ act }: { act: Act }) {
           {act.timeRange}
         </p>
         <h3
-          className="text-2xl md:text-3xl mb-2 leading-snug"
+          className="text-3xl mb-2 leading-snug"
           style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
         >
           {act.title}
