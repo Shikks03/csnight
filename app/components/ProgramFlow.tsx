@@ -151,8 +151,11 @@ const ActCard = forwardRef<
       ref={ref}
       onClick={() => onToggle(index)}
       className={`
-        border cursor-pointer transition-colors duration-300
-        ${isOpen ? "border-[#C89B3C]/70" : "border-[#C89B3C]/40 hover:border-[#C89B3C]/70"}
+        group border cursor-pointer transition-all duration-300
+        ${isOpen
+          ? "border-[#C89B3C]/70"
+          : "border-[#C89B3C]/40 md:hover:border-[#C89B3C]/70 md:hover:-translate-y-px"
+        }
       `}
       style={{ background: "#0C1829" }}
     >
