@@ -3,16 +3,37 @@
 import { useEffect, useState } from 'react';
 
 export default function CursorGlow() {
-  const [pos, setPos] = useState<{ x: number; y: number }>({ x: -1000, y: -1000 });
+  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    // Don't attach anything on touch-primary devices
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
+    const handlePointerMove = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
       setPos({ x: e.clientX, y: e.clientY });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    const handlePointerLeave = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
+      setPos(null);
+    };
+
+    // Belt-and-suspenders: any touch clears the glow
+    const handleTouch = () => setPos(null);
+
+    window.addEventListener('pointermove', handlePointerMove);
+    document.addEventListener('pointerleave', handlePointerLeave);
+    window.addEventListener('touchstart', handleTouch, { passive: true });
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      document.removeEventListener('pointerleave', handlePointerLeave);
+      window.removeEventListener('touchstart', handleTouch);
+    };
   }, []);
+
+  if (!pos) return null;
 
   return (
     <div
