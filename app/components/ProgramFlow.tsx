@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, forwardRef } from "react";
+import { useState, useRef, forwardRef, useCallback } from "react";
 
 type Moment = { timeRange: string; title: string; description: string };
 
@@ -181,23 +181,55 @@ const ActCard = forwardRef<
   HTMLDivElement,
   { act: Act; index: number; isOpen: boolean; onToggle: (i: number) => void }
 >(function ActCard({ act, index, isOpen, onToggle }, ref) {
+  const [pressing, setPressing] = useState(false);
+
+  const startPress = useCallback(() => setPressing(true), []);
+  const endPress = useCallback(() => setPressing(false), []);
+
   return (
     <div
       ref={ref}
       onClick={() => onToggle(index)}
-      className="group relative cursor-pointer transition-all duration-300 overflow-hidden"
+      onMouseDown={startPress}
+      onMouseUp={endPress}
+      onMouseLeave={endPress}
+      onTouchStart={startPress}
+      onTouchEnd={endPress}
+      onTouchCancel={endPress}
+      className="group relative cursor-pointer overflow-hidden"
       style={{
         background: "linear-gradient(145deg, #0E1E36 0%, #0B1829 60%, #0A1628 100%)",
-        border: isOpen ? "1px solid rgba(200,155,60,0.6)" : "1px solid rgba(200,155,60,0.2)",
-        boxShadow: isOpen
+        border: pressing
+          ? "1px solid rgba(200,155,60,0.9)"
+          : isOpen
+          ? "1px solid rgba(200,155,60,0.6)"
+          : "1px solid rgba(200,155,60,0.2)",
+        boxShadow: pressing
+          ? "0 0 48px rgba(200,155,60,0.22), inset 0 1px 0 rgba(200,155,60,0.15)"
+          : isOpen
           ? "0 0 40px rgba(200,155,60,0.12), inset 0 1px 0 rgba(200,155,60,0.08)"
           : "0 4px 24px rgba(0,0,0,0.3)",
+        transform: pressing ? "scale(0.972)" : "scale(1)",
+        transition: pressing
+          ? "transform 80ms ease-out, border-color 60ms ease-out, box-shadow 60ms ease-out"
+          : "transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1), border-color 300ms ease, box-shadow 300ms ease",
+        willChange: "transform",
       }}
     >
       {/* Hover glow overlay */}
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
         style={{ boxShadow: "inset 0 0 60px rgba(200,155,60,0.04)" }}
+      />
+
+      {/* Press flash overlay — radial gold burst from center */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at 50% 40%, rgba(200,155,60,0.18) 0%, transparent 65%)",
+          opacity: pressing ? 1 : 0,
+          transition: pressing ? "opacity 60ms ease-out" : "opacity 500ms ease-out",
+        }}
       />
 
       {/* Top gold accent line */}
@@ -282,8 +314,11 @@ const ActCard = forwardRef<
               height="10"
               viewBox="0 0 10 10"
               fill="none"
-              className="transition-transform duration-300"
-              style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#C89B3C" }}
+              style={{
+                transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                color: "#C89B3C",
+                transition: "transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+              }}
             >
               <path d="M1.5 3.5L5 7L8.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -333,8 +368,11 @@ const ActCard = forwardRef<
             height="10"
             viewBox="0 0 10 10"
             fill="none"
-            className="transition-transform duration-300"
-            style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#C89B3C" }}
+            style={{
+              transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+              color: "#C89B3C",
+              transition: "transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+            }}
           >
             <path d="M1.5 3.5L5 7L8.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -343,9 +381,13 @@ const ActCard = forwardRef<
 
       {/* Expanded moment rows */}
       <div
-        className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
-          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
+        style={{
+          display: "grid",
+          gridTemplateRows: isOpen ? "1fr" : "0fr",
+          transition: isOpen
+            ? "grid-template-rows 450ms cubic-bezier(0.16, 1, 0.3, 1)"
+            : "grid-template-rows 280ms cubic-bezier(0.4, 0, 1, 1)",
+        }}
       >
         <div className="overflow-hidden">
           {/* Timeline container */}
