@@ -19,7 +19,7 @@
 - All buttons must use the gold border style unless specified
 - The Google Form reservation link is: https://forms.gle/YOUR_LINK
 - All "Reserve a seat" buttons must open in a new tab
-- Ticket prices are fixed: ACM ₱1000, Non-ACM CS ₱1300, External ₱1600
+- Ticket prices are fixed: ACM ₱899, Non-ACM CS ₱999, External ₱1099
 - Decorative dividers between sections use the ornamental gold line component
 
 ## File structure

@@ -73,8 +73,24 @@ export function ProgramFlow() {
   };
 
   return (
-    <section id="program" className="relative py-32 px-4 bg-[#0A1628] overflow-hidden">
-      <div className="max-w-5xl mx-auto">
+    <section id="program" className="relative py-32 px-4 overflow-hidden" style={{ background: "#0A1628" }}>
+      {/* Ambient radial glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px]"
+          style={{
+            background: "radial-gradient(ellipse at center top, rgba(200,155,60,0.06) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px]"
+          style={{
+            background: "radial-gradient(ellipse at center bottom, rgba(200,155,60,0.04) 0%, transparent 70%)",
+          }}
+        />
+      </div>
+
+      <div className="max-w-5xl mx-auto relative">
         {/* Heading */}
         <div className="text-center mb-20">
           <p
@@ -95,9 +111,28 @@ export function ProgramFlow() {
           >
             Twenty moments. One unforgettable evening.
           </p>
+          {/* Ornamental divider */}
+          <div className="flex items-center justify-center gap-3 mt-10">
+            <div className="h-px w-24" style={{ background: "linear-gradient(to right, transparent, #C89B3C88)" }} />
+            <div
+              className="w-1.5 h-1.5 rotate-45 shrink-0"
+              style={{ background: "#C89B3C" }}
+            />
+            <div className="h-px w-6" style={{ background: "#C89B3C88" }} />
+            <div
+              className="w-2 h-2 rotate-45 shrink-0"
+              style={{ background: "#C89B3C" }}
+            />
+            <div className="h-px w-6" style={{ background: "#C89B3C88" }} />
+            <div
+              className="w-1.5 h-1.5 rotate-45 shrink-0"
+              style={{ background: "#C89B3C" }}
+            />
+            <div className="h-px w-24" style={{ background: "linear-gradient(to left, transparent, #C89B3C88)" }} />
+          </div>
         </div>
 
-        {/* Act cards — layout switches when one is open */}
+        {/* Act cards */}
         {openIndex === null ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {actGroups.map((act, i) => (
@@ -150,28 +185,51 @@ const ActCard = forwardRef<
     <div
       ref={ref}
       onClick={() => onToggle(index)}
-      className={`
-        group border cursor-pointer transition-all duration-300
-        ${isOpen
-          ? "border-[#C89B3C]/70"
-          : "border-[#C89B3C]/40 md:hover:border-[#C89B3C]/70 md:hover:-translate-y-px"
-        }
-      `}
-      style={{ background: "#0C1829" }}
+      className="group relative cursor-pointer transition-all duration-300 overflow-hidden"
+      style={{
+        background: "linear-gradient(145deg, #0E1E36 0%, #0B1829 60%, #0A1628 100%)",
+        border: isOpen ? "1px solid rgba(200,155,60,0.6)" : "1px solid rgba(200,155,60,0.2)",
+        boxShadow: isOpen
+          ? "0 0 40px rgba(200,155,60,0.12), inset 0 1px 0 rgba(200,155,60,0.08)"
+          : "0 4px 24px rgba(0,0,0,0.3)",
+      }}
     >
+      {/* Hover glow overlay */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{ boxShadow: "inset 0 0 60px rgba(200,155,60,0.04)" }}
+      />
+
+      {/* Top gold accent line */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px transition-opacity duration-300"
+        style={{
+          background: "linear-gradient(to right, transparent, rgba(200,155,60,0.6), transparent)",
+          opacity: isOpen ? 1 : 0.3,
+        }}
+      />
+
+      {/* Watermark numeral */}
+      <div
+        className="absolute right-4 top-2 select-none pointer-events-none leading-none transition-opacity duration-300"
+        style={{
+          fontFamily: "Playfair Display, serif",
+          fontSize: "9rem",
+          color: "#C89B3C",
+          opacity: isOpen ? 0.05 : 0.04,
+          lineHeight: 1,
+        }}
+      >
+        {act.numeral}
+      </div>
+
       {/* Card header — desktop */}
-      <div className="hidden md:block px-8 pt-8 pb-0">
+      <div className="hidden md:block px-8 pt-8 pb-0 relative">
         <p
-          className="text-7xl leading-none mb-4"
-          style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C" }}
+          className="text-xs uppercase tracking-[0.3em] mb-4"
+          style={{ color: "rgba(200,155,60,0.7)", fontFamily: "Inter, sans-serif", letterSpacing: "0.3em" }}
         >
-          {act.numeral}
-        </p>
-        <p
-          className="text-xs uppercase tracking-[0.25em] mb-3"
-          style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
-        >
-          {act.timeRange}
+          Act {act.numeral}
         </p>
         <h3
           className="text-3xl mb-2 leading-snug"
@@ -180,41 +238,72 @@ const ActCard = forwardRef<
           {act.title}
         </h3>
         <p
-          className="text-base italic"
-          style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.7 }}
+          className="text-sm italic mb-4"
+          style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.6 }}
         >
           {act.mood}
         </p>
-        <div className="border-t border-[#C89B3C]/30 mt-5 pt-4 pb-4 flex items-center justify-between">
-          {!isOpen ? (
-            <p className="text-xs tracking-wide" style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}>
-              View moments ↓
-            </p>
-          ) : (
-            <p
-              className="text-xs tracking-wide"
-              style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
-              onClick={(e) => { e.stopPropagation(); onToggle(index); }}
+
+        {/* Time badge */}
+        <div className="inline-flex items-center gap-2 mb-5">
+          <div className="w-1 h-1 rounded-full" style={{ background: "#C89B3C" }} />
+          <p
+            className="text-xs tracking-[0.2em] uppercase"
+            style={{ color: "rgba(200,155,60,0.8)", fontFamily: "Inter, sans-serif" }}
+          >
+            {act.timeRange}
+          </p>
+        </div>
+
+        <div
+          className="border-t mt-0 mb-0 flex items-center justify-between py-4 transition-colors duration-300"
+          style={{ borderColor: isOpen ? "rgba(200,155,60,0.3)" : "rgba(200,155,60,0.15)" }}
+        >
+          <span
+            className="text-xs tracking-widest uppercase transition-colors duration-200"
+            style={{
+              color: "rgba(200,155,60,0.7)",
+              fontFamily: "Inter, sans-serif",
+              letterSpacing: "0.15em",
+            }}
+          >
+            {isOpen ? "Close" : `${act.moments.length} moments`}
+          </span>
+          <div
+            className="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 shrink-0"
+            style={{
+              border: "1px solid rgba(200,155,60,0.4)",
+              background: isOpen ? "rgba(200,155,60,0.12)" : "transparent",
+            }}
+            onClick={(e) => { if (isOpen) { e.stopPropagation(); onToggle(index); } }}
+          >
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              className="transition-transform duration-300"
+              style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#C89B3C" }}
             >
-              × Close
-            </p>
-          )}
+              <path d="M1.5 3.5L5 7L8.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
         </div>
       </div>
 
       {/* Card header — mobile */}
-      <div className="md:hidden px-6 py-6 flex items-start justify-between">
-        <div className="flex items-center gap-4 flex-1 min-w-0">
+      <div className="md:hidden px-6 py-6 flex items-start justify-between relative">
+        <div className="flex items-start gap-4 flex-1 min-w-0">
           <p
-            className="text-5xl leading-none shrink-0"
-            style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C" }}
+            className="text-4xl leading-none shrink-0 mt-0.5"
+            style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", opacity: 0.9 }}
           >
             {act.numeral}
           </p>
           <div className="min-w-0">
             <p
-              className="text-xs uppercase tracking-[0.25em] mb-1"
-              style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+              className="text-xs uppercase tracking-[0.2em] mb-1"
+              style={{ color: "rgba(200,155,60,0.7)", fontFamily: "Inter, sans-serif" }}
             >
               {act.timeRange}
             </p>
@@ -226,74 +315,103 @@ const ActCard = forwardRef<
             </h3>
             <p
               className="text-sm italic mt-1"
-              style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.7 }}
+              style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.6 }}
             >
               {act.mood}
             </p>
           </div>
         </div>
-        <span
-          className={`text-xl shrink-0 ml-4 mt-1 transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
-          style={{ color: "#C89B3C" }}
+        <div
+          className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 ml-3 mt-0.5 transition-all duration-300"
+          style={{
+            border: "1px solid rgba(200,155,60,0.4)",
+            background: isOpen ? "rgba(200,155,60,0.12)" : "transparent",
+          }}
         >
-          ›
-        </span>
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
+            className="transition-transform duration-300"
+            style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#C89B3C" }}
+          >
+            <path d="M1.5 3.5L5 7L8.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
       </div>
 
-      {/* Expanded moment rows — animated with grid-rows trick */}
+      {/* Expanded moment rows */}
       <div
         className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
           isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >
         <div className="overflow-hidden">
-          <div className="px-8 pb-8">
+          {/* Timeline container */}
+          <div className="px-8 pb-8 relative">
+            {/* Vertical timeline line */}
+            <div
+              className="absolute left-[2.85rem] top-0 bottom-8 w-px"
+              style={{ background: "linear-gradient(to bottom, rgba(200,155,60,0.3), rgba(200,155,60,0.05))" }}
+            />
             {act.moments.map((moment, mi) => (
               <div
                 key={mi}
-                className="py-4 border-t border-[#C89B3C]/20 first:border-t-0"
+                className="relative pl-8"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Desktop moment row */}
-                <div className="hidden md:flex items-baseline gap-4">
-                  <p
-                    className="text-xs uppercase tracking-[0.25em] shrink-0 w-36"
-                    style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+                {/* Timeline dot */}
+                <div
+                  className="absolute left-0 top-[1.15rem] w-2 h-2 rounded-full -translate-y-1/2"
+                  style={{
+                    background: "#0A1628",
+                    border: "1px solid rgba(200,155,60,0.5)",
+                    boxShadow: mi === 0 ? "0 0 6px rgba(200,155,60,0.3)" : "none",
+                  }}
+                />
+
+                {/* Desktop row */}
+                <div className="hidden md:flex items-start gap-5 py-3.5 border-t border-[rgba(200,155,60,0.08)] first:border-t-0">
+                  <span
+                    className="text-xs tracking-[0.15em] uppercase shrink-0 pt-0.5 w-36"
+                    style={{ color: "rgba(200,155,60,0.65)", fontFamily: "Inter, sans-serif" }}
                   >
                     {moment.timeRange}
-                  </p>
+                  </span>
                   <div>
                     <p
-                      className="text-base font-semibold"
+                      className="text-sm font-medium leading-snug"
                       style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
                     >
                       {moment.title}
                     </p>
                     <p
-                      className="text-sm italic mt-0.5"
-                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.6 }}
+                      className="text-xs italic mt-0.5"
+                      style={{ color: "#F5EDD8", fontFamily: "Inter, sans-serif", opacity: 0.45 }}
                     >
                       {moment.description}
                     </p>
                   </div>
                 </div>
-                {/* Mobile moment row */}
-                <div className="md:hidden">
+
+                {/* Mobile row */}
+                <div className="md:hidden py-3.5 border-t border-[rgba(200,155,60,0.08)] first:border-t-0">
                   <p
-                    className="text-xs uppercase tracking-[0.25em] mb-1"
-                    style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+                    className="text-xs uppercase tracking-[0.15em] mb-0.5"
+                    style={{ color: "rgba(200,155,60,0.65)", fontFamily: "Inter, sans-serif" }}
                   >
                     {moment.timeRange}
                   </p>
                   <p
-                    className="text-base font-semibold"
+                    className="text-sm font-medium"
                     style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
                   >
                     {moment.title}
                   </p>
                   <p
-                    className="text-sm italic mt-0.5"
-                    style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.6 }}
+                    className="text-xs italic mt-0.5"
+                    style={{ color: "#F5EDD8", fontFamily: "Inter, sans-serif", opacity: 0.45 }}
                   >
                     {moment.description}
                   </p>
@@ -303,6 +421,15 @@ const ActCard = forwardRef<
           </div>
         </div>
       </div>
+
+      {/* Bottom gold accent line */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-px transition-opacity duration-300"
+        style={{
+          background: "linear-gradient(to right, transparent, rgba(200,155,60,0.4), transparent)",
+          opacity: isOpen ? 1 : 0,
+        }}
+      />
     </div>
   );
 });

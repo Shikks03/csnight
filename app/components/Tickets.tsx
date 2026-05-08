@@ -5,7 +5,7 @@ const RESERVATION_LINK = "https://forms.gle/YOUR_LINK";
 const tiers = [
   {
     name: "ACM Member",
-    price: "₱1,000",
+    price: "₱899",
     features: [
       "Full event access",
       "Masquerade reception",
@@ -18,7 +18,7 @@ const tiers = [
   },
   {
     name: "External Participant",
-    price: "₱1,600",
+    price: "₱1,099",
     features: [
       "Full event access",
       "Masquerade reception",
@@ -32,7 +32,7 @@ const tiers = [
   },
   {
     name: "Non-ACM CS Student",
-    price: "₱1,300",
+    price: "₱999",
     features: [
       "Full event access",
       "Masquerade reception",

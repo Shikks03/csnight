@@ -127,13 +127,55 @@ export function About() {
                     className="text-2xl leading-tight"
                     style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
                   >
-                    200 Seats Only
+                    220 Seats Only
                   </p>
                   <p
                     className="text-sm mt-1 italic"
                     style={{ color: "#F5EDD8", opacity: 0.7, fontFamily: "Playfair Display, serif" }}
                   >
-                    Limited seats available — reserve yours early.
+                    170 CS Students · 50 External Participants
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* First Come, First Served Card */}
+            <div
+              className="relative overflow-hidden"
+              style={{ border: "1px solid rgba(200,155,60,0.35)", background: "rgba(200,155,60,0.04)" }}
+            >
+              {/* Corner accents */}
+              <svg className="absolute top-0 left-0 w-8 h-8" viewBox="0 0 100 100">
+                <path d="M0,0 L60,0 L60,10 L10,10 L10,60 L0,60 Z" fill="#C89B3C" opacity="0.6" />
+              </svg>
+              <svg className="absolute bottom-0 right-0 w-8 h-8" viewBox="0 0 100 100">
+                <path d="M100,100 L40,100 L40,90 L90,90 L90,40 L100,40 Z" fill="#C89B3C" opacity="0.6" />
+              </svg>
+
+              <div className="px-8 py-6 flex items-center gap-6">
+                {/* Icon */}
+                <div className="shrink-0 w-14 h-14 border border-[#C89B3C]/50 flex items-center justify-center bg-[#C89B3C]/10">
+                  <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="#C89B3C" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                </div>
+
+                {/* Text */}
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] mb-1" style={{ color: "#8BA3BF" }}>
+                    Priority
+                  </p>
+                  <p
+                    className="text-2xl leading-tight"
+                    style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+                  >
+                    First Come, First Served
+                  </p>
+                  <p
+                    className="text-sm mt-1 italic"
+                    style={{ color: "#F5EDD8", opacity: 0.7, fontFamily: "Playfair Display, serif" }}
+                  >
+                    Reserve early to secure your place
                   </p>
                 </div>
               </div>
@@ -242,12 +284,28 @@ export function About() {
                   </div>
 
                   <div>
+                    <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Doors Open</p>
+                    <p
+                      className="text-2xl"
+                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", fontWeight: 600 }}
+                    >
+                      3:20 PM
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-10 h-px bg-[#C89B3C]/30" />
+                    <div className="w-1 h-1 rounded-full bg-[#C89B3C]/50" />
+                    <div className="w-10 h-px bg-[#C89B3C]/30" />
+                  </div>
+
+                  <div>
                     <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Venue</p>
                     <p
                       className="text-2xl"
                       style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", fontWeight: 600 }}
                     >
-                      17th Floor Gymnasium
+                      FEU Tech — 17th Floor Gymnasium
                     </p>
                   </div>
                 </div>
