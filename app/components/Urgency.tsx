@@ -14,10 +14,10 @@ export function Urgency() {
   };
 
   return (
-    <section className="relative py-40 px-4 bg-gradient-to-b from-[#0A1628] via-black to-[#0A1628] overflow-hidden">
+    <section className="relative py-40 px-4 bg-gradient-to-b from-black via-black to-[#0A1628] overflow-hidden">
       {/* Spotlight */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_top,rgba(200,155,60,0.15)_0%,transparent_60%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_50%_65%,rgba(200,155,60,0.07)_0%,transparent_55%)]" />
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
