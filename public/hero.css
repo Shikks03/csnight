@@ -1,0 +1,64 @@
+/* CS Night Hero — canvas scroll-scrubber styles */
+
+#hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#hero-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.2em;
+  color: #C89B3C;
+  text-transform: uppercase;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 20;
+}
+
+#hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+/* Bottom gradient for text legibility */
+#hero-overlay::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(5, 11, 20, 0.85) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Re-enable pointer events only on interactive children */
+#hero-overlay button,
+#hero-overlay a {
+  pointer-events: auto;
+}

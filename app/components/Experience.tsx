@@ -26,18 +26,18 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="relative py-32 px-4 bg-[#0D1A2A] overflow-hidden"
+      className="relative py-32 px-4 bg-[#060E1A] overflow-hidden"
     >
-      {/* Velvet Curtain Backdrop */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://images.unsplash.com/photo-1747605975912-9349d22c6e19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080"
-          alt=""
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D1A2A] via-transparent to-[#0D1A2A]" />
-      </div>
+      {/* Central radial glow behind cards */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 65% 65% at 50% 55%, rgba(200,155,60,0.06) 0%, transparent 70%)" }}
+      />
+      {/* Corner vignettes */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 120% 120% at 50% 50%, transparent 38%, rgba(2,5,12,0.45) 100%)" }}
+      />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Title */}

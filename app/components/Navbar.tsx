@@ -4,11 +4,21 @@ import { useState, useEffect } from "react";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [heroDone, setHeroDone] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
+    const onHeroDone = () => setHeroDone(true);
+    const onHeroEnterBack = () => setHeroDone(false);
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("hero:scrollComplete", onHeroDone);
+    window.addEventListener("hero:scrollEnter", onHeroEnterBack);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("hero:scrollComplete", onHeroDone);
+      window.removeEventListener("hero:scrollEnter", onHeroEnterBack);
+    };
   }, []);
 
   const scrollTo = (id: string) => {
@@ -19,7 +29,7 @@ export function Navbar() {
   return (
     <nav
       className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+        heroDone && scrolled
           ? "top-0 bg-[#050B14]/90 backdrop-blur-md border-b border-[#C89B3C]/20 py-3"
           : "top-4 md:top-8 bg-transparent py-4"
       }`}

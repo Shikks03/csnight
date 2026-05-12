@@ -2,18 +2,18 @@ export function About() {
   return (
     <section
       id="about"
-      className="relative py-32 px-4 bg-linear-to-b from-[#0A1628] via-[#0D1A2A] to-[#0A1628] overflow-hidden"
+      className="relative py-32 px-4 bg-[#080F1B] overflow-hidden"
     >
-      {/* Opera House Background */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://images.unsplash.com/photo-1759336153678-62c16336c872?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080"
-          alt=""
-          className="w-full h-full object-cover"
-        />
-      </div>
 
+      {/* Chandelier glow from above */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none z-[1]"
+        style={{
+          width: "900px",
+          height: "450px",
+          background: "radial-gradient(ellipse at top, rgba(200,155,60,0.07) 0%, transparent 68%)",
+        }}
+      />
       {/* Curtain Effects */}
       <div className="absolute left-0 top-0 bottom-0 w-1/4 z-[1] pointer-events-none">
         <div className="w-full h-full bg-linear-to-r from-[#0A1628] via-[#0D2840]/60 to-transparent" />

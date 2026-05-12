@@ -50,17 +50,19 @@ export function Tickets() {
   return (
     <section
       id="tickets"
-      className="relative py-40 px-4 bg-gradient-to-b from-[#0A1628] via-[#0D1A2A] to-black overflow-hidden"
+      className="relative py-40 px-4 overflow-hidden"
+      style={{ background: "linear-gradient(to bottom, #08101C, #040810 40%, #010307 100%)" }}
     >
-      {/* Opera House Ambiance */}
-      <div className="absolute inset-0 z-0 opacity-5">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://images.unsplash.com/photo-1759336153678-62c16336c872?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080"
-          alt=""
-          className="w-full h-full object-cover"
-        />
-      </div>
+
+      {/* Theatrical spotlight from above */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
+        style={{
+          width: "1000px",
+          height: "600px",
+          background: "radial-gradient(ellipse at top, rgba(200,155,60,0.09) 0%, rgba(200,155,60,0.03) 35%, transparent 65%)",
+        }}
+      />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Title */}

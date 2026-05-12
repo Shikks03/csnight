@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import Script from "next/script";
 
 export function Hero() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,14 @@ export function Hero() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [isRevealed]);
+
+  // Once the envelope is dismissed, fire hero:revealed so hero.js sets up ScrollTrigger
+  // with body.overflow already restored (so GSAP measures scroll metrics correctly).
+  useEffect(() => {
+    if (isRevealed) {
+      window.dispatchEvent(new Event('hero:revealed'));
+    }
   }, [isRevealed]);
 
   const scrollToTickets = () => {
@@ -121,105 +130,88 @@ export function Hero() {
         )}
       </AnimatePresence>
 
-      {/* Main Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#0A1628] via-[#0D1A2A] to-[#0A1628]">
-        {/* Ornate Frame */}
-        <div className="absolute inset-4 md:inset-8 border border-[#C89B3C]/20 pointer-events-none z-[1]">
-          <svg className="absolute top-0 left-0 w-12 h-12 -translate-x-px -translate-y-px" viewBox="0 0 100 100">
-            <path d="M0,0 L100,0 L100,10 L10,10 L10,100 L0,100 Z" fill="#C89B3C" opacity="0.6" />
-          </svg>
-          <svg className="absolute top-0 right-0 w-12 h-12 translate-x-px -translate-y-px" viewBox="0 0 100 100">
-            <path d="M100,0 L0,0 L0,10 L90,10 L90,100 L100,100 Z" fill="#C89B3C" opacity="0.6" />
-          </svg>
-          <svg className="absolute bottom-0 left-0 w-12 h-12 -translate-x-px translate-y-px" viewBox="0 0 100 100">
-            <path d="M0,100 L100,100 L100,90 L10,90 L10,0 L0,0 Z" fill="#C89B3C" opacity="0.6" />
-          </svg>
-          <svg className="absolute bottom-0 right-0 w-12 h-12 translate-x-px translate-y-px" viewBox="0 0 100 100">
-            <path d="M100,100 L0,100 L0,90 L90,90 L90,0 L100,0 Z" fill="#C89B3C" opacity="0.6" />
-          </svg>
-        </div>
+      {/* Canvas Hero Section — pinned by GSAP ScrollTrigger */}
+      <div id="hero-section">
+        <canvas id="hero-canvas" />
 
-        {/* Velvet Curtain Texture */}
-        <div className="absolute inset-0 z-[1] pointer-events-none">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://images.unsplash.com/photo-1747605975912-9349d22c6e19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080"
-            alt=""
-            className="absolute top-0 left-0 w-full h-full object-cover opacity-[0.05] mix-blend-screen"
-          />
-        </div>
+        {/* Loading indicator — hidden by hero.js once all frames are loaded */}
+        <div id="hero-loading">Loading... 0%</div>
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
-          <p
-            className="text-lg md:text-2xl mb-8 italic tracking-wide uppercase"
-            style={{
-              fontFamily: "Playfair Display, serif",
-              color: "#F5EDD8",
-              letterSpacing: "0.3em",
-              textShadow: "0 2px 10px rgba(0,0,0,0.5)",
-            }}
-          >
-            A Masquerade Grand Ball
-          </p>
+        {/* Overlay — faded in by hero.js after preload completes */}
+        <div id="hero-overlay">
+          <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
+            <p
+              className="text-lg md:text-2xl mb-8 italic tracking-wide uppercase"
+              style={{
+                fontFamily: "Playfair Display, serif",
+                color: "#F5EDD8",
+                letterSpacing: "0.3em",
+                textShadow: "0 2px 10px rgba(0,0,0,0.5)",
+              }}
+            >
+              A Masquerade Grand Ball
+            </p>
 
-          <h1
-            className="text-7xl md:text-[10rem] lg:text-[12rem] mb-6 tracking-wider leading-none"
-            style={{
-              fontFamily: "Playfair Display, serif",
-              fontWeight: 700,
-              color: "#C89B3C",
-              textShadow: `
-                0 0 60px rgba(200, 155, 60, 0.4),
-                2px 2px 4px rgba(0, 0, 0, 0.8),
-                -1px -1px 0px rgba(255, 215, 100, 0.2)
-              `,
-            }}
-          >
-            CS NIGHT
-          </h1>
+            <h1
+              className="text-7xl md:text-[10rem] lg:text-[12rem] mb-6 tracking-wider leading-none"
+              style={{
+                fontFamily: "Playfair Display, serif",
+                fontWeight: 700,
+                color: "#C89B3C",
+                textShadow: `
+                  0 0 60px rgba(200, 155, 60, 0.4),
+                  2px 2px 4px rgba(0, 0, 0, 0.8),
+                  -1px -1px 0px rgba(255, 215, 100, 0.2)
+                `,
+              }}
+            >
+              CS NIGHT
+            </h1>
 
-          {/* Decorative Divider */}
-          <div className="flex items-center justify-center gap-4 mb-8 w-full max-w-md">
-            <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent to-[#C89B3C]" />
-            <div className="w-2 h-2 rotate-45 bg-[#C89B3C]" />
-            <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent to-[#C89B3C]" />
+            {/* Decorative Divider */}
+            <div className="flex items-center justify-center gap-4 mb-4 w-full max-w-md">
+              <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent to-[#C89B3C]" />
+              <div className="w-2 h-2 rotate-45 bg-[#C89B3C]" />
+              <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent to-[#C89B3C]" />
+            </div>
+
+            <p
+              className="text-base md:text-xl mb-12 tracking-[0.15em] uppercase opacity-80"
+              style={{ fontFamily: "Playfair Display, serif", color: "#F5EDD8" }}
+            >
+              June 27, 2026
+            </p>
+
+            <button
+              onClick={scrollToTickets}
+              className="group relative px-12 py-5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(200,155,60,0.4),_inset_0_0_20px_rgba(200,155,60,0.2)] cursor-pointer pointer-events-auto"
+              style={{
+                fontFamily: "Playfair Display, serif",
+                borderColor: "#C89B3C",
+                color: "#C89B3C",
+              }}
+            >
+              <span className="relative z-10 text-lg md:text-xl tracking-[0.2em] uppercase font-semibold">
+                RSVP Now
+              </span>
+              <div className="absolute inset-0 bg-[#C89B3C]/10 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
+            </button>
           </div>
 
-          <p
-            className="text-xl md:text-3xl mb-16 italic opacity-90"
-            style={{ fontFamily: "Playfair Display, serif", color: "#F5EDD8" }}
-          >
-            One night. A thousand memories.
-          </p>
-
-          <button
-            onClick={scrollToTickets}
-            className="group relative px-12 py-5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(200,155,60,0.4),_inset_0_0_20px_rgba(200,155,60,0.2)] cursor-pointer"
-            style={{
-              fontFamily: "Playfair Display, serif",
-              borderColor: "#C89B3C",
-              color: "#C89B3C",
-            }}
-          >
-            <span className="relative z-10 text-lg md:text-xl tracking-[0.2em] uppercase font-semibold">
-              RSVP Now
-            </span>
-            <div className="absolute inset-0 bg-[#C89B3C]/10 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
-          </button>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 animate-bounce opacity-70">
-          <div
-            className="text-[10px] uppercase tracking-[0.3em]"
-            style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
-          >
-            Scroll to Read
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce opacity-70">
+            <div
+              className="text-[10px] uppercase tracking-[0.3em]"
+              style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+            >
+              Scroll
+            </div>
+            <div className="w-[1px] h-10 bg-gradient-to-b from-[#C89B3C] to-transparent" />
           </div>
-          <div className="w-[1px] h-10 bg-gradient-to-b from-[#C89B3C] to-transparent" />
         </div>
-      </section>
+      </div>
+
+      <Script src="/hero.js" strategy="afterInteractive" />
     </>
   );
 }

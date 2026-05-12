@@ -19,19 +19,18 @@ const navLinks = ["About", "Tickets", "FAQ", "Contact"];
 export function Footer() {
   return (
     <footer className="relative bg-black pt-24 pb-12 px-4 overflow-hidden">
-      {/* Curtain Closure */}
-      <div className="absolute inset-0 z-0 opacity-30">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://images.unsplash.com/photo-1747605975912-9349d22c6e19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080"
-          alt=""
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
-      </div>
 
       {/* Top Ornamental Border */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#C89B3C] to-transparent" />
+      {/* Ambient glow behind title */}
+      <div
+        className="absolute top-16 left-1/2 -translate-x-1/2 pointer-events-none"
+        style={{
+          width: "700px",
+          height: "350px",
+          background: "radial-gradient(ellipse at top, rgba(200,155,60,0.07) 0%, transparent 65%)",
+        }}
+      />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Logo & Tagline */}
