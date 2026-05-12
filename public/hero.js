@@ -63,7 +63,9 @@ const BASE_PATH = '/frames/frame_';
       const total = done + failed;
       const pct = Math.round((total / FRAME_COUNT) * 100);
       if (loadingEl) loadingEl.textContent = 'Loading... ' + pct + '%';
+      window.dispatchEvent(new CustomEvent('hero:loadProgress', { detail: { percent: pct } }));
       if (total === FRAME_COUNT) {
+        window.dispatchEvent(new Event('hero:loadComplete'));
         if (failed === FRAME_COUNT) {
           console.warn('[hero] All frames failed to load — showing static fallback');
           showFallback();

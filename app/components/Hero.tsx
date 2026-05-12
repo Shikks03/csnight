@@ -3,28 +3,74 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Script from "next/script";
 
+type Phase = "envelope" | "loading" | "revealed";
+
 export function Hero() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isRevealed, setIsRevealed] = useState(false);
+  const [phase, setPhase] = useState<Phase>("envelope");
+  const [loadProgress, setLoadProgress] = useState(0);
+  const [displayProgress, setDisplayProgress] = useState(0);
+  const [minTimeReached, setMinTimeReached] = useState(false);
 
+  // Block scroll until main page is revealed
   useEffect(() => {
-    if (!isRevealed) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = phase !== "revealed" ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isRevealed]);
+  }, [phase]);
 
-  // Once the envelope is dismissed, fire hero:revealed so hero.js sets up ScrollTrigger
-  // with body.overflow already restored (so GSAP measures scroll metrics correctly).
+  // Signal hero.js to init ScrollTrigger once envelope is gone
   useEffect(() => {
-    if (isRevealed) {
-      window.dispatchEvent(new Event('hero:revealed'));
+    if (phase === "revealed") {
+      window.dispatchEvent(new Event("hero:revealed"));
     }
-  }, [isRevealed]);
+  }, [phase]);
+
+  // Track frame-load progress from hero.js
+  useEffect(() => {
+    const onProgress = (e: Event) => {
+      const pct = (e as CustomEvent<{ percent: number }>).detail.percent;
+      setLoadProgress(pct);
+    };
+    const onComplete = () => setLoadProgress(100);
+    window.addEventListener("hero:loadProgress", onProgress);
+    window.addEventListener("hero:loadComplete", onComplete);
+    return () => {
+      window.removeEventListener("hero:loadProgress", onProgress);
+      window.removeEventListener("hero:loadComplete", onComplete);
+    };
+  }, []);
+
+  // Animate display progress 0→100 over 3 seconds and set minTimeReached at the end
+  useEffect(() => {
+    if (phase !== "loading") return;
+    setDisplayProgress(0);
+    setMinTimeReached(false);
+    const start = Date.now();
+    const duration = 2000;
+    let raf: number;
+    const tick = () => {
+      const pct = Math.min(100, Math.round(((Date.now() - start) / duration) * 100));
+      setDisplayProgress(pct);
+      if (pct < 100) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        setMinTimeReached(true);
+      }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [phase]);
+
+  // Advance to revealed only when both the minimum time AND all frames are ready
+  useEffect(() => {
+    if (phase !== "loading") return;
+    if (loadProgress >= 100 && minTimeReached) {
+      const t = setTimeout(() => setPhase("revealed"), 700);
+      return () => clearTimeout(t);
+    }
+  }, [phase, loadProgress, minTimeReached]);
 
   const scrollToTickets = () => {
     document.getElementById("tickets")?.scrollIntoView({ behavior: "smooth" });
@@ -34,98 +80,212 @@ export function Hero() {
     if (isOpen) return;
     setIsOpen(true);
     setTimeout(() => {
-      setIsRevealed(true);
+      setPhase("loading");
       window.scrollTo({ top: 0 });
     }, 2800);
   };
 
   return (
     <>
-      {/* Envelope Overlay Sequence */}
+      {/* Persistent backdrop — stays opaque until main page is ready, then fades away */}
       <AnimatePresence>
-        {!isRevealed && (
+        {phase !== "revealed" && (
           <motion.div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050B14] overflow-hidden"
+            key="backdrop"
+            className="fixed inset-0 z-[99] bg-[#050B14]"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 1 } }}
+            exit={{ opacity: 0, transition: { duration: 0.9, ease: "easeInOut" } }}
           >
-            <motion.div
-              className="relative w-[90%] max-w-xl aspect-[3/2] cursor-pointer group"
-              onClick={handleOpen}
-              animate={
-                isOpen
-                  ? { scale: 4, y: "40vh", opacity: 0 }
-                  : { scale: 1, y: 0, opacity: 1 }
-              }
-              transition={{ duration: 1.5, delay: 1.5, ease: "easeInOut" }}
-            >
-              {/* Back of Envelope */}
-              <div className="absolute inset-0 bg-[#0A141F] shadow-[0_20px_60px_rgba(0,0,0,0.8)] rounded-sm" />
-
-              {/* Card inside */}
-              <motion.div
-                className="absolute inset-2 bg-[#0A1628] border-2 border-[#C89B3C]/50 flex flex-col items-center pt-8 z-[5] shadow-inner"
-                animate={isOpen ? { y: "-65%" } : { y: 0 }}
-                transition={{ duration: 0.9, delay: 0.6, ease: "backOut" }}
-              >
-                <div
-                  className="text-sm italic text-[#F5EDD8] mb-2 opacity-80"
-                  style={{ fontFamily: "Playfair Display, serif" }}
+            {/* ── Envelope content ── */}
+            <AnimatePresence>
+              {phase === "envelope" && (
+                <motion.div
+                  key="envelope-content"
+                  className="absolute inset-0 flex items-center justify-center overflow-hidden"
+                  exit={{ opacity: 0, transition: { duration: 0.5 } }}
                 >
-                  A Masquerade Grand Ball
-                </div>
-                <div
-                  className="text-3xl tracking-widest text-[#C89B3C] font-bold"
-                  style={{ fontFamily: "Playfair Display, serif" }}
-                >
-                  CS NIGHT
-                </div>
-                <div className="w-12 h-[1px] bg-[#C89B3C]/50 mt-3" />
-              </motion.div>
+                  <motion.div
+                    className="relative w-[90%] max-w-xl aspect-[3/2] cursor-pointer group"
+                    onClick={handleOpen}
+                    animate={
+                      isOpen
+                        ? { scale: 4, y: "40vh", opacity: 0 }
+                        : { scale: 1, y: 0, opacity: 1 }
+                    }
+                    transition={{ duration: 1.5, delay: 1.5, ease: "easeInOut" }}
+                  >
+                    {/* Back of Envelope */}
+                    <div className="absolute inset-0 bg-[#0A141F] shadow-[0_20px_60px_rgba(0,0,0,0.8)] rounded-sm" />
 
-              {/* Left Flap */}
-              <div
-                className="absolute top-0 left-0 bottom-0 w-1/2 bg-[#0D1A2A] border-r border-[#C89B3C]/20 z-10 drop-shadow-md"
-                style={{ clipPath: "polygon(0 0, 100% 50%, 0 100%)" }}
-              />
+                    {/* Card inside */}
+                    <motion.div
+                      className="absolute inset-2 bg-[#0A1628] border-2 border-[#C89B3C]/50 flex flex-col items-center pt-8 z-[5] shadow-inner"
+                      animate={isOpen ? { y: "-65%" } : { y: 0 }}
+                      transition={{ duration: 0.9, delay: 0.6, ease: "backOut" }}
+                    >
+                      <div
+                        className="text-sm italic text-[#F5EDD8] mb-2 opacity-80"
+                        style={{ fontFamily: "Playfair Display, serif" }}
+                      >
+                        A Masquerade Grand Ball
+                      </div>
+                      <div
+                        className="text-3xl tracking-widest text-[#C89B3C] font-bold"
+                        style={{ fontFamily: "Playfair Display, serif" }}
+                      >
+                        CS NIGHT
+                      </div>
+                      <div className="w-12 h-[1px] bg-[#C89B3C]/50 mt-3" />
+                    </motion.div>
 
-              {/* Right Flap */}
-              <div
-                className="absolute top-0 right-0 bottom-0 w-1/2 bg-[#0D1A2A] border-l border-[#C89B3C]/20 z-10 drop-shadow-md"
-                style={{ clipPath: "polygon(100% 0, 0 50%, 100% 100%)" }}
-              />
+                    {/* Left Flap */}
+                    <div
+                      className="absolute top-0 left-0 bottom-0 w-1/2 bg-[#0D1A2A] border-r border-[#C89B3C]/20 z-10 drop-shadow-md"
+                      style={{ clipPath: "polygon(0 0, 100% 50%, 0 100%)" }}
+                    />
 
-              {/* Bottom Flap */}
-              <div
-                className="absolute bottom-0 left-0 right-0 h-[60%] bg-[#112236] border-t border-[#C89B3C]/30 z-10 shadow-[0_-5px_15px_rgba(0,0,0,0.4)]"
-                style={{ clipPath: "polygon(0 100%, 50% 0, 100% 100%)" }}
-              />
+                    {/* Right Flap */}
+                    <div
+                      className="absolute top-0 right-0 bottom-0 w-1/2 bg-[#0D1A2A] border-l border-[#C89B3C]/20 z-10 drop-shadow-md"
+                      style={{ clipPath: "polygon(100% 0, 0 50%, 100% 100%)" }}
+                    />
 
-              {/* Top Flap */}
-              <motion.div
-                className="absolute top-0 left-0 right-0 h-[55%] bg-[#142840] border-b border-[#C89B3C]/40 shadow-[0_5px_15px_rgba(0,0,0,0.4)] origin-top"
-                style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}
-                initial={{ zIndex: 20 }}
-                animate={isOpen ? { rotateX: 180, zIndex: 0 } : { rotateX: 0, zIndex: 20 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-              />
+                    {/* Bottom Flap */}
+                    <div
+                      className="absolute bottom-0 left-0 right-0 h-[60%] bg-[#112236] border-t border-[#C89B3C]/30 z-10 shadow-[0_-5px_15px_rgba(0,0,0,0.4)]"
+                      style={{ clipPath: "polygon(0 100%, 50% 0, 100% 100%)" }}
+                    />
 
-              {/* Gold Seal */}
-              <motion.div
-                className="absolute top-[55%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-br from-[#E5C06B] via-[#C89B3C] to-[#8B6914] rounded-full shadow-[0_0_20px_rgba(200,155,60,0.6)] flex items-center justify-center border-2 border-[#FFE8A1]/50 z-30"
-                animate={isOpen ? { scale: 0, opacity: 0 } : { scale: 1, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <span className="font-serif text-[#4A3500] text-lg font-bold tracking-tighter">CS</span>
-              </motion.div>
+                    {/* Top Flap */}
+                    <motion.div
+                      className="absolute top-0 left-0 right-0 h-[55%] bg-[#142840] border-b border-[#C89B3C]/40 shadow-[0_5px_15px_rgba(0,0,0,0.4)] origin-top"
+                      style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}
+                      initial={{ zIndex: 20 }}
+                      animate={isOpen ? { rotateX: 180, zIndex: 0 } : { rotateX: 0, zIndex: 20 }}
+                      transition={{ duration: 0.8, ease: "easeInOut" }}
+                    />
 
-              {/* Hint Text */}
-              {!isOpen && (
-                <motion.div className="absolute -bottom-12 left-0 right-0 text-center text-[#C89B3C] tracking-[0.2em] uppercase text-xs animate-pulse font-serif">
-                  Tap to Open Invitation
+                    {/* Gold Seal */}
+                    <motion.div
+                      className="absolute top-[55%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-br from-[#E5C06B] via-[#C89B3C] to-[#8B6914] rounded-full shadow-[0_0_20px_rgba(200,155,60,0.6)] flex items-center justify-center border-2 border-[#FFE8A1]/50 z-30"
+                      animate={isOpen ? { scale: 0, opacity: 0 } : { scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <span className="font-serif text-[#4A3500] text-lg font-bold tracking-tighter">CS</span>
+                    </motion.div>
+
+                    {/* Hint Text */}
+                    {!isOpen && (
+                      <motion.div className="absolute -bottom-12 left-0 right-0 text-center text-[#C89B3C] tracking-[0.2em] uppercase text-xs animate-pulse font-serif">
+                        Tap to Open Invitation
+                      </motion.div>
+                    )}
+                  </motion.div>
                 </motion.div>
               )}
-            </motion.div>
+            </AnimatePresence>
+
+            {/* ── Loading screen content ── */}
+            <AnimatePresence>
+              {phase === "loading" && (
+                <motion.div
+                  key="loading-content"
+                  className="absolute inset-0 flex flex-col items-center justify-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  {/* Corner accents */}
+                  <span className="absolute top-6 left-6 w-8 h-8 border-t border-l border-[#C89B3C]/30" />
+                  <span className="absolute top-6 right-6 w-8 h-8 border-t border-r border-[#C89B3C]/30" />
+                  <span className="absolute bottom-6 left-6 w-8 h-8 border-b border-l border-[#C89B3C]/30" />
+                  <span className="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-[#C89B3C]/30" />
+
+                  <div className="flex flex-col items-center gap-12 w-full max-w-sm px-10 mx-auto">
+                    {/* Top ornament */}
+                    <div className="flex items-center gap-4 w-full">
+                      <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#C89B3C]/50" />
+                      <div className="w-2 h-2 rotate-45 bg-[#C89B3C]/60" />
+                      <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#C89B3C]/50" />
+                    </div>
+
+                    {/* Seal + title */}
+                    <div className="flex flex-col items-center gap-5">
+                      <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#E5C06B] via-[#C89B3C] to-[#8B6914] flex items-center justify-center shadow-[0_0_48px_rgba(200,155,60,0.4)] border border-[#FFE8A1]/30">
+                        <span
+                          className="text-3xl font-bold tracking-tight text-[#2A1800]"
+                          style={{ fontFamily: "Playfair Display, serif" }}
+                        >
+                          CS
+                        </span>
+                      </div>
+                      <p
+                        className="text-xs tracking-[0.35em] uppercase text-[#8BA3BF]/60"
+                        style={{ fontFamily: "Playfair Display, serif" }}
+                      >
+                        A Masquerade Grand Ball
+                      </p>
+                      <h2
+                        className="text-5xl font-bold tracking-widest text-[#C89B3C]"
+                        style={{ fontFamily: "Playfair Display, serif" }}
+                      >
+                        CS NIGHT
+                      </h2>
+                    </div>
+
+                    {/* Progress bar */}
+                    <div className="w-full flex flex-col gap-3">
+                      <div className="relative h-px w-full bg-[#C89B3C]/15 overflow-visible">
+                        <motion.div
+                          className="absolute top-0 left-0 h-px bg-gradient-to-r from-[#C89B3C]/60 to-[#C89B3C]"
+                          style={{ width: `${displayProgress}%` }}
+                          transition={{ ease: "linear", duration: 0.05 }}
+                        />
+                        <motion.div
+                          className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#C89B3C] shadow-[0_0_12px_rgba(200,155,60,0.9),0_0_5px_rgba(255,232,161,0.6)]"
+                          style={{ left: `${Math.min(displayProgress, 99.5)}%` }}
+                          transition={{ ease: "linear", duration: 0.05 }}
+                        />
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <AnimatePresence mode="wait">
+                          {displayProgress >= 100 ? (
+                            <motion.p
+                              key="ready"
+                              className="text-xs tracking-[0.25em] uppercase text-[#C89B3C]/80 w-full text-center"
+                              style={{ fontFamily: "Playfair Display, serif" }}
+                              initial={{ opacity: 0, y: 4 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.4 }}
+                            >
+                              Step into the night
+                            </motion.p>
+                          ) : (
+                            <motion.span
+                              key="pct"
+                              className="text-sm text-[#C89B3C]/60 tabular-nums"
+                              style={{ fontFamily: "Playfair Display, serif" }}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                            >
+                              {displayProgress}%
+                            </motion.span>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </div>
+
+                    {/* Bottom ornament */}
+                    <div className="flex items-center gap-4 w-full">
+                      <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#C89B3C]/50" />
+                      <div className="w-2 h-2 rotate-45 bg-[#C89B3C]/60" />
+                      <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#C89B3C]/50" />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
@@ -133,11 +293,7 @@ export function Hero() {
       {/* Canvas Hero Section — pinned by GSAP ScrollTrigger */}
       <div id="hero-section">
         <canvas id="hero-canvas" />
-
-        {/* Loading indicator — hidden by hero.js once all frames are loaded */}
         <div id="hero-loading">Loading... 0%</div>
-
-        {/* Overlay — faded in by hero.js after preload completes */}
         <div id="hero-overlay">
           <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
             <p
