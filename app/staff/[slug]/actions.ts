@@ -11,7 +11,7 @@ import {
   buildSessionToken,
 } from '@/lib/auth'
 import { getSupabaseClient } from '@/lib/supabase'
-import type { Tier } from '@/lib/seats'
+import { TIERS, type Tier } from '@/lib/seats'
 
 const adminPath = '/staff/' + process.env.ADMIN_PATH_SLUG!
 
@@ -47,6 +47,10 @@ export async function reserveSeat(
   const authed = await getVerifiedCookie()
   if (!authed) redirect(adminPath)
 
+  if (!TIERS.includes(tier as Tier) || !registrantName.trim()) {
+    redirect(adminPath)
+  }
+
   await (getSupabaseClient().from('seats') as any) // no generated DB types yet
     .update({
       status: 'reserved',
@@ -76,23 +80,3 @@ export async function clearSeat(seatId: string) {
   revalidatePath(adminPath)
 }
 
-export async function updateSeat(
-  seatId: string,
-  registrantName: string,
-  tier: Tier,
-) {
-  const authed = await getVerifiedCookie()
-  if (!authed) redirect(adminPath)
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await (getSupabaseClient().from('seats') as any)
-    .update({
-      status: 'reserved',
-      registrant_name: registrantName,
-      tier,
-      updated_at: new Date().toISOString(),
-    })
-    .eq('id', seatId)
-
-  revalidatePath(adminPath)
-}

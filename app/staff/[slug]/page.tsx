@@ -10,14 +10,16 @@ import { login } from './actions'
 
 export const revalidate = 15
 
-interface Props {
+export default async function AdminPage({
+  params,
+  searchParams,
+}: {
   params: Promise<{ slug: string }>
-}
-
-export default async function AdminPage({ params }: Props) {
+  searchParams: Promise<{ error?: string }>
+}) {
   const { slug } = await params
 
-  if (slug !== process.env.ADMIN_PATH_SLUG) {
+  if (!process.env.ADMIN_PATH_SLUG || slug !== process.env.ADMIN_PATH_SLUG) {
     notFound()
   }
 
@@ -103,6 +105,11 @@ export default async function AdminPage({ params }: Props) {
                   boxSizing: 'border-box',
                 }}
               />
+              {(await searchParams).error && (
+                <p style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '0.5rem' }}>
+                  Incorrect password. Try again.
+                </p>
+              )}
             </div>
 
             <button
