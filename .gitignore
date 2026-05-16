@@ -36,3 +36,6 @@ Thumbs.db
 
 # worktrees
 .worktrees
+
+# superpowers brainstorm artifacts
+.superpowers/
