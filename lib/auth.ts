@@ -11,23 +11,18 @@ export const SESSION_COOKIE_OPTIONS = {
   maxAge: 60 * 60 * 8, // 8 hours
 }
 
-/**
- * HMAC-SHA256 of `data` keyed with ADMIN_PASSWORD env var.
- * Returns a hex string suitable for use as a session token.
- */
-export async function signSessionToken(data: string): Promise<string> {
+// Signed payload constant — what we HMAC to produce the session token.
+const SESSION_PAYLOAD = 'admin'
+
+// HMAC-SHA256 of `data` keyed with ADMIN_PASSWORD. Returns hex string.
+export function signSessionToken(data: string): string {
   const secret = process.env.ADMIN_PASSWORD!
-  const hmac = createHmac('sha256', secret)
-  hmac.update(data)
-  return hmac.digest('hex')
+  return createHmac('sha256', secret).update(data).digest('hex')
 }
 
-/**
- * Constant-time compare of a stored cookie value against a freshly
- * computed HMAC of ADMIN_PASSWORD.
- */
-export async function verifySessionCookie(cookieValue: string): Promise<boolean> {
-  const expected = await signSessionToken(process.env.ADMIN_PASSWORD!)
+// Constant-time verify: re-derive the expected token and compare.
+export function verifySessionCookie(cookieValue: string): boolean {
+  const expected = signSessionToken(SESSION_PAYLOAD)
   try {
     const a = Buffer.from(cookieValue, 'hex')
     const b = Buffer.from(expected, 'hex')
@@ -38,17 +33,15 @@ export async function verifySessionCookie(cookieValue: string): Promise<boolean>
   }
 }
 
-/**
- * Constant-time string compare of `input` against ADMIN_PASSWORD env var.
- */
+// Build the session token that gets stored in the cookie.
+export function buildSessionToken(): string {
+  return signSessionToken(SESSION_PAYLOAD)
+}
+
+// Constant-time password check: hash both sides to equalise length before comparing.
 export function checkPassword(input: string): boolean {
   const secret = process.env.ADMIN_PASSWORD ?? ''
-  try {
-    const a = Buffer.from(input)
-    const b = Buffer.from(secret)
-    if (a.length !== b.length) return false
-    return timingSafeEqual(a, b)
-  } catch {
-    return false
-  }
+  const a = createHmac('sha256', 'pw-check').update(input).digest()
+  const b = createHmac('sha256', 'pw-check').update(secret).digest()
+  return timingSafeEqual(a, b)
 }
