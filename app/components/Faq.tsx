@@ -163,6 +163,19 @@ export function Faq() {
           })}
         </div>
 
+        {/* Footer ornamental dots */}
+        <div className="flex items-center justify-center gap-3 mt-12">
+          <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent to-[#C89B3C]/50" />
+          {[...Array(7)].map((_, i) => (
+            <div
+              key={i}
+              className="w-2 h-2 rounded-full bg-[#F5EDD8] shadow-[0_0_10px_rgba(245,237,216,0.6)]"
+              style={{ opacity: 0.3 + (3 - Math.abs(3 - i)) * 0.15 }}
+            />
+          ))}
+          <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent to-[#C89B3C]/50" />
+        </div>
+
       </div>
     </section>
   );
