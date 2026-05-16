@@ -11,13 +11,14 @@
 
 CREATE TABLE IF NOT EXISTS seats (
   id               text        PRIMARY KEY,          -- e.g. "T01-A1"
-  table_no         integer     NOT NULL,             -- 1–16
-  side             text        NOT NULL,             -- 'A' | 'B'
-  seat_no          integer     NOT NULL,             -- 1–8
-  status           text        NOT NULL DEFAULT 'available', -- 'available' | 'reserved'
+  table_no         integer     NOT NULL CHECK (table_no BETWEEN 1 AND 16),
+  side             text        NOT NULL CHECK (side IN ('A', 'B')),
+  seat_no          integer     NOT NULL CHECK (seat_no BETWEEN 1 AND 8),
+  status           text        NOT NULL DEFAULT 'available' CHECK (status IN ('available', 'reserved')),
   registrant_name  text,                             -- nullable
-  tier             text,                             -- nullable: 'ACM' | 'Non-ACM CS' | 'External'
-  updated_at       timestamptz NOT NULL DEFAULT now()
+  tier             text        CHECK (tier IN ('ACM', 'Non-ACM CS', 'External')), -- nullable
+  updated_at       timestamptz NOT NULL DEFAULT now(),
+  UNIQUE (table_no, side, seat_no)
 );
 
 
@@ -55,6 +56,9 @@ CREATE TRIGGER seats_set_updated_at
 -- Generated via a DO block so the file stays concise but every
 -- row is deterministic.  ON CONFLICT DO NOTHING makes it safe
 -- to re-run at any time without wiping existing reservations.
+--
+-- To reset all reservations during development, uncomment:
+-- UPDATE seats SET status = 'available', registrant_name = NULL, tier = NULL;
 -- ------------------------------------------------------------
 
 DO $$
