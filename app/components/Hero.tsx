@@ -225,12 +225,12 @@ export function Hero() {
                       >
                         A Masquerade Grand Ball
                       </p>
-                      <h2
+                      <div
                         className="text-5xl font-bold tracking-widest text-[#C89B3C]"
                         style={{ fontFamily: "Playfair Display, serif" }}
                       >
                         CS NIGHT
-                      </h2>
+                      </div>
                     </div>
 
                     {/* Progress bar */}

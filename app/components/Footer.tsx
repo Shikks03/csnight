@@ -18,7 +18,7 @@ const navLinks = ["About", "Tickets", "FAQ", "Contact"];
 
 export function Footer() {
   return (
-    <footer className="relative bg-black pt-24 pb-12 px-4 overflow-hidden">
+    <footer id="contact" className="relative bg-black pt-24 pb-12 px-4 overflow-hidden">
 
       {/* Top Ornamental Border */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#C89B3C] to-transparent" />
@@ -35,7 +35,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Logo & Tagline */}
         <div className="text-center mb-16">
-          <h2
+          <div
             className="text-7xl md:text-8xl lg:text-9xl mb-6"
             style={{
               fontFamily: "Playfair Display, serif",
@@ -46,7 +46,7 @@ export function Footer() {
             }}
           >
             CS NIGHT
-          </h2>
+          </div>
           <p
             className="text-2xl md:text-3xl italic mb-8"
             style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}

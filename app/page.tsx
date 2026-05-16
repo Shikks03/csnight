@@ -5,6 +5,7 @@ import { Experience } from "./components/Experience";
 import { ProgramFlow } from "./components/ProgramFlow";
 import { Urgency } from "./components/Urgency";
 import { Tickets } from "./components/Tickets";
+import { Faq } from "./components/Faq";
 import { Footer } from "./components/Footer";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <ProgramFlow />
       <Urgency />
       <Tickets />
+      <Faq />
       <Footer />
     </main>
   );
