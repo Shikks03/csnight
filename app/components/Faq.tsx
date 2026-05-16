@@ -70,15 +70,77 @@ export function Faq() {
           <div className="flex-1 max-w-[120px] h-[1px] bg-gradient-to-l from-transparent to-[#C89B3C]" />
         </motion.div>
 
-        {/* FAQ accordion — placeholder, filled in Task 3 */}
         <div className="space-y-3">
-          {FAQ_ITEMS.map((item, i) => (
-            <div key={i} className="border border-[#C89B3C]/30 px-6 py-5">
-              <span style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}>
-                {item.question}
-              </span>
-            </div>
-          ))}
+          {FAQ_ITEMS.map((item, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5, ease: "easeOut" }}
+                className="relative overflow-hidden"
+                style={{
+                  border: isOpen ? "1px solid #C89B3C" : "1px solid rgba(200,155,60,0.3)",
+                  boxShadow: isOpen
+                    ? "0 0 25px rgba(200,155,60,0.3), inset 0 0 40px rgba(200,155,60,0.06)"
+                    : "none",
+                  transition: "border-color 0.3s, box-shadow 0.3s",
+                }}
+              >
+                {/* SVG corner brackets */}
+                <svg className="absolute top-0 left-0 w-4 h-4 -translate-x-px -translate-y-px pointer-events-none" viewBox="0 0 100 100">
+                  <path d="M0,0 L100,0 L100,20 L20,20 L20,100 L0,100 Z" fill="#C89B3C" opacity={isOpen ? "1" : "0.5"} />
+                </svg>
+                <svg className="absolute top-0 right-0 w-4 h-4 translate-x-px -translate-y-px pointer-events-none" viewBox="0 0 100 100">
+                  <path d="M100,0 L0,0 L0,20 L80,20 L80,100 L100,100 Z" fill="#C89B3C" opacity={isOpen ? "1" : "0.5"} />
+                </svg>
+                <svg className="absolute bottom-0 left-0 w-4 h-4 -translate-x-px translate-y-px pointer-events-none" viewBox="0 0 100 100">
+                  <path d="M0,100 L100,100 L100,80 L20,80 L20,0 L0,0 Z" fill="#C89B3C" opacity={isOpen ? "1" : "0.5"} />
+                </svg>
+                <svg className="absolute bottom-0 right-0 w-4 h-4 translate-x-px translate-y-px pointer-events-none" viewBox="0 0 100 100">
+                  <path d="M100,100 L0,100 L0,80 L80,80 L80,0 L100,0 Z" fill="#C89B3C" opacity={isOpen ? "1" : "0.5"} />
+                </svg>
+
+                {/* Button placeholder — filled in Task 4 */}
+                <button
+                  id={`faq-btn-${i}`}
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between px-6 py-5 text-left"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${i}`}
+                >
+                  <span
+                    className="text-base md:text-lg font-medium pr-4 transition-colors duration-300"
+                    style={{
+                      fontFamily: "Playfair Display, serif",
+                      color: isOpen ? "#C89B3C" : "#F5EDD8",
+                    }}
+                  >
+                    {item.question}
+                  </span>
+                  <span aria-hidden="true" style={{ color: "#C89B3C", fontSize: "1.25rem" }}>
+                    +
+                  </span>
+                </button>
+
+                {/* Answer panel placeholder — filled in Task 4 */}
+                <div
+                  id={`faq-panel-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${i}`}
+                  hidden={!isOpen}
+                  className="px-6 pb-5 border-t border-[#C89B3C]/20"
+                >
+                  <p className="text-base leading-relaxed pt-4" style={{ color: "#8BA3BF", fontFamily: "Inter, sans-serif" }}>
+                    {item.answer}
+                  </p>
+                </div>
+
+              </motion.div>
+            );
+          })}
         </div>
 
       </div>
