@@ -30,9 +30,11 @@ export function Faq() {
               className="border border-[#C89B3C]/30 overflow-hidden"
             >
               <button
+                id={`faq-btn-${i}`}
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full flex items-center justify-between px-6 py-5 text-left transition-colors hover:bg-[#C89B3C]/5"
                 aria-expanded={openIndex === i}
+                aria-controls={`faq-panel-${i}`}
               >
                 <span
                   className="text-base md:text-lg font-medium pr-4"
@@ -41,6 +43,7 @@ export function Faq() {
                   {item.question}
                 </span>
                 <span
+                  aria-hidden="true"
                   className="text-xl flex-shrink-0 transition-transform duration-200"
                   style={{
                     color: "#C89B3C",
@@ -50,16 +53,20 @@ export function Faq() {
                   +
                 </span>
               </button>
-              {openIndex === i && (
-                <div className="px-6 pb-5 border-t border-[#C89B3C]/20">
-                  <p
-                    className="text-base leading-relaxed pt-4"
-                    style={{ color: "#8BA3BF", fontFamily: "Inter, sans-serif" }}
-                  >
-                    {item.answer}
-                  </p>
-                </div>
-              )}
+              <div
+                id={`faq-panel-${i}`}
+                role="region"
+                aria-labelledby={`faq-btn-${i}`}
+                hidden={openIndex !== i}
+                className="px-6 pb-5 border-t border-[#C89B3C]/20"
+              >
+                <p
+                  className="text-base leading-relaxed pt-4"
+                  style={{ color: "#8BA3BF", fontFamily: "Inter, sans-serif" }}
+                >
+                  {item.answer}
+                </p>
+              </div>
             </div>
           ))}
         </div>
