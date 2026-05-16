@@ -103,16 +103,18 @@ export function Faq() {
                   <path d="M100,100 L0,100 L0,80 L80,80 L80,0 L100,0 Z" fill="#C89B3C" opacity={isOpen ? "1" : "0.5"} />
                 </svg>
 
-                {/* Button placeholder — filled in Task 4 */}
                 <button
                   id={`faq-btn-${i}`}
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between px-6 py-5 text-left"
+                  className="relative w-full flex items-center justify-between px-6 py-5 text-left overflow-hidden group"
                   aria-expanded={isOpen}
                   aria-controls={`faq-panel-${i}`}
                 >
+                  {/* Shimmer sweep on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C89B3C]/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none" />
+
                   <span
-                    className="text-base md:text-lg font-medium pr-4 transition-colors duration-300"
+                    className="relative z-10 text-base md:text-lg font-medium pr-4 transition-colors duration-300"
                     style={{
                       fontFamily: "Playfair Display, serif",
                       color: isOpen ? "#C89B3C" : "#F5EDD8",
@@ -120,23 +122,41 @@ export function Faq() {
                   >
                     {item.question}
                   </span>
-                  <span aria-hidden="true" style={{ color: "#C89B3C", fontSize: "1.25rem" }}>
+
+                  <motion.span
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    aria-hidden="true"
+                    className="relative z-10 flex-shrink-0 text-xl"
+                    style={{ color: "#C89B3C", display: "inline-block" }}
+                  >
                     +
-                  </span>
+                  </motion.span>
                 </button>
 
-                {/* Answer panel placeholder — filled in Task 4 */}
-                <div
-                  id={`faq-panel-${i}`}
-                  role="region"
-                  aria-labelledby={`faq-btn-${i}`}
-                  hidden={!isOpen}
-                  className="px-6 pb-5 border-t border-[#C89B3C]/20"
-                >
-                  <p className="text-base leading-relaxed pt-4" style={{ color: "#8BA3BF", fontFamily: "Inter, sans-serif" }}>
-                    {item.answer}
-                  </p>
-                </div>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={`faq-panel-${i}`}
+                      role="region"
+                      aria-labelledby={`faq-btn-${i}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <div className="px-6 pb-5 border-t border-[#C89B3C]/20">
+                        <p
+                          className="text-base leading-relaxed pt-4"
+                          style={{ color: "#8BA3BF", fontFamily: "Inter, sans-serif" }}
+                        >
+                          {item.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
               </motion.div>
             );
