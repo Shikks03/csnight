@@ -1,7 +1,7 @@
 export const TABLES = 16
 export const SIDES = ['A', 'B'] as const
 export const SEATS_PER_SIDE = 8
-export const TIERS = ['ACM', 'Non-ACM CS', 'External'] as const
+export const TIERS = ['ACM', 'Non-ACM CS', 'External', 'Associates', 'Awardees'] as const
 
 export type Side = typeof SIDES[number]       // 'A' | 'B'
 export type Tier = typeof TIERS[number]       // 'ACM' | 'Non-ACM CS' | 'External'

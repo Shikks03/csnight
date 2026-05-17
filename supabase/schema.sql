@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS seats (
   seat_no          integer     NOT NULL CHECK (seat_no BETWEEN 1 AND 8),
   status           text        NOT NULL DEFAULT 'available' CHECK (status IN ('available', 'reserved')),
   registrant_name  text,                             -- nullable
-  tier             text        CHECK (tier IN ('ACM', 'Non-ACM CS', 'External')), -- nullable
+  tier             text        CHECK (tier IN ('ACM', 'Non-ACM CS', 'External', 'Associates', 'Awardees')), -- nullable
   updated_at       timestamptz NOT NULL DEFAULT now(),
   UNIQUE (table_no, side, seat_no)
 );

@@ -13,6 +13,8 @@ const TIER_COLORS: Record<Tier, string> = {
   ACM: '#4ade80',
   'Non-ACM CS': '#60a5fa',
   External: '#f59e0b',
+  Associates: '#a78bfa',
+  Awardees: '#f472b6',
 }
 
 function getInitials(name: string | null): string {
@@ -36,6 +38,8 @@ export default function SeatMap({ seats }: SeatMapProps) {
     ACM: 0,
     'Non-ACM CS': 0,
     External: 0,
+    Associates: 0,
+    Awardees: 0,
   }
   for (const s of reserved) {
     if (s.tier) tierCounts[s.tier]++
@@ -87,7 +91,7 @@ export default function SeatMap({ seats }: SeatMapProps) {
             marginLeft: 'auto',
           }}
         >
-          {(['ACM', 'Non-ACM CS', 'External'] as Tier[]).map((t) => (
+          {(['ACM', 'Non-ACM CS', 'External', 'Associates', 'Awardees'] as Tier[]).map((t) => (
             <span
               key={t}
               style={{
@@ -170,7 +174,7 @@ function TableCard({ tableNo, seatMap, onSelect }: TableCardProps) {
           marginBottom: '0.875rem',
         }}
       >
-        Table {tableNo}
+        {tableNo === 16 ? "Associate's Table" : `Table ${tableNo}`}
       </p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -185,7 +189,7 @@ function TableCard({ tableNo, seatMap, onSelect }: TableCardProps) {
                 marginBottom: '0.4rem',
               }}
             >
-              Side {side}
+              {tableNo === 15 && side === 'B' ? "Awardees Table" : `Side ${side}`}
             </p>
             <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
               {Array.from({ length: SEATS_PER_SIDE }, (_, j) => j + 1).map((seatNo) => {

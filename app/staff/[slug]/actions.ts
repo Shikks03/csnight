@@ -51,7 +51,7 @@ export async function reserveSeat(
     redirect(adminPath)
   }
 
-  await (getSupabaseClient().from('seats') as any) // no generated DB types yet
+  const { error } = await (getSupabaseClient().from('seats') as any)
     .update({
       status: 'reserved',
       registrant_name: registrantName,
@@ -59,6 +59,8 @@ export async function reserveSeat(
       updated_at: new Date().toISOString(),
     })
     .eq('id', seatId)
+
+  if (error) throw new Error(error.message)
 
   revalidatePath(adminPath)
 }

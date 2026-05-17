@@ -135,12 +135,21 @@ export default async function AdminPage({
     )
   }
 
-  const { data: seats } = await getSupabaseClient()
+  const { data: seats, error: seatsError } = await getSupabaseClient()
     .from('seats')
     .select('*')
     .order('table_no', { ascending: true })
     .order('side', { ascending: true })
     .order('seat_no', { ascending: true })
+
+  if (seatsError) {
+    return (
+      <main style={{ minHeight: '100vh', backgroundColor: '#0A1628', color: '#ef4444', padding: '2rem', fontFamily: 'monospace' }}>
+        <p>Supabase error: {seatsError.message}</p>
+        <pre>{JSON.stringify(seatsError, null, 2)}</pre>
+      </main>
+    )
+  }
 
   return (
     <main
@@ -151,6 +160,7 @@ export default async function AdminPage({
         fontFamily: 'Inter, sans-serif',
       }}
     >
+      <p style={{ color: '#C89B3C', padding: '1rem', fontFamily: 'monospace' }}>DEBUG: {seats?.length ?? 0} seats fetched</p>
       <SeatMap seats={seats ?? []} />
     </main>
   )

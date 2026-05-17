@@ -17,6 +17,8 @@ const TIER_COLORS: Record<Tier, string> = {
   ACM: '#4ade80',
   'Non-ACM CS': '#60a5fa',
   External: '#f59e0b',
+  Associates: '#a78bfa',
+  Awardees: '#f472b6',
 }
 
 function formatSeatLabel(seat: Seat): string {
