@@ -313,7 +313,6 @@ export function Hero() {
       {/* Canvas Hero Section — pinned by GSAP ScrollTrigger */}
       <div id="hero-section">
         <canvas id="hero-canvas" />
-        <div id="hero-loading">Loading... 0%</div>
         <div id="hero-overlay">
           <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
             <p

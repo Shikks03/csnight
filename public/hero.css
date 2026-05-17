@@ -17,18 +17,7 @@
 }
 
 #hero-loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Playfair Display', serif;
-  font-size: 0.875rem;
-  letter-spacing: 0.2em;
-  color: #C89B3C;
-  text-transform: uppercase;
-  opacity: 0.7;
-  pointer-events: none;
-  z-index: 20;
+  display: none; /* React loading screen handles all progress feedback */
 }
 
 #hero-overlay {

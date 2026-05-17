@@ -58,15 +58,13 @@ const BASE_PATH = '/frames/frame_';
 
   /* ── Preload all frames with progress indicator ─────────────────── */
   function preloadFrames(onComplete) {
-    let done = 0;
+    let total = 0;
     let failed = 0;
 
     function onDone() {
-      done++;
-      const total = done + failed;
+      total++;
       const pct = Math.round((total / FRAME_COUNT) * 100);
       window.__heroLoad.percent = pct;
-      if (loadingEl) loadingEl.textContent = 'Loading... ' + pct + '%';
       window.dispatchEvent(new CustomEvent('hero:loadProgress', { detail: { percent: pct } }));
       if (total === FRAME_COUNT) {
         window.__heroLoad.complete = true;
@@ -164,6 +162,7 @@ const BASE_PATH = '/frames/frame_';
       // so that body.overflow is restored and GSAP can measure scroll metrics correctly.
       window.addEventListener('hero:revealed', function onRevealed() {
         window.removeEventListener('hero:revealed', onRevealed);
+        if (loadingEl) loadingEl.style.display = 'none';
         initScrollTrigger();
       }, { once: true });
     });
