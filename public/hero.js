@@ -11,11 +11,14 @@
  *
  * CONFIG — adjust these two values to match your video:
  */
-const FRAME_COUNT = 80;       // Total number of extracted frames
+const FRAME_COUNT = 104;      // Total number of extracted frames
 const SCROLL_DISTANCE = 750; // Pixels of scroll to play through all frames (higher = slower)
 const BASE_PATH = '/frames/frame_';
 
 (function () {
+  /* ── Global load state (allows React to seed on mount even if events fired first) */
+  window.__heroLoad = { percent: 0, complete: false };
+
   /* ── State ──────────────────────────────────────────────────────── */
   let canvas, ctx, heroSection, loadingEl, overlayEl;
   let currentFrame = 0;
@@ -62,9 +65,11 @@ const BASE_PATH = '/frames/frame_';
       done++;
       const total = done + failed;
       const pct = Math.round((total / FRAME_COUNT) * 100);
+      window.__heroLoad.percent = pct;
       if (loadingEl) loadingEl.textContent = 'Loading... ' + pct + '%';
       window.dispatchEvent(new CustomEvent('hero:loadProgress', { detail: { percent: pct } }));
       if (total === FRAME_COUNT) {
+        window.__heroLoad.complete = true;
         window.dispatchEvent(new Event('hero:loadComplete'));
         if (failed === FRAME_COUNT) {
           console.warn('[hero] All frames failed to load — showing static fallback');

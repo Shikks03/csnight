@@ -1,5 +1,5 @@
-"use client";
-import { useState, useEffect } from "react";
+﻿"use client";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Script from "next/script";
 
@@ -10,7 +10,8 @@ export function Hero() {
   const [phase, setPhase] = useState<Phase>("envelope");
   const [loadProgress, setLoadProgress] = useState(0);
   const [displayProgress, setDisplayProgress] = useState(0);
-  const [minTimeReached, setMinTimeReached] = useState(false);
+  const loadProgressRef = useRef(0);
+  const loadStartRef = useRef(0);
 
   // Block scroll until main page is revealed
   useEffect(() => {
@@ -27,13 +28,23 @@ export function Hero() {
     }
   }, [phase]);
 
-  // Track frame-load progress from hero.js
+  // Track frame-load progress from hero.js; seed from global to catch missed events
   useEffect(() => {
+    const heroLoad = (window as any).__heroLoad;
+    if (heroLoad) {
+      const pct = heroLoad.complete ? 100 : (heroLoad.percent || 0);
+      setLoadProgress(pct);
+      loadProgressRef.current = pct;
+    }
     const onProgress = (e: Event) => {
       const pct = (e as CustomEvent<{ percent: number }>).detail.percent;
       setLoadProgress(pct);
+      loadProgressRef.current = pct;
     };
-    const onComplete = () => setLoadProgress(100);
+    const onComplete = () => {
+      setLoadProgress(100);
+      loadProgressRef.current = 100;
+    };
     window.addEventListener("hero:loadProgress", onProgress);
     window.addEventListener("hero:loadComplete", onComplete);
     return () => {
@@ -42,35 +53,44 @@ export function Hero() {
     };
   }, []);
 
-  // Animate display progress 0→100 over 3 seconds and set minTimeReached at the end
+  // Ease displayProgress toward real asset progress; reveal once loaded + 600ms min elapsed
   useEffect(() => {
     if (phase !== "loading") return;
     setDisplayProgress(0);
-    setMinTimeReached(false);
-    const start = Date.now();
-    const duration = 2000;
+    loadStartRef.current = Date.now();
+    let display = 0;
     let raf: number;
-    const tick = () => {
-      const pct = Math.min(100, Math.round(((Date.now() - start) / duration) * 100));
-      setDisplayProgress(pct);
-      if (pct < 100) {
-        raf = requestAnimationFrame(tick);
-      } else {
-        setMinTimeReached(true);
-      }
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [phase]);
+    let revealTimeout: ReturnType<typeof setTimeout>;
+    let done = false;
 
-  // Advance to revealed only when both the minimum time AND all frames are ready
-  useEffect(() => {
-    if (phase !== "loading") return;
-    if (loadProgress >= 100 && minTimeReached) {
-      const t = setTimeout(() => setPhase("revealed"), 700);
-      return () => clearTimeout(t);
-    }
-  }, [phase, loadProgress, minTimeReached]);
+    // Safety net: force completion after 15s so the page never hangs permanently
+    const safetyTimer = setTimeout(() => {
+      setLoadProgress(100);
+      loadProgressRef.current = 100;
+    }, 15000);
+
+    const tick = () => {
+      if (done) return;
+      const target = loadProgressRef.current;
+      const elapsed = Date.now() - loadStartRef.current;
+      const diff = target - display;
+      display = Math.abs(diff) < 0.5 ? target : display + diff * 0.12;
+      setDisplayProgress(Math.round(display));
+      if (target >= 100 && elapsed >= 600 && display >= 100) {
+        done = true;
+        revealTimeout = setTimeout(() => setPhase("revealed"), 300);
+        return;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(revealTimeout);
+      clearTimeout(safetyTimer);
+    };
+  }, [phase]);
 
   const scrollToTickets = () => {
     document.getElementById("tickets")?.scrollIntoView({ behavior: "smooth" });
@@ -125,13 +145,13 @@ export function Hero() {
                     >
                       <div
                         className="text-sm italic text-[#F5EDD8] mb-2 opacity-80"
-                        style={{ fontFamily: "Playfair Display, serif" }}
+                        style={{ fontFamily: "Cinzel, serif" }}
                       >
                         A Masquerade Grand Ball
                       </div>
                       <div
                         className="text-3xl tracking-widest text-[#C89B3C] font-bold"
-                        style={{ fontFamily: "Playfair Display, serif" }}
+                        style={{ fontFamily: "Cinzel, serif" }}
                       >
                         CS NIGHT
                       </div>
@@ -214,20 +234,20 @@ export function Hero() {
                       <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#E5C06B] via-[#C89B3C] to-[#8B6914] flex items-center justify-center shadow-[0_0_48px_rgba(200,155,60,0.4)] border border-[#FFE8A1]/30">
                         <span
                           className="text-3xl font-bold tracking-tight text-[#2A1800]"
-                          style={{ fontFamily: "Playfair Display, serif" }}
+                          style={{ fontFamily: "Cinzel, serif" }}
                         >
                           CS
                         </span>
                       </div>
                       <p
                         className="text-xs tracking-[0.35em] uppercase text-[#8BA3BF]/60"
-                        style={{ fontFamily: "Playfair Display, serif" }}
+                        style={{ fontFamily: "Cinzel, serif" }}
                       >
                         A Masquerade Grand Ball
                       </p>
                       <div
                         className="text-5xl font-bold tracking-widest text-[#C89B3C]"
-                        style={{ fontFamily: "Playfair Display, serif" }}
+                        style={{ fontFamily: "Cinzel, serif" }}
                       >
                         CS NIGHT
                       </div>
@@ -239,12 +259,12 @@ export function Hero() {
                         <motion.div
                           className="absolute top-0 left-0 h-px bg-gradient-to-r from-[#C89B3C]/60 to-[#C89B3C]"
                           style={{ width: `${displayProgress}%` }}
-                          transition={{ ease: "linear", duration: 0.05 }}
+                          transition={{ duration: 0 }}
                         />
                         <motion.div
                           className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#C89B3C] shadow-[0_0_12px_rgba(200,155,60,0.9),0_0_5px_rgba(255,232,161,0.6)]"
                           style={{ left: `${Math.min(displayProgress, 99.5)}%` }}
-                          transition={{ ease: "linear", duration: 0.05 }}
+                          transition={{ duration: 0 }}
                         />
                       </div>
 
@@ -254,7 +274,7 @@ export function Hero() {
                             <motion.p
                               key="ready"
                               className="text-xs tracking-[0.25em] uppercase text-[#C89B3C]/80 w-full text-center"
-                              style={{ fontFamily: "Playfair Display, serif" }}
+                              style={{ fontFamily: "Cinzel, serif" }}
                               initial={{ opacity: 0, y: 4 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.4 }}
@@ -265,7 +285,7 @@ export function Hero() {
                             <motion.span
                               key="pct"
                               className="text-sm text-[#C89B3C]/60 tabular-nums"
-                              style={{ fontFamily: "Playfair Display, serif" }}
+                              style={{ fontFamily: "Cinzel, serif" }}
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
                             >
@@ -299,7 +319,7 @@ export function Hero() {
             <p
               className="text-lg md:text-2xl mb-8 italic tracking-wide uppercase"
               style={{
-                fontFamily: "Playfair Display, serif",
+                fontFamily: "Cinzel, serif",
                 color: "#F5EDD8",
                 letterSpacing: "0.3em",
                 textShadow: "0 2px 10px rgba(0,0,0,0.5)",
@@ -311,7 +331,7 @@ export function Hero() {
             <h1
               className="text-7xl md:text-[10rem] lg:text-[12rem] mb-6 tracking-wider leading-none"
               style={{
-                fontFamily: "Playfair Display, serif",
+                fontFamily: "Cinzel, serif",
                 fontWeight: 700,
                 color: "#C89B3C",
                 textShadow: `
@@ -333,7 +353,7 @@ export function Hero() {
 
             <p
               className="text-base md:text-xl mb-12 tracking-[0.15em] uppercase opacity-80"
-              style={{ fontFamily: "Playfair Display, serif", color: "#F5EDD8" }}
+              style={{ fontFamily: "Cinzel, serif", color: "#F5EDD8" }}
             >
               June 27, 2026
             </p>
@@ -342,7 +362,7 @@ export function Hero() {
               onClick={scrollToTickets}
               className="group relative px-12 py-5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(200,155,60,0.4),_inset_0_0_20px_rgba(200,155,60,0.2)] cursor-pointer pointer-events-auto"
               style={{
-                fontFamily: "Playfair Display, serif",
+                fontFamily: "Cinzel, serif",
                 borderColor: "#C89B3C",
                 color: "#C89B3C",
               }}
@@ -358,7 +378,7 @@ export function Hero() {
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce opacity-70">
             <div
               className="text-[10px] uppercase tracking-[0.3em]"
-              style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+              style={{ color: "#C89B3C", fontFamily: "Cinzel, serif" }}
             >
               Scroll
             </div>
