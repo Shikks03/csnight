@@ -1,6 +1,7 @@
-"use client";
+﻿"use client";
 import { Crown, Users, Shirt } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { Reveal } from "./Reveal";
 
 const items: { icon: LucideIcon; title: string; subtitle: string }[] = [
   { icon: Crown, title: "One Night Only", subtitle: "June 27 — an evening that happens once" },
@@ -22,11 +23,11 @@ export function Urgency() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Main Message */}
-        <div className="text-center mb-20">
+        <Reveal><div className="text-center mb-20">
           <h2
             className="text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight"
             style={{
-              fontFamily: "Playfair Display, serif",
+              fontFamily: "Cinzel, serif",
               color: "#C89B3C",
               fontWeight: 700,
               textShadow: `0 0 60px rgba(200, 155, 60, 0.6), 0 0 30px rgba(200, 155, 60, 0.4), 2px 2px 8px rgba(0, 0, 0, 0.9)`,
@@ -37,7 +38,7 @@ export function Urgency() {
           <p
             className="text-3xl md:text-5xl lg:text-6xl italic"
             style={{
-              fontFamily: "Playfair Display, serif",
+              fontFamily: "Cinzel, serif",
               color: "#F5EDD8",
               textShadow: "2px 2px 30px rgba(0,0,0,0.9)",
             }}
@@ -50,14 +51,15 @@ export function Urgency() {
             <div className="w-4 h-4 rotate-45 bg-[#C89B3C] shadow-[0_0_20px_rgba(200,155,60,0.8)]" />
             <div className="w-32 h-[2px] bg-gradient-to-l from-transparent via-[#C89B3C] to-[#C89B3C]" />
           </div>
-        </div>
+        </div></Reveal>
 
         {/* Stats Grid */}
         <div className="grid md:grid-cols-3 gap-12 mb-20">
           {items.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div key={index} className="group text-center relative">
+              <Reveal key={index} delay={index * 0.1}>
+              <div className="group text-center relative">
                 <div className="absolute inset-0 border-2 border-[#C89B3C]/30 group-hover:border-[#C89B3C] transition-colors duration-500" />
                 <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(200,155,60,0.05)] group-hover:shadow-[inset_0_0_60px_rgba(200,155,60,0.15)] transition-shadow duration-500" />
 
@@ -74,7 +76,7 @@ export function Urgency() {
 
                   <h3
                     className="text-3xl mb-4 tracking-wide"
-                    style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+                    style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
                   >
                     {item.title}
                   </h3>
@@ -90,18 +92,19 @@ export function Urgency() {
                   </p>
                 </div>
               </div>
+              </Reveal>
             );
           })}
         </div>
 
         {/* CTA Button */}
-        <div className="text-center relative">
+        <Reveal delay={0.25}><div className="text-center relative">
           <div className="inline-block relative">
             <div className="absolute -inset-8 border border-[#C89B3C]/30 pointer-events-none" />
             <button
               onClick={scrollToTickets}
               className="group relative px-16 py-8 bg-gradient-to-b from-[#C89B3C] to-[#8B6914] overflow-hidden transition-all duration-700 hover:shadow-[0_0_80px_rgba(200,155,60,0.8)] hover:scale-105 cursor-pointer"
-              style={{ fontFamily: "Playfair Display, serif" }}
+              style={{ fontFamily: "Cinzel, serif" }}
             >
               <span className="relative z-10 text-2xl md:text-3xl tracking-[0.2em] uppercase text-[#0D1A2A] font-bold">
                 Reserve your seat now
@@ -122,7 +125,7 @@ export function Urgency() {
             ))}
             <div className="w-24 h-[2px] bg-gradient-to-l from-transparent to-[#C89B3C]/50" />
           </div>
-        </div>
+        </div></Reveal>
       </div>
     </section>
   );

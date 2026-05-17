@@ -1,3 +1,5 @@
+﻿import { Reveal } from "./Reveal";
+
 export function About() {
   return (
     <section
@@ -24,17 +26,17 @@ export function About() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Title */}
-        <div className="text-center mb-20">
+        <Reveal><div className="text-center mb-20">
           <p
             className="text-xs uppercase tracking-[0.4em] mb-4"
-            style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "#C89B3C", fontFamily: "Cinzel, serif" }}
           >
             — An Exclusive Evening —
           </p>
           <h2
             className="text-6xl md:text-8xl mb-6 relative inline-block"
             style={{
-              fontFamily: "Playfair Display, serif",
+              fontFamily: "Cinzel, serif",
               color: "#C89B3C",
               fontWeight: 700,
               textShadow: `0 0 40px rgba(200, 155, 60, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.8)`,
@@ -43,16 +45,16 @@ export function About() {
             About the Night
             <div className="absolute -bottom-2 left-0 right-0 h-[3px] bg-linear-to-r from-transparent via-[#C89B3C] to-transparent" />
           </h2>
-        </div>
+        </div></Reveal>
 
         <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-start">
           {/* Left Column — Invitation Letter */}
-          <div className="space-y-8 relative">
+          <Reveal delay={0.1}><div className="space-y-8 relative">
             <div className="relative">
               <span
                 className="float-left text-9xl leading-none mr-4 mt-2"
                 style={{
-                  fontFamily: "Playfair Display, serif",
+                  fontFamily: "Cinzel, serif",
                   color: "#C89B3C",
                   textShadow: "0 0 30px rgba(200, 155, 60, 0.6)",
                 }}
@@ -61,7 +63,7 @@ export function About() {
               </span>
               <p
                 className="text-xl md:text-2xl leading-relaxed"
-                style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
+                style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
               >
                 S Night is not just another university event—it&apos;s the most prestigious grand ball of the year,
                 exclusively crafted for Computer Science students and their distinguished guests.
@@ -75,7 +77,7 @@ export function About() {
 
             <p
               className="text-lg md:text-xl leading-relaxed italic"
-              style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+              style={{ color: "#C89B3C", fontFamily: "Cinzel, serif" }}
             >
               Behind every mask lies a story waiting to unfold. This is your invitation to be part of something
               unforgettable—a night where tradition and technology dance together in perfect harmony.
@@ -125,13 +127,13 @@ export function About() {
                   </p>
                   <p
                     className="text-2xl leading-tight"
-                    style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+                    style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
                   >
                     220 Seats Only
                   </p>
                   <p
                     className="text-sm mt-1 italic"
-                    style={{ color: "#F5EDD8", opacity: 0.7, fontFamily: "Playfair Display, serif" }}
+                    style={{ color: "#F5EDD8", opacity: 0.7, fontFamily: "Cinzel, serif" }}
                   >
                     170 CS Students · 50 External Participants
                   </p>
@@ -167,23 +169,23 @@ export function About() {
                   </p>
                   <p
                     className="text-2xl leading-tight"
-                    style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+                    style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
                   >
                     First Come, First Served
                   </p>
                   <p
                     className="text-sm mt-1 italic"
-                    style={{ color: "#F5EDD8", opacity: 0.7, fontFamily: "Playfair Display, serif" }}
+                    style={{ color: "#F5EDD8", opacity: 0.7, fontFamily: "Cinzel, serif" }}
                   >
                     Reserve early to secure your place
                   </p>
                 </div>
               </div>
             </div>
-          </div>
+          </div></Reveal>
 
           {/* Right Column — Formal Invitation Card */}
-          <div className="relative lg:sticky lg:top-8 lg:-mt-8">
+          <Reveal delay={0.2}><div className="relative lg:sticky lg:top-8 lg:-mt-8">
             <div
               className="relative bg-linear-to-b from-[#0D1A2A] via-[#0A1628] to-[#0D1A2A] shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden"
               style={{ border: "1px solid rgba(200,155,60,0.4)" }}
@@ -212,13 +214,13 @@ export function About() {
               <div className="px-10 py-12 text-center space-y-0">
                 <p
                   className="text-xs uppercase tracking-[0.35em] mb-6"
-                  style={{ color: "#8BA3BF", fontFamily: "Playfair Display, serif" }}
+                  style={{ color: "#8BA3BF", fontFamily: "Cinzel, serif" }}
                 >
                   The ACM-CS Community
                 </p>
                 <p
                   className="text-sm italic mb-2"
-                  style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.8 }}
+                  style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", opacity: 0.8 }}
                 >
                   cordially invites you to
                 </p>
@@ -226,7 +228,7 @@ export function About() {
                 <h3
                   className="text-4xl tracking-wider my-5"
                   style={{
-                    fontFamily: "Playfair Display, serif",
+                    fontFamily: "Cinzel, serif",
                     color: "#C89B3C",
                     fontWeight: 700,
                     textShadow: "0 0 30px rgba(200, 155, 60, 0.5)",
@@ -244,7 +246,7 @@ export function About() {
 
                 <p
                   className="text-base italic mb-8"
-                  style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.75 }}
+                  style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", opacity: 0.75 }}
                 >
                   A Masquerade Grand Ball
                 </p>
@@ -255,7 +257,7 @@ export function About() {
                     <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Date</p>
                     <p
                       className="text-2xl"
-                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", fontWeight: 600 }}
+                      style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
                     >
                       June 27, 2026
                     </p>
@@ -271,7 +273,7 @@ export function About() {
                     <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Time</p>
                     <p
                       className="text-2xl"
-                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", fontWeight: 600 }}
+                      style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
                     >
                       5:00 PM onwards
                     </p>
@@ -287,7 +289,7 @@ export function About() {
                     <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Doors Open</p>
                     <p
                       className="text-2xl"
-                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", fontWeight: 600 }}
+                      style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
                     >
                       3:20 PM
                     </p>
@@ -303,7 +305,7 @@ export function About() {
                     <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Venue</p>
                     <p
                       className="text-2xl"
-                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", fontWeight: 600 }}
+                      style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
                     >
                       FEU Tech — 17th Floor Gymnasium
                     </p>
@@ -318,7 +320,7 @@ export function About() {
                   <p
                     className="text-2xl"
                     style={{
-                      fontFamily: "Playfair Display, serif",
+                      fontFamily: "Cinzel, serif",
                       color: "#C89B3C",
                       fontWeight: 700,
                       textShadow: "0 0 20px rgba(200, 155, 60, 0.4)",
@@ -328,7 +330,7 @@ export function About() {
                   </p>
                   <p
                     className="text-base mt-1 italic"
-                    style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.7 }}
+                    style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", opacity: 0.7 }}
                   >
                     Masks Required
                   </p>
@@ -338,7 +340,7 @@ export function About() {
               {/* Bottom decorative band */}
               <div className="h-1 w-full bg-linear-to-r from-transparent via-[#C89B3C] to-transparent" />
             </div>
-          </div>
+          </div></Reveal>
         </div>
       </div>
     </section>

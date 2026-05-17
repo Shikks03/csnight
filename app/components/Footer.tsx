@@ -1,5 +1,6 @@
-import React from "react";
+﻿import React from "react";
 import { Facebook, Instagram, Mail } from "lucide-react";
+import { Reveal } from "./Reveal";
 
 const LinkedInIcon = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
   <svg viewBox="0 0 24 24" className={className} style={style} fill="currentColor">
@@ -32,13 +33,13 @@ export function Footer() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Reveal className="max-w-7xl mx-auto relative z-10">
         {/* Logo & Tagline */}
         <div className="text-center mb-16">
           <div
             className="text-7xl md:text-8xl lg:text-9xl mb-6"
             style={{
-              fontFamily: "Playfair Display, serif",
+              fontFamily: "Cinzel, serif",
               color: "#C89B3C",
               fontWeight: 700,
               textShadow: `0 0 80px rgba(200, 155, 60, 0.6), 0 0 40px rgba(200, 155, 60, 0.4), 2px 2px 8px rgba(0, 0, 0, 0.9)`,
@@ -49,7 +50,7 @@ export function Footer() {
           </div>
           <p
             className="text-2xl md:text-3xl italic mb-8"
-            style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
           >
             One night. A thousand memories.
           </p>
@@ -94,7 +95,7 @@ export function Footer() {
                 <a
                   href={`#${link.toLowerCase()}`}
                   className="uppercase tracking-[0.2em] transition-all duration-300 hover:text-[#C89B3C] hover:tracking-[0.3em]"
-                  style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
+                  style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
                 >
                   {link}
                 </a>
@@ -121,7 +122,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="text-center">
-          <p className="text-lg mb-3" style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}>
+          <p className="text-lg mb-3" style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}>
             Organized by the FEU Tech <span style={{ color: "#C89B3C" }}>ACM</span> Student Chapter
           </p>
           <p className="text-sm uppercase tracking-[0.2em]" style={{ color: "#C89B3C", opacity: 0.7 }}>
@@ -133,7 +134,7 @@ export function Footer() {
             <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-[#C89B3C]/30" />
           </div>
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

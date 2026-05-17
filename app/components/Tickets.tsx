@@ -1,4 +1,5 @@
-import { Check, Sparkles } from "lucide-react";
+﻿import { Check, Sparkles } from "lucide-react";
+import { Reveal } from "./Reveal";
 
 const RESERVATION_LINK = "https://forms.gle/YOUR_LINK";
 
@@ -66,11 +67,11 @@ export function Tickets() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Title */}
-        <div className="text-center mb-24">
+        <Reveal><div className="text-center mb-24">
           <h2
             className="text-7xl md:text-9xl mb-8 relative inline-block"
             style={{
-              fontFamily: "Playfair Display, serif",
+              fontFamily: "Cinzel, serif",
               color: "#C89B3C",
               fontWeight: 700,
               textShadow: `0 0 60px rgba(200, 155, 60, 0.6), 2px 2px 8px rgba(0, 0, 0, 0.9)`,
@@ -81,17 +82,17 @@ export function Tickets() {
           </h2>
           <p
             className="text-2xl md:text-3xl mt-12 italic max-w-3xl mx-auto leading-relaxed"
-            style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
           >
             Secure your place at the most prestigious event of the year
           </p>
-        </div>
+        </div></Reveal>
 
         {/* Pricing Triptych */}
         <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
           {tiers.map((tier, index) => (
+            <Reveal key={index} delay={index * 0.12}>
             <div
-              key={index}
               className={`relative flex flex-col bg-gradient-to-b from-[#0D1A2A] via-[#0A1628] to-[#0D1A2A] transition-all duration-700 ${
                 tier.highlighted
                   ? "lg:scale-110 lg:-translate-y-8 shadow-[0_40px_100px_rgba(200,155,60,0.4)]"
@@ -144,7 +145,7 @@ export function Tickets() {
                 <div className="text-center mb-8">
                   <h3
                     className="text-2xl md:text-3xl mb-6 tracking-wide uppercase"
-                    style={{ fontFamily: "Playfair Display, serif", color: "#F5EDD8", fontWeight: 600 }}
+                    style={{ fontFamily: "Cinzel, serif", color: "#F5EDD8", fontWeight: 600 }}
                   >
                     {tier.name}
                   </h3>
@@ -162,7 +163,7 @@ export function Tickets() {
                   <p
                     className="text-6xl md:text-7xl mb-2"
                     style={{
-                      fontFamily: "Playfair Display, serif",
+                      fontFamily: "Cinzel, serif",
                       color: "#C89B3C",
                       fontWeight: 700,
                       textShadow: tier.highlighted
@@ -200,7 +201,7 @@ export function Tickets() {
                       ? "bg-gradient-to-r from-[#C89B3C] to-[#8B6914] border-[#C89B3C] text-[#0D1A2A] hover:shadow-[0_0_50px_rgba(200,155,60,0.8)]"
                       : "bg-transparent border-[#C89B3C] text-[#C89B3C] hover:bg-gradient-to-r hover:from-[#C89B3C] hover:to-[#8B6914] hover:text-[#0D1A2A] hover:shadow-[0_0_40px_rgba(200,155,60,0.6)]"
                   }`}
-                  style={{ fontFamily: "Playfair Display, serif" }}
+                  style={{ fontFamily: "Cinzel, serif" }}
                 >
                   <span className="relative z-10 text-xl tracking-[0.2em] uppercase font-bold">
                     Reserve a seat
@@ -209,13 +210,14 @@ export function Tickets() {
                 </a>
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
 
         {/* Additional Info */}
-        <div className="text-center max-w-4xl mx-auto">
+        <Reveal delay={0.1}><div className="text-center max-w-4xl mx-auto">
           <div className="border-t-2 border-b-2 border-[#C89B3C]/30 py-8 px-12">
-            <p className="text-lg mb-3 italic" style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}>
+            <p className="text-lg mb-3 italic" style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}>
               All tickets include full access to the masquerade reception, formal dinner, and grand ball.
             </p>
             <p className="text-base" style={{ color: "#C89B3C" }}>
@@ -234,7 +236,7 @@ export function Tickets() {
             ))}
             <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent to-[#C89B3C]/50" />
           </div>
-        </div>
+        </div></Reveal>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
-"use client";
+﻿"use client";
 import { useState, useRef, forwardRef, useCallback } from "react";
+import { Reveal } from "./Reveal";
 
 type Moment = { timeRange: string; title: string; description: string };
 
@@ -92,22 +93,22 @@ export function ProgramFlow() {
 
       <div className="max-w-5xl mx-auto relative">
         {/* Heading */}
-        <div className="text-center mb-20">
+        <Reveal><div className="text-center mb-20">
           <p
             className="text-xs uppercase tracking-[0.4em] mb-4"
-            style={{ color: "#C89B3C", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "#C89B3C", fontFamily: "Cinzel, serif" }}
           >
             — June 27, 2026 —
           </p>
           <h2
             className="text-5xl md:text-7xl"
-            style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+            style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
           >
             The Programme
           </h2>
           <p
             className="text-lg mt-6 italic"
-            style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.7 }}
+            style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", opacity: 0.7 }}
           >
             Twenty moments. One unforgettable evening.
           </p>
@@ -130,9 +131,10 @@ export function ProgramFlow() {
             />
             <div className="h-px w-24" style={{ background: "linear-gradient(to left, transparent, #C89B3C88)" }} />
           </div>
-        </div>
+        </div></Reveal>
 
         {/* Act cards */}
+        <Reveal delay={0.15}>
         {openIndex === null ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {actGroups.map((act, i) => (
@@ -172,6 +174,7 @@ export function ProgramFlow() {
             </div>
           </div>
         )}
+        </Reveal>
       </div>
     </section>
   );
@@ -245,7 +248,7 @@ const ActCard = forwardRef<
       <div
         className="absolute right-4 top-2 select-none pointer-events-none leading-none transition-opacity duration-300"
         style={{
-          fontFamily: "Playfair Display, serif",
+          fontFamily: "Cinzel, serif",
           fontSize: "9rem",
           color: "#C89B3C",
           opacity: isOpen ? 0.05 : 0.04,
@@ -259,19 +262,19 @@ const ActCard = forwardRef<
       <div className="hidden md:block px-8 pt-8 pb-0 relative">
         <p
           className="text-xs uppercase tracking-[0.3em] mb-4"
-          style={{ color: "rgba(200,155,60,0.7)", fontFamily: "Inter, sans-serif", letterSpacing: "0.3em" }}
+          style={{ color: "rgba(200,155,60,0.7)", fontFamily: "Montserrat, sans-serif", letterSpacing: "0.3em" }}
         >
           Act {act.numeral}
         </p>
         <h3
           className="text-3xl mb-2 leading-snug"
-          style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+          style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
         >
           {act.title}
         </h3>
         <p
           className="text-sm italic mb-4"
-          style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.6 }}
+          style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", opacity: 0.6 }}
         >
           {act.mood}
         </p>
@@ -281,7 +284,7 @@ const ActCard = forwardRef<
           <div className="w-1 h-1 rounded-full" style={{ background: "#C89B3C" }} />
           <p
             className="text-xs tracking-[0.2em] uppercase"
-            style={{ color: "rgba(200,155,60,0.8)", fontFamily: "Inter, sans-serif" }}
+            style={{ color: "rgba(200,155,60,0.8)", fontFamily: "Montserrat, sans-serif" }}
           >
             {act.timeRange}
           </p>
@@ -295,7 +298,7 @@ const ActCard = forwardRef<
             className="text-xs tracking-widest uppercase transition-colors duration-200"
             style={{
               color: "rgba(200,155,60,0.7)",
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "Montserrat, sans-serif",
               letterSpacing: "0.15em",
             }}
           >
@@ -331,26 +334,26 @@ const ActCard = forwardRef<
         <div className="flex items-start gap-4 flex-1 min-w-0">
           <p
             className="text-4xl leading-none shrink-0 mt-0.5"
-            style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", opacity: 0.9 }}
+            style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", opacity: 0.9 }}
           >
             {act.numeral}
           </p>
           <div className="min-w-0">
             <p
               className="text-xs uppercase tracking-[0.2em] mb-1"
-              style={{ color: "rgba(200,155,60,0.7)", fontFamily: "Inter, sans-serif" }}
+              style={{ color: "rgba(200,155,60,0.7)", fontFamily: "Montserrat, sans-serif" }}
             >
               {act.timeRange}
             </p>
             <h3
               className="text-xl leading-snug"
-              style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+              style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
             >
               {act.title}
             </h3>
             <p
               className="text-sm italic mt-1"
-              style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif", opacity: 0.6 }}
+              style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", opacity: 0.6 }}
             >
               {act.mood}
             </p>
@@ -417,20 +420,20 @@ const ActCard = forwardRef<
                 <div className="hidden md:flex items-start gap-5 py-3.5 border-t border-[rgba(200,155,60,0.08)] first:border-t-0">
                   <span
                     className="text-xs tracking-[0.15em] uppercase shrink-0 pt-0.5 w-36"
-                    style={{ color: "rgba(200,155,60,0.65)", fontFamily: "Inter, sans-serif" }}
+                    style={{ color: "rgba(200,155,60,0.65)", fontFamily: "Montserrat, sans-serif" }}
                   >
                     {moment.timeRange}
                   </span>
                   <div>
                     <p
                       className="text-sm font-medium leading-snug"
-                      style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
+                      style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
                     >
                       {moment.title}
                     </p>
                     <p
                       className="text-xs italic mt-0.5"
-                      style={{ color: "#F5EDD8", fontFamily: "Inter, sans-serif", opacity: 0.45 }}
+                      style={{ color: "#F5EDD8", fontFamily: "Montserrat, sans-serif", opacity: 0.45 }}
                     >
                       {moment.description}
                     </p>
@@ -441,19 +444,19 @@ const ActCard = forwardRef<
                 <div className="md:hidden py-3.5 border-t border-[rgba(200,155,60,0.08)] first:border-t-0">
                   <p
                     className="text-xs uppercase tracking-[0.15em] mb-0.5"
-                    style={{ color: "rgba(200,155,60,0.65)", fontFamily: "Inter, sans-serif" }}
+                    style={{ color: "rgba(200,155,60,0.65)", fontFamily: "Montserrat, sans-serif" }}
                   >
                     {moment.timeRange}
                   </p>
                   <p
                     className="text-sm font-medium"
-                    style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
+                    style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
                   >
                     {moment.title}
                   </p>
                   <p
                     className="text-xs italic mt-0.5"
-                    style={{ color: "#F5EDD8", fontFamily: "Inter, sans-serif", opacity: 0.45 }}
+                    style={{ color: "#F5EDD8", fontFamily: "Montserrat, sans-serif", opacity: 0.45 }}
                   >
                     {moment.description}
                   </p>

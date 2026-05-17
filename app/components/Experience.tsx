@@ -1,4 +1,5 @@
-import { Sparkles, Wine, Music } from "lucide-react";
+﻿import { Sparkles, Wine, Music } from "lucide-react";
+import { Reveal } from "./Reveal";
 import type { LucideIcon } from "lucide-react";
 
 const experiences: { icon: LucideIcon; title: string; description: string; number: string }[] = [
@@ -41,11 +42,11 @@ export function Experience() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Title */}
-        <div className="text-center mb-24">
+        <Reveal><div className="text-center mb-24">
           <h2
             className="text-6xl md:text-8xl mb-6 relative inline-block"
             style={{
-              fontFamily: "Playfair Display, serif",
+              fontFamily: "Cinzel, serif",
               color: "#C89B3C",
               fontWeight: 700,
               textShadow: `0 0 40px rgba(200, 155, 60, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.8)`,
@@ -56,19 +57,19 @@ export function Experience() {
           </h2>
           <p
             className="text-xl md:text-2xl mt-8 italic max-w-3xl mx-auto"
-            style={{ color: "#F5EDD8", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
           >
             Three acts. One unforgettable evening.
           </p>
-        </div>
+        </div></Reveal>
 
         {/* Triptych Cards */}
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
           {experiences.map((experience, index) => {
             const Icon = experience.icon;
             return (
+              <Reveal key={index} delay={index * 0.12}>
               <div
-                key={index}
                 className="group relative bg-gradient-to-b from-[#0A1628] to-[#0D1A2A] transition-all duration-700 hover:shadow-[0_30px_90px_rgba(200,155,60,0.3)] hover:-translate-y-4"
                 style={{
                   border: "2px solid",
@@ -82,7 +83,7 @@ export function Experience() {
                 >
                   <span
                     className="text-3xl"
-                    style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+                    style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
                   >
                     {experience.number}
                   </span>
@@ -107,7 +108,7 @@ export function Experience() {
 
                   <h3
                     className="text-3xl mb-6 text-center leading-tight"
-                    style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+                    style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
                   >
                     {experience.title}
                   </h3>
@@ -138,12 +139,13 @@ export function Experience() {
                   </svg>
                 </div>
               </div>
+              </Reveal>
             );
           })}
         </div>
 
         {/* Pearl Divider */}
-        <div className="flex items-center justify-center gap-3 mt-20">
+        <Reveal delay={0.1}><div className="flex items-center justify-center gap-3 mt-20">
           <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent to-[#C89B3C]/50" />
           {[...Array(7)].map((_, i) => (
             <div
@@ -153,7 +155,7 @@ export function Experience() {
             />
           ))}
           <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent to-[#C89B3C]/50" />
-        </div>
+        </div></Reveal>
       </div>
     </section>
   );
