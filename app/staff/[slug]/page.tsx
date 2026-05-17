@@ -160,8 +160,7 @@ export default async function AdminPage({
         fontFamily: 'Inter, sans-serif',
       }}
     >
-      <p style={{ color: '#C89B3C', padding: '1rem', fontFamily: 'monospace' }}>DEBUG: {seats?.length ?? 0} seats fetched</p>
-      <SeatMap seats={seats ?? []} />
+<SeatMap seats={seats ?? []} />
     </main>
   )
 }
