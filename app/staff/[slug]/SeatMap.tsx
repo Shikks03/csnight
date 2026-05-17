@@ -41,6 +41,7 @@ export default function SeatMap({ seats }: SeatMapProps) {
     Associates: 0,
     Awardees: 0,
   }
+
   for (const s of reserved) {
     if (s.tier) tierCounts[s.tier]++
   }
@@ -86,34 +87,55 @@ export default function SeatMap({ seats }: SeatMapProps) {
         <div
           style={{
             display: 'flex',
-            gap: '1rem',
+            gap: '1.25rem',
             flexWrap: 'wrap',
             marginLeft: 'auto',
+            alignItems: 'center',
           }}
         >
-          {(['ACM', 'Non-ACM CS', 'External', 'Associates', 'Awardees'] as Tier[]).map((t) => (
-            <span
-              key={t}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.375rem',
-                color: '#8BA3BF',
-                fontSize: '0.8125rem',
-              }}
-            >
-              <span
-                style={{
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  backgroundColor: TIER_COLORS[t],
-                  flexShrink: 0,
-                }}
-              />
-              {t}: <span style={{ color: '#F5EDD8', fontWeight: 600 }}>{tierCounts[t]}</span>
-            </span>
-          ))}
+          {/* ACM + Non-ACM CS: shared pool of 120 */}
+          {(() => {
+            const combined = tierCounts['ACM'] + tierCounts['Non-ACM CS']
+            const atCap = combined >= 120
+            return (
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: '#8BA3BF', fontSize: '0.8125rem' }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: TIER_COLORS['ACM'], flexShrink: 0 }} />
+                ACM <span style={{ color: '#F5EDD8', fontWeight: 600 }}>{tierCounts['ACM']}</span>
+                <span style={{ color: '#4a5568' }}>|</span>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: TIER_COLORS['Non-ACM CS'], flexShrink: 0 }} />
+                Non-ACM CS <span style={{ color: '#F5EDD8', fontWeight: 600 }}>{tierCounts['Non-ACM CS']}</span>
+                <span style={{ color: atCap ? '#ef4444' : '#8BA3BF', fontWeight: 600 }}>({combined}/120)</span>
+              </span>
+            )
+          })()}
+
+          {/* External: individual cap of 50 */}
+          {(() => {
+            const atCap = tierCounts['External'] >= 50
+            return (
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: '#8BA3BF', fontSize: '0.8125rem' }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: TIER_COLORS['External'], flexShrink: 0 }} />
+                External{' '}
+                <span style={{ color: atCap ? '#ef4444' : '#F5EDD8', fontWeight: 600 }}>{tierCounts['External']}/50</span>
+              </span>
+            )
+          })()}
+
+          {/* Associates + Awardees: shared pool of 20 */}
+          {(() => {
+            const combined = tierCounts['Associates'] + tierCounts['Awardees']
+            const atCap = combined >= 20
+            return (
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: '#8BA3BF', fontSize: '0.8125rem' }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: TIER_COLORS['Associates'], flexShrink: 0 }} />
+                Associates <span style={{ color: '#F5EDD8', fontWeight: 600 }}>{tierCounts['Associates']}</span>
+                <span style={{ color: '#4a5568' }}>|</span>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: TIER_COLORS['Awardees'], flexShrink: 0 }} />
+                Awardees <span style={{ color: '#F5EDD8', fontWeight: 600 }}>{tierCounts['Awardees']}</span>
+                <span style={{ color: atCap ? '#ef4444' : '#8BA3BF', fontWeight: 600 }}>({combined}/20)</span>
+              </span>
+            )
+          })()}
         </div>
       </div>
 
