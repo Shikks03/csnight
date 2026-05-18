@@ -4,7 +4,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="relative py-32 px-4 bg-[#080F1B] overflow-hidden"
+      className="relative py-16 sm:py-24 md:py-32 px-4 bg-[#080F1B] overflow-hidden"
     >
 
       {/* Chandelier glow from above */}
@@ -26,15 +26,15 @@ export function About() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Title */}
-        <Reveal><div className="text-center mb-20">
+        <Reveal><div className="text-center mb-14 md:mb-20">
           <p
-            className="text-xs uppercase tracking-[0.4em] mb-4"
+            className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-4"
             style={{ color: "#C89B3C", fontFamily: "Cinzel, serif" }}
           >
             — An Exclusive Evening —
           </p>
           <h2
-            className="text-6xl md:text-8xl mb-6 relative inline-block"
+            className="text-4xl sm:text-6xl md:text-8xl mb-6 relative inline-block"
             style={{
               fontFamily: "Cinzel, serif",
               color: "#C89B3C",
@@ -47,12 +47,12 @@ export function About() {
           </h2>
         </div></Reveal>
 
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-start">
+        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-10 md:gap-16 items-start">
           {/* Left Column — Invitation Letter */}
           <Reveal delay={0.1}><div className="space-y-8 relative">
             <div className="relative">
               <span
-                className="float-left text-9xl leading-none mr-4 mt-2"
+                className="float-left text-6xl sm:text-8xl md:text-9xl leading-none mr-3 sm:mr-4 mt-2"
                 style={{
                   fontFamily: "Cinzel, serif",
                   color: "#C89B3C",
@@ -109,9 +109,9 @@ export function About() {
                 <path d="M100,100 L40,100 L40,90 L90,90 L90,40 L100,40 Z" fill="#C89B3C" opacity="0.6" />
               </svg>
 
-              <div className="px-8 py-6 flex items-center gap-6">
+              <div className="px-5 py-5 gap-4 sm:px-8 sm:py-6 sm:gap-6 flex items-center">
                 {/* Icon */}
-                <div className="shrink-0 w-14 h-14 border border-[#C89B3C]/50 flex items-center justify-center bg-[#C89B3C]/10">
+                <div className="shrink-0 w-12 h-12 sm:w-14 sm:h-14 border border-[#C89B3C]/50 flex items-center justify-center bg-[#C89B3C]/10">
                   <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="#C89B3C" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
                   </svg>
@@ -120,7 +120,7 @@ export function About() {
                 {/* Text */}
                 <div>
                   <p
-                    className="text-xs uppercase tracking-[0.3em] mb-1"
+                    className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-1"
                     style={{ color: "#8BA3BF" }}
                   >
                     Capacity
@@ -154,9 +154,9 @@ export function About() {
                 <path d="M100,100 L40,100 L40,90 L90,90 L90,40 L100,40 Z" fill="#C89B3C" opacity="0.6" />
               </svg>
 
-              <div className="px-8 py-6 flex items-center gap-6">
+              <div className="px-5 py-5 gap-4 sm:px-8 sm:py-6 sm:gap-6 flex items-center">
                 {/* Icon */}
-                <div className="shrink-0 w-14 h-14 border border-[#C89B3C]/50 flex items-center justify-center bg-[#C89B3C]/10">
+                <div className="shrink-0 w-12 h-12 sm:w-14 sm:h-14 border border-[#C89B3C]/50 flex items-center justify-center bg-[#C89B3C]/10">
                   <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="#C89B3C" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                   </svg>
@@ -164,7 +164,7 @@ export function About() {
 
                 {/* Text */}
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] mb-1" style={{ color: "#8BA3BF" }}>
+                  <p className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-1" style={{ color: "#8BA3BF" }}>
                     Priority
                   </p>
                   <p
@@ -211,9 +211,9 @@ export function About() {
               </svg>
 
               {/* Card content — centered invitation typography */}
-              <div className="px-10 py-12 text-center space-y-0">
+              <div className="px-6 py-10 sm:px-10 sm:py-12 text-center space-y-0">
                 <p
-                  className="text-xs uppercase tracking-[0.35em] mb-6"
+                  className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-6"
                   style={{ color: "#8BA3BF", fontFamily: "Cinzel, serif" }}
                 >
                   The ACM-CS Community
@@ -254,7 +254,7 @@ export function About() {
                 {/* Details block */}
                 <div className="space-y-5 border-t border-b border-[#C89B3C]/20 py-8 my-2">
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Date</p>
+                    <p className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-1" style={{ color: "#8BA3BF" }}>Date</p>
                     <p
                       className="text-2xl"
                       style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
@@ -270,7 +270,7 @@ export function About() {
                   </div>
 
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Time</p>
+                    <p className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-1" style={{ color: "#8BA3BF" }}>Time</p>
                     <p
                       className="text-2xl"
                       style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
@@ -286,7 +286,7 @@ export function About() {
                   </div>
 
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Doors Open</p>
+                    <p className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-1" style={{ color: "#8BA3BF" }}>Doors Open</p>
                     <p
                       className="text-2xl"
                       style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
@@ -302,7 +302,7 @@ export function About() {
                   </div>
 
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.35em] mb-1" style={{ color: "#8BA3BF" }}>Venue</p>
+                    <p className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-1" style={{ color: "#8BA3BF" }}>Venue</p>
                     <p
                       className="text-2xl"
                       style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
@@ -314,7 +314,7 @@ export function About() {
 
                 {/* Dress Code */}
                 <div className="pt-6">
-                  <p className="text-[10px] uppercase tracking-[0.35em] mb-3" style={{ color: "#8BA3BF" }}>
+                  <p className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-3" style={{ color: "#8BA3BF" }}>
                     Dress Code
                   </p>
                   <p
