@@ -27,7 +27,7 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="relative py-32 px-4 bg-[#060E1A] overflow-hidden"
+      className="relative py-16 sm:py-24 md:py-32 px-4 bg-[#060E1A] overflow-hidden"
     >
       {/* Central radial glow behind cards */}
       <div
@@ -42,9 +42,9 @@ export function Experience() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Title */}
-        <Reveal><div className="text-center mb-24">
+        <Reveal><div className="text-center mb-12 md:mb-24">
           <h2
-            className="text-6xl md:text-8xl mb-6 relative inline-block"
+            className="text-4xl sm:text-6xl md:text-8xl mb-6 relative inline-block"
             style={{
               fontFamily: "Cinzel, serif",
               color: "#C89B3C",
@@ -78,7 +78,7 @@ export function Experience() {
               >
                 {/* Theatrical Number */}
                 <div
-                  className="absolute -top-6 -left-6 w-16 h-16 flex items-center justify-center border-2 border-[#C89B3C] bg-[#0D1A2A] shadow-[0_0_30px_rgba(200,155,60,0.6)]"
+                  className="absolute -top-4 -left-4 w-12 h-12 sm:-top-6 sm:-left-6 sm:w-16 sm:h-16 flex items-center justify-center border-2 border-[#C89B3C] bg-[#0D1A2A] shadow-[0_0_30px_rgba(200,155,60,0.6)]"
                   style={{ clipPath: "polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%)" }}
                 >
                   <span
