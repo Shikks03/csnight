@@ -316,11 +316,10 @@ export function Hero() {
         <div id="hero-overlay">
           <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
             <p
-              className="text-lg md:text-2xl mb-8 italic tracking-wide uppercase"
+              className="text-base sm:text-lg md:text-2xl mb-8 italic tracking-[0.2em] sm:tracking-[0.3em] uppercase"
               style={{
                 fontFamily: "Cinzel, serif",
                 color: "#F5EDD8",
-                letterSpacing: "0.3em",
                 textShadow: "0 2px 10px rgba(0,0,0,0.5)",
               }}
             >
@@ -328,7 +327,7 @@ export function Hero() {
             </p>
 
             <h1
-              className="text-7xl md:text-[10rem] lg:text-[12rem] mb-6 tracking-wider leading-none"
+              className="text-6xl sm:text-7xl md:text-[10rem] lg:text-[12rem] mb-6 tracking-wider leading-none"
               style={{
                 fontFamily: "Cinzel, serif",
                 fontWeight: 700,
@@ -351,7 +350,7 @@ export function Hero() {
             </div>
 
             <p
-              className="text-base md:text-xl mb-12 tracking-[0.15em] uppercase opacity-80"
+              className="text-sm sm:text-base md:text-xl mb-12 tracking-[0.15em] uppercase opacity-80"
               style={{ fontFamily: "Cinzel, serif", color: "#F5EDD8" }}
             >
               June 27, 2026
@@ -359,7 +358,7 @@ export function Hero() {
 
             <button
               onClick={scrollToTickets}
-              className="group relative px-12 py-5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(200,155,60,0.4),_inset_0_0_20px_rgba(200,155,60,0.2)] cursor-pointer pointer-events-auto"
+              className="group relative px-8 py-4 sm:px-12 sm:py-5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(200,155,60,0.4),_inset_0_0_20px_rgba(200,155,60,0.2)] cursor-pointer pointer-events-auto"
               style={{
                 fontFamily: "Cinzel, serif",
                 borderColor: "#C89B3C",
@@ -376,7 +375,7 @@ export function Hero() {
           {/* Scroll Indicator */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce opacity-70">
             <div
-              className="text-[10px] uppercase tracking-[0.3em]"
+              className="text-[11px] uppercase tracking-[0.2em]"
               style={{ color: "#C89B3C", fontFamily: "Cinzel, serif" }}
             >
               Scroll
