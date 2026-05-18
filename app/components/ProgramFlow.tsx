@@ -74,7 +74,7 @@ export function ProgramFlow() {
   };
 
   return (
-    <section id="program" className="relative py-32 px-4 overflow-hidden" style={{ background: "#0A1628" }}>
+    <section id="program" className="relative py-20 sm:py-28 md:py-40 px-4 overflow-hidden" style={{ background: "#0A1628" }}>
       {/* Ambient radial glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div
@@ -93,15 +93,15 @@ export function ProgramFlow() {
 
       <div className="max-w-5xl mx-auto relative">
         {/* Heading */}
-        <Reveal><div className="text-center mb-20">
+        <Reveal><div className="text-center mb-12 md:mb-20">
           <p
-            className="text-xs uppercase tracking-[0.4em] mb-4"
+            className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] mb-4"
             style={{ color: "#C89B3C", fontFamily: "Cinzel, serif" }}
           >
             — June 27, 2026 —
           </p>
           <h2
-            className="text-5xl md:text-7xl"
+            className="text-4xl sm:text-5xl md:text-7xl"
             style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
           >
             The Programme
