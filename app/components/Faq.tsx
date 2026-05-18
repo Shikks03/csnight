@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -17,7 +17,7 @@ export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="relative bg-[#0A1628] py-24 px-4 overflow-hidden">
+    <section id="faq" className="relative bg-[#0A1628] py-14 sm:py-20 md:py-24 px-4 overflow-hidden">
 
       {/* Theatrical spotlight from above */}
       <div
@@ -51,15 +51,15 @@ export function Faq() {
 
         {/* Heading */}
         <h2
-          className="text-4xl md:text-5xl text-center mb-4"
-          style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C", fontWeight: 700 }}
+          className="text-3xl sm:text-4xl md:text-5xl text-center mb-4"
+          style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
         >
           Frequently Asked Questions
         </h2>
 
         {/* Gold ornament — animates in on scroll */}
         <motion.div
-          className="flex items-center justify-center gap-4 mb-16"
+          className="flex items-center justify-center gap-4 mb-10 md:mb-16"
           initial={{ scaleX: 0, opacity: 0 }}
           whileInView={{ scaleX: 1, opacity: 1 }}
           viewport={{ once: true }}
@@ -116,7 +116,7 @@ export function Faq() {
                   <span
                     className="relative z-10 text-base md:text-lg font-medium pr-4 transition-colors duration-300"
                     style={{
-                      fontFamily: "Playfair Display, serif",
+                      fontFamily: "Cinzel, serif",
                       color: isOpen ? "#C89B3C" : "#F5EDD8",
                     }}
                   >
@@ -149,7 +149,7 @@ export function Faq() {
                       <div className="px-6 pb-5 border-t border-[#C89B3C]/20">
                         <p
                           className="text-base leading-relaxed pt-4"
-                          style={{ color: "#8BA3BF", fontFamily: "Inter, sans-serif" }}
+                          style={{ color: "#8BA3BF", fontFamily: "Montserrat, sans-serif" }}
                         >
                           {item.answer}
                         </p>
