@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import CursorGlow from "./components/CursorGlow";
 import { Analytics } from "@vercel/analytics/next";
@@ -51,6 +51,13 @@ export const metadata: Metadata = {
       "FEU Tech ACM's most prestigious grand ball for CS students. June 27, 2026 · FEU Tech, Manila.",
     // Dynamic opengraph-image.tsx auto-wires here too
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0A1628",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
