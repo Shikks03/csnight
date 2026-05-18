@@ -19,7 +19,7 @@ const navLinks = ["About", "Tickets", "FAQ", "Contact"];
 
 export function Footer() {
   return (
-    <footer id="contact" className="relative bg-black pt-24 pb-12 px-4 overflow-hidden">
+    <footer id="contact" className="relative bg-black pt-16 pb-10 sm:pt-20 sm:pb-12 md:pt-24 px-4 overflow-hidden">
 
       {/* Top Ornamental Border */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#C89B3C] to-transparent" />
@@ -35,9 +35,9 @@ export function Footer() {
 
       <Reveal className="max-w-7xl mx-auto relative z-10">
         {/* Logo & Tagline */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-20">
           <div
-            className="text-7xl md:text-8xl lg:text-9xl mb-6"
+            className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl mb-6"
             style={{
               fontFamily: "Cinzel, serif",
               color: "#C89B3C",
@@ -49,14 +49,14 @@ export function Footer() {
             CS NIGHT
           </div>
           <p
-            className="text-2xl md:text-3xl italic mb-8"
+            className="text-xl sm:text-2xl md:text-3xl italic mb-8"
             style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
           >
             One night. A thousand memories.
           </p>
 
           <div className="flex items-center justify-center gap-4 mt-8">
-            <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-[#C89B3C] to-[#C89B3C]" />
+            <div className="w-16 sm:w-24 h-[2px] bg-gradient-to-r from-transparent via-[#C89B3C] to-[#C89B3C]" />
             {[...Array(5)].map((_, i) => (
               <div
                 key={i}
@@ -64,19 +64,19 @@ export function Footer() {
                 style={{ opacity: 0.3 + (2 - Math.abs(2 - i)) * 0.15 }}
               />
             ))}
-            <div className="w-24 h-[2px] bg-gradient-to-l from-transparent via-[#C89B3C] to-[#C89B3C]" />
+            <div className="w-16 sm:w-24 h-[2px] bg-gradient-to-l from-transparent via-[#C89B3C] to-[#C89B3C]" />
           </div>
         </div>
 
         {/* Social Icons */}
-        <div className="flex justify-center gap-8 mb-16">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-16">
           {socials.map(({ Icon, href }, i) => (
             <a
               key={i}
               href={href}
               target={href.startsWith("mailto:") ? undefined : "_blank"}
               rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-              className="group relative w-16 h-16 border-[3px] border-[#C89B3C] flex items-center justify-center transition-all duration-500 hover:bg-[#C89B3C] hover:scale-110 hover:shadow-[0_0_40px_rgba(200,155,60,0.8)]"
+              className="group relative w-12 h-12 sm:w-16 sm:h-16 border-[3px] border-[#C89B3C] flex items-center justify-center transition-all duration-500 hover:bg-[#C89B3C] hover:scale-110 hover:shadow-[0_0_40px_rgba(200,155,60,0.8)]"
             >
               <Icon className="w-7 h-7 transition-colors duration-500 group-hover:text-[#0D1A2A]" style={{ color: "#C89B3C" }} />
               <div className="absolute -top-1 -left-1 w-3 h-3 border-l-2 border-t-2 border-[#F5EDD8] opacity-50" />
@@ -89,7 +89,7 @@ export function Footer() {
 
         {/* Nav Links */}
         <div className="text-center mb-12">
-          <div className="flex flex-wrap justify-center gap-8 text-base">
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-3 sm:gap-8 text-base">
             {navLinks.map((link, i) => (
               <span key={i} className="flex items-center gap-8">
                 <a
