@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, useEffect } from "react";
 
 export function Navbar() {
@@ -42,12 +42,12 @@ export function Navbar() {
         >
           <span
             className="text-2xl font-bold tracking-widest leading-none transition-colors duration-300 group-hover:text-[#E5C06B]"
-            style={{ fontFamily: "Playfair Display, serif", color: "#C89B3C" }}
+            style={{ fontFamily: "Cinzel, serif", color: "#C89B3C" }}
           >
             CS NIGHT
           </span>
           <span
-            className="text-[10px] uppercase tracking-[0.3em] leading-none mt-0.5"
+            className="text-[11px] tracking-[0.2em] sm:tracking-[0.3em] leading-none mt-0.5"
             style={{ color: "#F5EDD8", opacity: 0.6 }}
           >
             A Masquerade Grand Ball
@@ -61,7 +61,7 @@ export function Navbar() {
               key={link}
               onClick={() => scrollTo(link)}
               className="text-xs uppercase tracking-[0.25em] transition-all duration-300 hover:text-[#C89B3C] cursor-pointer"
-              style={{ fontFamily: "Playfair Display, serif", color: "#F5EDD8" }}
+              style={{ fontFamily: "Cinzel, serif", color: "#F5EDD8" }}
             >
               {link === "experience" ? "What Awaits" : link}
             </button>
@@ -71,7 +71,7 @@ export function Navbar() {
             className="group relative px-7 py-2.5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_rgba(200,155,60,0.4)] cursor-pointer"
             style={{
               borderColor: "#C89B3C",
-              fontFamily: "Playfair Display, serif",
+              fontFamily: "Cinzel, serif",
               color: "#C89B3C",
             }}
           >
@@ -84,9 +84,10 @@ export function Navbar() {
 
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer"
+          className="md:hidden flex flex-col gap-1.5 p-2.5 cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
         >
           {[0, 1, 2].map((i) => (
             <span
@@ -109,7 +110,7 @@ export function Navbar() {
               key={link}
               onClick={() => scrollTo(link)}
               className="text-left text-sm uppercase tracking-[0.2em] transition-colors duration-300 hover:text-[#C89B3C] cursor-pointer"
-              style={{ fontFamily: "Playfair Display, serif", color: "#F5EDD8" }}
+              style={{ fontFamily: "Cinzel, serif", color: "#F5EDD8" }}
             >
               {link === "experience" ? "What Awaits" : link}
             </button>
@@ -117,7 +118,7 @@ export function Navbar() {
           <button
             onClick={() => scrollTo("tickets")}
             className="self-start px-8 py-3 border-2 border-[#C89B3C] text-[#C89B3C] text-xs tracking-[0.2em] uppercase cursor-pointer"
-            style={{ fontFamily: "Playfair Display, serif" }}
+            style={{ fontFamily: "Cinzel, serif" }}
           >
             RSVP
           </button>
