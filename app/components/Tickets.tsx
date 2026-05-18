@@ -51,7 +51,7 @@ export function Tickets() {
   return (
     <section
       id="tickets"
-      className="relative py-40 px-4 overflow-hidden"
+      className="relative py-20 sm:py-28 md:py-40 px-4 overflow-hidden"
       style={{ background: "linear-gradient(to bottom, #08101C, #040810 40%, #010307 100%)" }}
     >
 
@@ -67,9 +67,9 @@ export function Tickets() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Title */}
-        <Reveal><div className="text-center mb-24">
+        <Reveal><div className="text-center mb-12 md:mb-20">
           <h2
-            className="text-7xl md:text-9xl mb-8 relative inline-block"
+            className="text-5xl sm:text-7xl md:text-9xl mb-8 relative inline-block"
             style={{
               fontFamily: "Cinzel, serif",
               color: "#C89B3C",
@@ -81,7 +81,7 @@ export function Tickets() {
             <div className="absolute -bottom-3 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#C89B3C] to-transparent" />
           </h2>
           <p
-            className="text-2xl md:text-3xl mt-12 italic max-w-3xl mx-auto leading-relaxed"
+            className="text-xl sm:text-2xl md:text-3xl mt-12 italic max-w-3xl mx-auto leading-relaxed"
             style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
           >
             Secure your place at the most prestigious event of the year
@@ -89,7 +89,7 @@ export function Tickets() {
         </div></Reveal>
 
         {/* Pricing Triptych */}
-        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+        <div className="grid lg:grid-cols-3 gap-10 sm:gap-8 max-w-6xl mx-auto mb-16">
           {tiers.map((tier, index) => (
             <Reveal key={index} delay={index * 0.12}>
             <div
@@ -103,7 +103,7 @@ export function Tickets() {
               {/* Badge */}
               {tier.badge && (
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-20">
-                  <div className="relative px-8 py-3 bg-gradient-to-r from-[#C89B3C] via-[#FFD700] to-[#C89B3C] shadow-[0_0_40px_rgba(200,155,60,0.8)]">
+                  <div className="relative px-5 py-2.5 sm:px-8 sm:py-3 bg-gradient-to-r from-[#C89B3C] via-[#FFD700] to-[#C89B3C] shadow-[0_0_40px_rgba(200,155,60,0.8)]">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-5 h-5 text-[#0D1A2A]" />
                       <span className="text-sm uppercase tracking-[0.2em] font-bold text-[#0D1A2A]">
@@ -140,7 +140,7 @@ export function Tickets() {
                 }`}
               />
 
-              <div className="relative p-10 pt-16 flex flex-col flex-1">
+              <div className="relative p-6 pt-14 sm:p-10 sm:pt-16 flex flex-col flex-1">
                 {/* Tier Name */}
                 <div className="text-center mb-8">
                   <h3
@@ -216,7 +216,7 @@ export function Tickets() {
 
         {/* Additional Info */}
         <Reveal delay={0.1}><div className="text-center max-w-4xl mx-auto">
-          <div className="border-t-2 border-b-2 border-[#C89B3C]/30 py-8 px-12">
+          <div className="border-t-2 border-b-2 border-[#C89B3C]/30 py-6 px-5 sm:py-8 sm:px-12">
             <p className="text-lg mb-3 italic" style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}>
               All tickets include full access to the masquerade reception, formal dinner, and grand ball.
             </p>
