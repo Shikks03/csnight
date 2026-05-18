@@ -84,7 +84,7 @@ export function Navbar() {
 
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2.5 cursor-pointer"
+          className="md:hidden flex flex-col gap-1.5 p-3 cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
