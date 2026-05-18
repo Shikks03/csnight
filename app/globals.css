@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 /* CS Night Design Tokens */
@@ -14,8 +14,8 @@
   --gold-dark: #8B6914;
   --cream: #F5EDD8;
   --blue-secondary: #8BA3BF;
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Montserrat', sans-serif;
 }
 
 @theme inline {
@@ -23,6 +23,8 @@
   --color-gold: var(--gold);
   --color-cream: var(--cream);
   --color-blue-secondary: var(--blue-secondary);
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Montserrat', sans-serif;
 }
 
 html {
@@ -55,3 +57,7 @@ body {
 .ornamental-divider::after {
   background: linear-gradient(to left, transparent, rgba(200, 155, 60, 0.5));
 }
+
+/* Mobile overflow + media safety net */
+html, body { overflow-x: hidden; }
+img, svg, video, canvas { max-width: 100%; }
