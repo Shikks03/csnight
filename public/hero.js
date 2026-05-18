@@ -146,6 +146,11 @@ const BASE_PATH = '/frames/frame_';
       return;
     }
 
+    if (window.matchMedia('(max-width: 767px), (prefers-reduced-motion: reduce)').matches) {
+      revealOverlay();
+      return;
+    }
+
     ctx = canvas.getContext('2d');
     resizeCanvas();
 

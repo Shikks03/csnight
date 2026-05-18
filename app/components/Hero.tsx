@@ -10,8 +10,14 @@ export function Hero() {
   const [phase, setPhase] = useState<Phase>("envelope");
   const [loadProgress, setLoadProgress] = useState(0);
   const [displayProgress, setDisplayProgress] = useState(0);
+  const [heroMode, setHeroMode] = useState<"pending" | "canvas" | "poster">("pending");
   const loadProgressRef = useRef(0);
   const loadStartRef = useRef(0);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px), (prefers-reduced-motion: reduce)");
+    setHeroMode(mq.matches ? "poster" : "canvas");
+  }, []);
 
   // Block scroll until main page is revealed
   useEffect(() => {
@@ -56,6 +62,10 @@ export function Hero() {
   // Ease displayProgress toward real asset progress; reveal once loaded + 600ms min elapsed
   useEffect(() => {
     if (phase !== "loading") return;
+    if (heroMode === "poster") {
+      loadProgressRef.current = 100;
+      setLoadProgress(100);
+    }
     setDisplayProgress(0);
     loadStartRef.current = Date.now();
     let display = 0;
@@ -312,8 +322,21 @@ export function Hero() {
 
       {/* Canvas Hero Section — pinned by GSAP ScrollTrigger */}
       <div id="hero-section">
-        <canvas id="hero-canvas" />
-        <div id="hero-overlay">
+        {heroMode === "poster" ? (
+          <img
+            src="/frames/frame_0001.webp"
+            alt="CS Night — A Masquerade Grand Ball"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <canvas id="hero-canvas" />
+        )}
+        <div
+          id="hero-overlay"
+          style={heroMode === "poster" && phase === "revealed"
+            ? { opacity: 1, transform: "translateY(0)" }
+            : undefined}
+        >
           <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
             <p
               className="text-base sm:text-lg md:text-2xl mb-8 italic tracking-[0.2em] sm:tracking-[0.3em] uppercase"
@@ -385,7 +408,7 @@ export function Hero() {
         </div>
       </div>
 
-      <Script src="/hero.js" strategy="afterInteractive" />
+      {heroMode === "canvas" && <Script src="/hero.js" strategy="afterInteractive" />}
     </>
   );
 }
