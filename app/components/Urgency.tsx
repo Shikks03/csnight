@@ -15,7 +15,7 @@ export function Urgency() {
   };
 
   return (
-    <section className="relative py-40 px-4 bg-gradient-to-b from-black via-black to-[#0A1628] overflow-hidden">
+    <section className="relative py-20 sm:py-28 md:py-40 px-4 bg-gradient-to-b from-black via-black to-[#0A1628] overflow-hidden">
       {/* Spotlight */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_50%_65%,rgba(200,155,60,0.07)_0%,transparent_55%)]" />
@@ -23,9 +23,9 @@ export function Urgency() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Main Message */}
-        <Reveal><div className="text-center mb-20">
+        <Reveal><div className="text-center mb-12 md:mb-20">
           <h2
-            className="text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight"
             style={{
               fontFamily: "Cinzel, serif",
               color: "#C89B3C",
@@ -36,7 +36,7 @@ export function Urgency() {
             The night of a lifetime —
           </h2>
           <p
-            className="text-3xl md:text-5xl lg:text-6xl italic"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl italic"
             style={{
               fontFamily: "Cinzel, serif",
               color: "#F5EDD8",
@@ -47,14 +47,14 @@ export function Urgency() {
           </p>
 
           <div className="flex items-center justify-center gap-4 mt-12">
-            <div className="w-32 h-[2px] bg-gradient-to-r from-transparent via-[#C89B3C] to-[#C89B3C]" />
+            <div className="w-16 sm:w-32 h-[2px] bg-gradient-to-r from-transparent via-[#C89B3C] to-[#C89B3C]" />
             <div className="w-4 h-4 rotate-45 bg-[#C89B3C] shadow-[0_0_20px_rgba(200,155,60,0.8)]" />
-            <div className="w-32 h-[2px] bg-gradient-to-l from-transparent via-[#C89B3C] to-[#C89B3C]" />
+            <div className="w-16 sm:w-32 h-[2px] bg-gradient-to-l from-transparent via-[#C89B3C] to-[#C89B3C]" />
           </div>
         </div></Reveal>
 
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-3 gap-12 mb-20">
+        <div className="grid md:grid-cols-3 gap-8 md:gap-12 mb-12 md:mb-20">
           {items.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -100,13 +100,13 @@ export function Urgency() {
         {/* CTA Button */}
         <Reveal delay={0.25}><div className="text-center relative">
           <div className="inline-block relative">
-            <div className="absolute -inset-8 border border-[#C89B3C]/30 pointer-events-none" />
+            <div className="absolute -inset-3 sm:-inset-8 border border-[#C89B3C]/30 pointer-events-none" />
             <button
               onClick={scrollToTickets}
-              className="group relative px-16 py-8 bg-gradient-to-b from-[#C89B3C] to-[#8B6914] overflow-hidden transition-all duration-700 hover:shadow-[0_0_80px_rgba(200,155,60,0.8)] hover:scale-105 cursor-pointer"
+              className="group relative px-8 py-5 sm:px-16 sm:py-8 bg-gradient-to-b from-[#C89B3C] to-[#8B6914] overflow-hidden transition-all duration-700 hover:shadow-[0_0_80px_rgba(200,155,60,0.8)] hover:scale-105 cursor-pointer"
               style={{ fontFamily: "Cinzel, serif" }}
             >
-              <span className="relative z-10 text-2xl md:text-3xl tracking-[0.2em] uppercase text-[#0D1A2A] font-bold">
+              <span className="relative z-10 text-lg tracking-[0.12em] sm:text-2xl sm:tracking-[0.2em] md:text-3xl uppercase text-[#0D1A2A] font-bold">
                 Reserve your seat now
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -115,7 +115,7 @@ export function Urgency() {
           </div>
 
           <div className="flex items-center justify-center gap-4 mt-16">
-            <div className="w-24 h-[2px] bg-gradient-to-r from-transparent to-[#C89B3C]/50" />
+            <div className="w-14 sm:w-24 h-[2px] bg-gradient-to-r from-transparent to-[#C89B3C]/50" />
             {[...Array(5)].map((_, i) => (
               <div
                 key={i}
@@ -123,7 +123,7 @@ export function Urgency() {
                 style={{ opacity: 0.3 + (2 - Math.abs(2 - i)) * 0.15 }}
               />
             ))}
-            <div className="w-24 h-[2px] bg-gradient-to-l from-transparent to-[#C89B3C]/50" />
+            <div className="w-14 sm:w-24 h-[2px] bg-gradient-to-l from-transparent to-[#C89B3C]/50" />
           </div>
         </div></Reveal>
       </div>
