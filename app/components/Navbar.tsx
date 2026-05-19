@@ -66,6 +66,15 @@ export function Navbar() {
               {link === "experience" ? "What Awaits" : link}
             </button>
           ))}
+          <a
+            href="#handbook"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs uppercase tracking-[0.25em] transition-all duration-300 hover:text-[#C89B3C]"
+            style={{ fontFamily: "Cinzel, serif", color: "#F5EDD8" }}
+          >
+            Handbook
+          </a>
           <button
             onClick={() => scrollTo("tickets")}
             className="group relative px-7 py-2.5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_rgba(200,155,60,0.4)] cursor-pointer"
@@ -115,6 +124,15 @@ export function Navbar() {
               {link === "experience" ? "What Awaits" : link}
             </button>
           ))}
+          <a
+            href="#handbook"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-left text-sm uppercase tracking-[0.2em] transition-colors duration-300 hover:text-[#C89B3C]"
+            style={{ fontFamily: "Cinzel, serif", color: "#F5EDD8" }}
+          >
+            Handbook
+          </a>
           <button
             onClick={() => scrollTo("tickets")}
             className="self-start px-8 py-3 border-2 border-[#C89B3C] text-[#C89B3C] text-xs tracking-[0.2em] uppercase cursor-pointer"
