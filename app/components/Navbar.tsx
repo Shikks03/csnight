@@ -128,6 +128,7 @@ export function Navbar() {
             href="#handbook"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
             className="text-left text-sm uppercase tracking-[0.2em] transition-colors duration-300 hover:text-[#C89B3C]"
             style={{ fontFamily: "Cinzel, serif", color: "#F5EDD8" }}
           >
