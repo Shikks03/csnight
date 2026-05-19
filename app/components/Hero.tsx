@@ -379,9 +379,11 @@ export function Hero() {
               June 27, 2026
             </p>
 
-            <button
-              onClick={scrollToTickets}
-              className="group relative px-8 py-4 sm:px-12 sm:py-5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(200,155,60,0.4),_inset_0_0_20px_rgba(200,155,60,0.2)] cursor-pointer pointer-events-auto"
+            <a
+              href="https://forms.gle/DqDEvQLoxq3rhti56"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-block px-8 py-4 sm:px-12 sm:py-5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(200,155,60,0.4),_inset_0_0_20px_rgba(200,155,60,0.2)] pointer-events-auto"
               style={{
                 fontFamily: "Cinzel, serif",
                 borderColor: "#C89B3C",
@@ -389,10 +391,10 @@ export function Hero() {
               }}
             >
               <span className="relative z-10 text-lg md:text-xl tracking-[0.2em] uppercase font-semibold">
-                RSVP Now
+                Reserve your Seat
               </span>
               <div className="absolute inset-0 bg-[#C89B3C]/10 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
-            </button>
+            </a>
           </div>
 
           {/* Scroll Indicator */}

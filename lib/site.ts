@@ -39,5 +39,4 @@ export const TICKET_TIERS = [
   { name: "External", price: 1099 },
 ];
 
-// Reservation URL (placeholder — user will replace with real Google Form URL after deploy)
-export const RESERVATION_URL = "https://forms.gle/YOUR_LINK";
+export const RESERVATION_URL = "https://forms.gle/DqDEvQLoxq3rhti56";

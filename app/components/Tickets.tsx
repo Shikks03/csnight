@@ -1,6 +1,6 @@
 import { Reveal } from "./Reveal";
 
-const RESERVATION_LINK = "https://forms.gle/YOUR_LINK";
+const RESERVATION_LINK = "https://forms.gle/DqDEvQLoxq3rhti56";
 
 type Tier = {
   name: string;
