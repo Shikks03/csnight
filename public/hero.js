@@ -161,16 +161,23 @@ const BASE_PATH = '/frames/frame_';
       if (window.ScrollTrigger) ScrollTrigger.refresh();
     });
 
-    preloadFrames(() => {
+    preloadFrames(function() {
       if (loadingEl) loadingEl.style.display = 'none';
       revealOverlay();
       // Wait for the envelope overlay to dismiss before setting up ScrollTrigger,
       // so that body.overflow is restored and GSAP can measure scroll metrics correctly.
-      window.addEventListener('hero:revealed', function onRevealed() {
-        window.removeEventListener('hero:revealed', onRevealed);
+      // If the safety timer already fired and React already dispatched hero:revealed,
+      // call initScrollTrigger immediately rather than waiting for an event that already passed.
+      if (window.__heroRevealed) {
         if (loadingEl) loadingEl.style.display = 'none';
         initScrollTrigger();
-      }, { once: true });
+      } else {
+        window.addEventListener('hero:revealed', function onRevealed() {
+          window.removeEventListener('hero:revealed', onRevealed);
+          if (loadingEl) loadingEl.style.display = 'none';
+          initScrollTrigger();
+        }, { once: true });
+      }
     });
   }
 

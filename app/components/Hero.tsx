@@ -30,6 +30,7 @@ export function Hero() {
   // Signal hero.js to init ScrollTrigger once envelope is gone
   useEffect(() => {
     if (phase === "revealed") {
+      (window as any).__heroRevealed = true;
       window.dispatchEvent(new Event("hero:revealed"));
     }
   }, [phase]);
@@ -333,7 +334,7 @@ export function Hero() {
         )}
         <div
           id="hero-overlay"
-          style={heroMode === "poster" && phase === "revealed"
+          style={phase === "revealed"
             ? { opacity: 1, transform: "translateY(0)" }
             : undefined}
         >
