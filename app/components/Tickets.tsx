@@ -301,6 +301,15 @@ export function Tickets() {
               <p className="text-sm sm:text-base" style={{ color: "#C89B3C" }}>
                 Payment details will be provided in the reservation form.
               </p>
+              <a
+                href="#handbook"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-4 text-xs uppercase tracking-[0.25em] transition-all duration-300 hover:opacity-70"
+                style={{ color: "#C89B3C", fontFamily: "Cinzel, serif" }}
+              >
+                Read the Handbook →
+              </a>
             </div>
 
             <div className="flex items-center justify-center gap-3 mt-16">
