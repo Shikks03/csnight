@@ -22,7 +22,7 @@ const tiers: Tier[] = [
     name: "Non-ACM CS Student",
     price: "₱999",
     qualification: "Enrolled FEU Tech CS student but not an ACM member.",
-    featured: true,
+    featured: false,
   },
   {
     name: "External Participant",
@@ -299,7 +299,7 @@ export function Tickets() {
                 All tickets include full access to the masquerade reception, formal dinner, and grand ball.
               </p>
               <p className="text-sm sm:text-base" style={{ color: "#C89B3C" }}>
-                Payment details and tier selection will be provided in the reservation form.
+                Payment details will be provided in the reservation form.
               </p>
             </div>
 
