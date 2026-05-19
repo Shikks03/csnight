@@ -136,18 +136,19 @@ const BASE_PATH = '/frames/frame_';
 
   /* ── Main init ──────────────────────────────────────────────────── */
   function initHero() {
-    canvas = document.getElementById('hero-canvas');
-    heroSection = document.getElementById('hero-section');
     loadingEl = document.getElementById('hero-loading');
     overlayEl = document.getElementById('hero-overlay');
 
-    if (!canvas || !heroSection) {
-      console.warn('[hero] Required DOM elements (#hero-canvas, #hero-section) not found');
+    if (window.matchMedia('(max-width: 767px), (prefers-reduced-motion: reduce)').matches) {
+      revealOverlay();
       return;
     }
 
-    if (window.matchMedia('(max-width: 767px), (prefers-reduced-motion: reduce)').matches) {
-      revealOverlay();
+    canvas = document.getElementById('hero-canvas');
+    heroSection = document.getElementById('hero-section');
+
+    if (!canvas || !heroSection) {
+      console.warn('[hero] Required DOM elements (#hero-canvas, #hero-section) not found');
       return;
     }
 
