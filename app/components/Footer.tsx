@@ -1,5 +1,5 @@
 ﻿import React from "react";
-import { Facebook, Instagram, Mail } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 const LinkedInIcon = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
@@ -12,14 +12,13 @@ const socials = [
   { Icon: Facebook, href: "https://www.facebook.com/feutechACM" },
   { Icon: Instagram, href: "https://www.instagram.com/feutechacm/" },
   { Icon: LinkedInIcon, href: "https://www.linkedin.com/company/feutechacm/posts/?feedView=all" },
-  { Icon: Mail, href: "mailto:acm.feu.it@gmail.com" },
 ];
 
 const navLinks = ["About", "Tickets", "FAQ", "Contact"];
 
 export function Footer() {
   return (
-    <footer id="contact" className="relative bg-black pt-16 pb-10 sm:pt-20 sm:pb-12 md:pt-24 px-4 overflow-hidden">
+    <footer className="relative bg-black pt-16 pb-10 sm:pt-20 sm:pb-12 md:pt-24 px-4 overflow-hidden">
 
       {/* Top Ornamental Border */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#C89B3C] to-transparent" />

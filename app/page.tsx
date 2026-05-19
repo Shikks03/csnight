@@ -6,6 +6,7 @@ import { ProgramFlow } from "./components/ProgramFlow";
 import { Urgency } from "./components/Urgency";
 import { Tickets } from "./components/Tickets";
 import { Faq } from "./components/Faq";
+import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <Urgency />
       <Tickets />
       <Faq />
+      <Contact />
       <Footer />
     </main>
   );

@@ -51,21 +51,11 @@ export function About() {
           {/* Left Column — Invitation Letter */}
           <Reveal delay={0.1}><div className="space-y-8 relative">
             <div className="relative">
-              <span
-                className="float-left text-6xl sm:text-8xl md:text-9xl leading-none mr-3 sm:mr-4 mt-2"
-                style={{
-                  fontFamily: "Cinzel, serif",
-                  color: "#C89B3C",
-                  textShadow: "0 0 30px rgba(200, 155, 60, 0.6)",
-                }}
-              >
-                C
-              </span>
               <p
-                className="text-xl md:text-2xl leading-relaxed"
+                className="drop-cap-p text-xl md:text-2xl leading-relaxed text-pretty"
                 style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
               >
-                S Night is not just another university event—it&apos;s the most prestigious grand ball of the year,
+                CS Night is not just another university event—it&apos;s the most prestigious grand ball of the year,
                 exclusively crafted for Computer Science students and their distinguished guests.
               </p>
             </div>
@@ -275,7 +265,7 @@ export function About() {
                       className="text-2xl"
                       style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
                     >
-                      5:00 PM onwards
+                      4:30 – 9:00 PM
                     </p>
                   </div>
 

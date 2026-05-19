@@ -38,6 +38,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* About section — exactly 2-line drop cap */
+.drop-cap-p::first-letter {
+  -webkit-initial-letter: 2;
+  initial-letter: 2;
+  color: #C89B3C;
+  font-family: Cinzel, serif;
+  text-shadow: 0 0 30px rgba(200, 155, 60, 0.6);
+  margin-right: 0.12em;
+}
+
 /* Ornamental divider component */
 .ornamental-divider {
   display: flex;

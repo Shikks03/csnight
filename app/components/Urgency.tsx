@@ -58,12 +58,12 @@ export function Urgency() {
           {items.map((item, index) => {
             const Icon = item.icon;
             return (
-              <Reveal key={index} delay={index * 0.1}>
-              <div className="group text-center relative">
+              <Reveal key={index} delay={index * 0.1} className="h-full">
+              <div className="group text-center relative h-full flex flex-col">
                 <div className="absolute inset-0 border-2 border-[#C89B3C]/30 group-hover:border-[#C89B3C] transition-colors duration-500" />
                 <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(200,155,60,0.05)] group-hover:shadow-[inset_0_0_60px_rgba(200,155,60,0.15)] transition-shadow duration-500" />
 
-                <div className="relative p-8 pt-12">
+                <div className="relative p-8 pt-12 flex flex-col flex-1 items-center">
                   <div className="inline-block mb-6 relative">
                     <div className="w-20 h-20 border-[3px] border-[#C89B3C] flex items-center justify-center bg-gradient-to-br from-[#C89B3C]/20 to-transparent group-hover:scale-110 transition-transform duration-500">
                       <Icon className="w-10 h-10" style={{ color: "#C89B3C" }} />
@@ -87,7 +87,7 @@ export function Urgency() {
                     ))}
                   </div>
 
-                  <p className="text-lg leading-relaxed px-4" style={{ color: "#F5EDD8" }}>
+                  <p className="text-lg leading-relaxed px-4 mt-auto" style={{ color: "#F5EDD8" }}>
                     {item.subtitle}
                   </p>
                 </div>
