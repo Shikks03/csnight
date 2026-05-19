@@ -14,7 +14,7 @@ const socials = [
   { Icon: LinkedInIcon, href: "https://www.linkedin.com/company/feutechacm/posts/?feedView=all" },
 ];
 
-const navLinks = ["About", "Tickets", "FAQ", "Contact"];
+const navLinks = ["About", "Tickets", "FAQ", "Contact", "Handbook"];
 
 export function Footer() {
   return (
@@ -93,6 +93,8 @@ export function Footer() {
               <span key={i} className="flex items-center gap-8">
                 <a
                   href={`#${link.toLowerCase()}`}
+                  target={link === "Handbook" ? "_blank" : undefined}
+                  rel={link === "Handbook" ? "noopener noreferrer" : undefined}
                   className="uppercase tracking-[0.2em] transition-all duration-300 hover:text-[#C89B3C] hover:tracking-[0.3em]"
                   style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
                 >
