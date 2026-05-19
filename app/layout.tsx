@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
-  verification: { google: "REPLACE_WITH_SEARCH_CONSOLE_TOKEN" },
+  verification: { google: "ejzjvlEiR1NG4UlzlwaTlPfFDiDo7pi8tuPxUvVqKdY" },
   openGraph: {
     title: "CS Night 2026 — A Masquerade Grand Ball",
     description:
