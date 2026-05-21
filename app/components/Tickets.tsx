@@ -210,7 +210,7 @@ export function Tickets() {
                         fontFamily: "Cinzel, serif",
                         color: "#C89B3C",
                         fontWeight: 700,
-                        fontSize: tier.featured ? "4.5rem" : "3.75rem",
+                        fontSize: tier.featured ? "clamp(2.5rem, 11vw, 4.5rem)" : "clamp(2rem, 9.5vw, 3.75rem)",
                         lineHeight: 1,
                         textShadow: tier.featured
                           ? "0 0 50px rgba(200,155,60,0.55), 0 0 100px rgba(200,155,60,0.2)"
@@ -230,12 +230,12 @@ export function Tickets() {
                   {/* Perforated tear line */}
                   <div className="relative my-6">
                     <div
-                      className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full"
+                      className="hidden sm:block absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full"
                       style={{ left: "-26px", background: "#060D18", border: "2px solid rgba(200,155,60,0.2)" }}
                     />
                     <div className="border-t-2 border-dashed" style={{ borderColor: "rgba(200,155,60,0.28)" }} />
                     <div
-                      className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full"
+                      className="hidden sm:block absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full"
                       style={{ right: "-26px", background: "#060D18", border: "2px solid rgba(200,155,60,0.2)" }}
                     />
                   </div>

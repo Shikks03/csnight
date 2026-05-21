@@ -79,7 +79,7 @@ export function Contact() {
           </p>
 
           <div
-            className="relative p-5 flex items-center justify-between transition-all duration-300"
+            className="relative p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-all duration-300"
             style={{
               border: "1px solid rgba(200,155,60,0.28)",
               background: "rgba(10,22,40,0.65)",
@@ -119,7 +119,7 @@ export function Contact() {
               href="https://www.facebook.com/Shiksss.shiksss/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-[11px] tracking-[0.18em] px-3.5 py-2 transition-all duration-300 hover:bg-[#C89B3C]/10 hover:border-[#C89B3C]/55 active:bg-[#C89B3C]/10 active:border-[#C89B3C]/55 whitespace-nowrap"
+              className="flex items-center gap-2 text-[11px] tracking-[0.18em] px-3.5 py-2 transition-all duration-300 hover:bg-[#C89B3C]/10 hover:border-[#C89B3C]/55 active:bg-[#C89B3C]/10 active:border-[#C89B3C]/55"
               style={{
                 color: "#C89B3C",
                 fontFamily: "Cinzel, serif",

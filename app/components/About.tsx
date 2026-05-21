@@ -229,7 +229,7 @@ export function About() {
                   <div>
                     <p className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-1" style={{ color: "#8BA3BF" }}>Date</p>
                     <p
-                      className="text-2xl"
+                      className="text-xl sm:text-2xl"
                       style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
                     >
                       June 27, 2026
@@ -245,7 +245,7 @@ export function About() {
                   <div>
                     <p className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-1" style={{ color: "#8BA3BF" }}>Time</p>
                     <p
-                      className="text-2xl"
+                      className="text-xl sm:text-2xl"
                       style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
                     >
                       4:30 – 9:00 PM
@@ -261,7 +261,7 @@ export function About() {
                   <div>
                     <p className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-1" style={{ color: "#8BA3BF" }}>Doors Open</p>
                     <p
-                      className="text-2xl"
+                      className="text-xl sm:text-2xl"
                       style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
                     >
                       3:20 PM
@@ -277,7 +277,7 @@ export function About() {
                   <div>
                     <p className="text-[11px] tracking-[0.2em] sm:text-xs sm:tracking-[0.35em] uppercase mb-1" style={{ color: "#8BA3BF" }}>Venue</p>
                     <p
-                      className="text-2xl"
+                      className="text-xl sm:text-2xl"
                       style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", fontWeight: 600 }}
                     >
                       FEU Tech — 17th Floor Gymnasium
@@ -291,7 +291,7 @@ export function About() {
                     Dress Code
                   </p>
                   <p
-                    className="text-2xl"
+                    className="text-xl sm:text-2xl"
                     style={{
                       fontFamily: "Cinzel, serif",
                       color: "#C89B3C",

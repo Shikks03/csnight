@@ -88,14 +88,14 @@ export function Footer() {
 
         {/* Nav Links */}
         <div className="text-center mb-12">
-          <div className="flex flex-wrap justify-center gap-x-5 gap-y-3 sm:gap-8 text-base">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 sm:gap-8 text-base">
             {navLinks.map((link, i) => (
-              <span key={i} className="flex items-center gap-8">
+              <span key={i} className="flex items-center gap-4">
                 <a
                   href={link === "Handbook" ? "https://drive.google.com/file/d/1dh7xJAXCiE-ESUq8xlgnXEcx8Gx9K98f/view" : `#${link.toLowerCase()}`}
                   target={link === "Handbook" ? "_blank" : undefined}
                   rel={link === "Handbook" ? "noopener noreferrer" : undefined}
-                  className="uppercase tracking-[0.2em] transition-all duration-300 hover:text-[#C89B3C] hover:tracking-[0.3em] active:text-[#C89B3C]"
+                  className="py-2 uppercase tracking-[0.2em] transition-all duration-300 hover:text-[#C89B3C] hover:tracking-[0.3em] active:text-[#C89B3C]"
                   style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
                 >
                   {link}
