@@ -9,6 +9,7 @@ import {
   EVENT_VENUE_NAME,
   EVENT_VENUE_ADDRESS,
   TICKET_TIERS,
+  TICKET_SALE_START,
   RESERVATION_URL,
 } from "@/lib/site";
 import { FAQ_ITEMS } from "@/lib/faq";
@@ -53,6 +54,10 @@ export function StructuredData() {
           name: ORGANIZER_NAME,
           url: SITE_URL,
         },
+        performer: {
+          "@type": "PerformingGroup",
+          name: "To Be Announced",
+        },
         offers: TICKET_TIERS.map((tier) => ({
           "@type": "Offer",
           name: tier.name,
@@ -60,6 +65,7 @@ export function StructuredData() {
           priceCurrency: "PHP",
           url: RESERVATION_URL,
           availability: "https://schema.org/InStock",
+          validFrom: TICKET_SALE_START,
         })),
       },
       {

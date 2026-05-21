@@ -5,7 +5,7 @@
  * JSON-LD schema, and other site-wide configurations.
  */
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cs-night.vercel.app";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://csnight.fit";
 
 // Event Information
 export const EVENT_NAME = "CS Night 2026";
@@ -31,6 +31,9 @@ export const ORGANIZER_SOCIALS = [
   "https://www.instagram.com/feutechacm/",
   "https://www.linkedin.com/company/feutechacm/posts/?feedView=all",
 ];
+
+// Ticket sale start date (used in offer schema validFrom)
+export const TICKET_SALE_START = "2026-03-20T00:00:00+08:00";
 
 // Ticket Information
 export const TICKET_TIERS = [
