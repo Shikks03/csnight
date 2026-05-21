@@ -6,6 +6,9 @@
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
+  background-image: url('/frames/frame_0001.webp');
+  background-size: cover;
+  background-position: center;
 }
 
 #hero-canvas {
