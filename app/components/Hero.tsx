@@ -304,14 +304,24 @@ export function Hero() {
 
                     {/* Seal + title */}
                     <div className="flex flex-col items-center gap-5">
-                      <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#E5C06B] via-[#C89B3C] to-[#8B6914] flex items-center justify-center shadow-[0_0_48px_rgba(200,155,60,0.4)] border border-[#FFE8A1]/30">
+                      <motion.div
+                        className="w-24 h-24 rounded-full bg-gradient-to-br from-[#E5C06B] via-[#C89B3C] to-[#8B6914] flex items-center justify-center border border-[#FFE8A1]/30"
+                        animate={{
+                          boxShadow: [
+                            "0 0 48px rgba(200,155,60,0.4)",
+                            "0 0 72px rgba(200,155,60,0.85), 0 0 120px rgba(200,155,60,0.25)",
+                            "0 0 48px rgba(200,155,60,0.4)",
+                          ],
+                        }}
+                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                      >
                         <span
                           className="text-3xl font-bold tracking-tight text-[#2A1800]"
                           style={{ fontFamily: "Cinzel, serif" }}
                         >
                           CS
                         </span>
-                      </div>
+                      </motion.div>
                       <p
                         className="text-xs tracking-[0.35em] uppercase text-[#8BA3BF]/60"
                         style={{ fontFamily: "Cinzel, serif" }}
