@@ -11,8 +11,8 @@
  *
  * CONFIG — adjust these two values to match your video:
  */
-const FRAME_COUNT = 104;      // Total number of extracted frames
-const SCROLL_DISTANCE = 750; // Pixels of scroll to play through all frames (higher = slower)
+const FRAME_COUNT = 50;       // Total number of extracted frames
+const SCROLL_DISTANCE = 750;  // Pixels of scroll to play through all frames (higher = slower)
 const BASE_PATH = '/frames/frame_';
 
 (function () {
@@ -164,20 +164,21 @@ const BASE_PATH = '/frames/frame_';
     preloadFrames(function() {
       if (loadingEl) loadingEl.style.display = 'none';
       revealOverlay();
-      // Wait for the envelope overlay to dismiss before setting up ScrollTrigger,
-      // so that body.overflow is restored and GSAP can measure scroll metrics correctly.
-      // If the safety timer already fired and React already dispatched hero:revealed,
-      // call initScrollTrigger immediately rather than waiting for an event that already passed.
-      if (window.__heroRevealed) {
-        if (loadingEl) loadingEl.style.display = 'none';
-        initScrollTrigger();
-      } else {
-        window.addEventListener('hero:revealed', function onRevealed() {
-          window.removeEventListener('hero:revealed', onRevealed);
+      // Frames are done — now wait for GSAP (loads in parallel, likely already ready).
+      // Only after GSAP is available can we set up ScrollTrigger. Also wait for the
+      // envelope overlay to dismiss so body.overflow is restored before GSAP measures scroll.
+      waitForGSAP(function() {
+        if (window.__heroRevealed) {
           if (loadingEl) loadingEl.style.display = 'none';
           initScrollTrigger();
-        }, { once: true });
-      }
+        } else {
+          window.addEventListener('hero:revealed', function onRevealed() {
+            window.removeEventListener('hero:revealed', onRevealed);
+            if (loadingEl) loadingEl.style.display = 'none';
+            initScrollTrigger();
+          }, { once: true });
+        }
+      });
     });
   }
 
@@ -193,9 +194,12 @@ const BASE_PATH = '/frames/frame_';
   /* ── Entry point ────────────────────────────────────────────────── */
   window.initHero = initHero;
 
+  // Start frame preloading immediately — don't wait for GSAP first.
+  // GSAP is only needed for ScrollTrigger setup, which happens after frames finish loading.
+  // Frames (8+ MB) and GSAP CDN scripts now download in parallel instead of sequentially.
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => waitForGSAP(initHero));
+    document.addEventListener('DOMContentLoaded', initHero);
   } else {
-    waitForGSAP(initHero);
+    initHero();
   }
 })();
