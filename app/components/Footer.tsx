@@ -92,7 +92,7 @@ export function Footer() {
             {navLinks.map((link, i) => (
               <span key={i} className="flex items-center gap-8">
                 <a
-                  href={`#${link.toLowerCase()}`}
+                  href={link === "Handbook" ? "https://drive.google.com/file/d/1dh7xJAXCiE-ESUq8xlgnXEcx8Gx9K98f/view" : `#${link.toLowerCase()}`}
                   target={link === "Handbook" ? "_blank" : undefined}
                   rel={link === "Handbook" ? "noopener noreferrer" : undefined}
                   className="uppercase tracking-[0.2em] transition-all duration-300 hover:text-[#C89B3C] hover:tracking-[0.3em]"

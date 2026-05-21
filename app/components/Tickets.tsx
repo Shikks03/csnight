@@ -302,7 +302,7 @@ export function Tickets() {
                 Payment details will be provided in the reservation form.
               </p>
               <a
-                href="#handbook"
+                href="https://drive.google.com/file/d/1dh7xJAXCiE-ESUq8xlgnXEcx8Gx9K98f/view"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 mt-4 text-xs uppercase tracking-[0.25em] transition-all duration-300 hover:opacity-70"

@@ -67,7 +67,7 @@ export function Navbar() {
             </button>
           ))}
           <a
-            href="#handbook"
+            href="https://drive.google.com/file/d/1dh7xJAXCiE-ESUq8xlgnXEcx8Gx9K98f/view"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs uppercase tracking-[0.25em] transition-all duration-300 hover:text-[#C89B3C]"
@@ -125,7 +125,7 @@ export function Navbar() {
             </button>
           ))}
           <a
-            href="#handbook"
+            href="https://drive.google.com/file/d/1dh7xJAXCiE-ESUq8xlgnXEcx8Gx9K98f/view"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMenuOpen(false)}
