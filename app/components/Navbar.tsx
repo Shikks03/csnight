@@ -5,8 +5,14 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [heroDone, setHeroDone] = useState(false);
+  const [noPinnedHero, setNoPinnedHero] = useState(false);
 
   useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px), (prefers-reduced-motion: reduce)");
+    const onMqChange = (e: MediaQueryListEvent) => setNoPinnedHero(e.matches);
+    setNoPinnedHero(mq.matches);
+    mq.addEventListener("change", onMqChange);
+
     const handleScroll = () => setScrolled(window.scrollY > 40);
     const onHeroDone = () => setHeroDone(true);
     const onHeroEnterBack = () => setHeroDone(false);
@@ -15,6 +21,7 @@ export function Navbar() {
     window.addEventListener("hero:scrollComplete", onHeroDone);
     window.addEventListener("hero:scrollEnter", onHeroEnterBack);
     return () => {
+      mq.removeEventListener("change", onMqChange);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("hero:scrollComplete", onHeroDone);
       window.removeEventListener("hero:scrollEnter", onHeroEnterBack);
@@ -29,7 +36,7 @@ export function Navbar() {
   return (
     <nav
       className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
-        heroDone && scrolled
+        (heroDone || noPinnedHero) && scrolled
           ? "top-0 bg-[#050B14]/90 backdrop-blur-md border-b border-[#C89B3C]/20 py-3"
           : "top-4 md:top-8 bg-transparent py-4"
       }`}
@@ -77,7 +84,7 @@ export function Navbar() {
           </a>
           <button
             onClick={() => scrollTo("tickets")}
-            className="group relative px-7 py-2.5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_rgba(200,155,60,0.4)] cursor-pointer"
+            className="group relative px-7 py-2.5 bg-transparent border-2 overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_rgba(200,155,60,0.4)] active:shadow-[0_0_30px_rgba(200,155,60,0.4)] cursor-pointer"
             style={{
               borderColor: "#C89B3C",
               fontFamily: "Cinzel, serif",
@@ -87,7 +94,7 @@ export function Navbar() {
             <span className="relative z-10 text-xs tracking-[0.2em] uppercase font-semibold">
               RSVP
             </span>
-            <div className="absolute inset-0 bg-[#C89B3C]/10 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
+            <div className="absolute inset-0 bg-[#C89B3C]/10 transform scale-y-0 group-hover:scale-y-100 group-active:scale-y-100 transition-transform duration-500 origin-bottom" />
           </button>
         </div>
 
@@ -136,7 +143,7 @@ export function Navbar() {
           </a>
           <button
             onClick={() => scrollTo("tickets")}
-            className="self-start px-8 py-3 border-2 border-[#C89B3C] text-[#C89B3C] text-xs tracking-[0.2em] uppercase cursor-pointer"
+            className="self-start px-8 py-3 border-2 border-[#C89B3C] text-[#C89B3C] text-xs tracking-[0.2em] uppercase cursor-pointer active:bg-[#C89B3C]/10"
             style={{ fontFamily: "Cinzel, serif" }}
           >
             RSVP
