@@ -5,12 +5,62 @@ import Script from "next/script";
 
 type Phase = "envelope" | "loading" | "revealed";
 
+const LOADING_PHRASES = [
+  "Lighting the chandeliers...",
+  "Preparing the masquerade...",
+  "Setting the grand stage...",
+  "Adorning the ballroom...",
+  "Welcoming the guests...",
+];
+
+const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
+  id: i,
+  x: (i * 37 + 11) % 97,
+  size: i % 3 === 0 ? 4 : i % 3 === 1 ? 3 : 2,
+  opacity: 0.12 + (i % 5) * 0.06,
+  duration: 5 + (i % 7),
+  delay: -(i * 0.8),
+}));
+
+function LoadingParticles() {
+  return (
+    <div
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+      aria-hidden="true"
+    >
+      {PARTICLES.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full bg-[#C89B3C]"
+          style={{
+            left: `${p.x}%`,
+            bottom: "-4px",
+            width: p.size,
+            height: p.size,
+          }}
+          animate={{
+            y: -720,
+            opacity: [p.opacity, p.opacity * 0.5, 0],
+          }}
+          transition={{
+            duration: p.duration,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export function Hero() {
   const [isOpen, setIsOpen] = useState(false);
   const [phase, setPhase] = useState<Phase>("envelope");
   const [loadProgress, setLoadProgress] = useState(0);
   const [displayProgress, setDisplayProgress] = useState(0);
   const [heroMode, setHeroMode] = useState<"pending" | "canvas" | "poster">("pending");
+  const [phraseIndex, setPhraseIndex] = useState(0);
   const loadProgressRef = useRef(0);
   const loadStartRef = useRef(0);
 
@@ -101,6 +151,16 @@ export function Hero() {
       clearTimeout(revealTimeout);
       clearTimeout(safetyTimer);
     };
+  }, [phase]);
+
+  // Cycle loading phrases while waiting
+  useEffect(() => {
+    if (phase !== "loading") return;
+    setPhraseIndex(0);
+    const id = setInterval(() => {
+      setPhraseIndex(i => (i + 1) % LOADING_PHRASES.length);
+    }, 2400);
+    return () => clearInterval(id);
   }, [phase]);
 
   const scrollToTickets = () => {
@@ -226,6 +286,8 @@ export function Hero() {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
                 >
+                  <LoadingParticles />
+
                   {/* Corner accents */}
                   <span className="absolute top-6 left-6 w-8 h-8 border-t border-l border-[#C89B3C]/30" />
                   <span className="absolute top-6 right-6 w-8 h-8 border-t border-r border-[#C89B3C]/30" />
@@ -279,31 +341,33 @@ export function Hero() {
                         />
                       </div>
 
-                      <div className="flex items-center justify-between">
-                        <AnimatePresence mode="wait">
-                          {displayProgress >= 100 ? (
+                      <div className="flex items-center justify-center h-6 overflow-hidden">
+                        {displayProgress >= 100 ? (
+                          <motion.p
+                            key="ready"
+                            className="text-xs tracking-[0.25em] uppercase text-[#C89B3C]/80 text-center"
+                            style={{ fontFamily: "Cinzel, serif" }}
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4 }}
+                          >
+                            Step into the night
+                          </motion.p>
+                        ) : (
+                          <AnimatePresence mode="wait">
                             <motion.p
-                              key="ready"
-                              className="text-xs tracking-[0.25em] uppercase text-[#C89B3C]/80 w-full text-center"
+                              key={phraseIndex}
+                              className="text-xs tracking-[0.2em] uppercase text-[#C89B3C]/60 text-center italic"
                               style={{ fontFamily: "Cinzel, serif" }}
-                              initial={{ opacity: 0, y: 4 }}
+                              initial={{ opacity: 0, y: 8 }}
                               animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.4 }}
+                              exit={{ opacity: 0, y: -8 }}
+                              transition={{ duration: 0.5, ease: "easeInOut" }}
                             >
-                              Step into the night
+                              {LOADING_PHRASES[phraseIndex]}
                             </motion.p>
-                          ) : (
-                            <motion.span
-                              key="pct"
-                              className="text-sm text-[#C89B3C]/60 tabular-nums"
-                              style={{ fontFamily: "Cinzel, serif" }}
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                            >
-                              {displayProgress}%
-                            </motion.span>
-                          )}
-                        </AnimatePresence>
+                          </AnimatePresence>
+                        )}
                       </div>
                     </div>
 
