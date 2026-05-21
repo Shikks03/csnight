@@ -106,12 +106,12 @@ export function Faq() {
                 <button
                   id={`faq-btn-${i}`}
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="relative w-full flex items-center justify-between px-6 py-5 text-left overflow-hidden group"
+                  className="relative w-full flex items-center justify-between px-6 py-5 text-left overflow-hidden group active:bg-[#C89B3C]/5"
                   aria-expanded={isOpen}
                   aria-controls={`faq-panel-${i}`}
                 >
                   {/* Shimmer sweep on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C89B3C]/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none" />
+                  <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-[#C89B3C]/10 to-transparent transition-transform duration-700 pointer-events-none ${isOpen ? "translate-x-full" : "-translate-x-full group-hover:translate-x-full"}`} />
 
                   <span
                     className="relative z-10 text-base md:text-lg font-medium pr-4 transition-colors duration-300"

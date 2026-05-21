@@ -119,7 +119,7 @@ export function Contact() {
               href="https://www.facebook.com/Shiksss.shiksss/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-[11px] tracking-[0.18em] px-3.5 py-2 transition-all duration-300 hover:bg-[#C89B3C]/10 hover:border-[#C89B3C]/55 whitespace-nowrap"
+              className="flex items-center gap-2 text-[11px] tracking-[0.18em] px-3.5 py-2 transition-all duration-300 hover:bg-[#C89B3C]/10 hover:border-[#C89B3C]/55 active:bg-[#C89B3C]/10 active:border-[#C89B3C]/55 whitespace-nowrap"
               style={{
                 color: "#C89B3C",
                 fontFamily: "Cinzel, serif",
@@ -174,7 +174,7 @@ export function Contact() {
                 </p>
                 <a
                   href="mailto:acm.feu.it@gmail.com"
-                  className="transition-colors duration-200 hover:text-[#C89B3C] text-[15px]"
+                  className="transition-colors duration-200 hover:text-[#C89B3C] active:text-[#C89B3C] text-[15px]"
                   style={{ color: "#F5EDD8", fontFamily: "monospace" }}
                 >
                   acm.feu.it@gmail.com
@@ -206,7 +206,7 @@ export function Contact() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm px-4 py-2.5 transition-all duration-300 hover:bg-[#C89B3C]/10 hover:border-[#C89B3C]/55"
+                    className="flex items-center gap-2 text-sm px-4 py-2.5 transition-all duration-300 hover:bg-[#C89B3C]/10 hover:border-[#C89B3C]/55 active:bg-[#C89B3C]/10 active:border-[#C89B3C]/55"
                     style={{
                       color: "#F5EDD8",
                       fontFamily: "monospace",

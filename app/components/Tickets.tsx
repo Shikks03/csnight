@@ -272,11 +272,11 @@ export function Tickets() {
                     </span>
                     {!tier.featured && (
                       <div
-                        className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500"
+                        className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 group-active/btn:opacity-100 transition-opacity duration-500"
                         style={{ background: "linear-gradient(135deg, #C89B3C, #8B6914)" }}
                       />
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover/btn:translate-x-full group-active/btn:translate-x-full transition-transform duration-1000" />
                   </a>
                 </div>
               </div>

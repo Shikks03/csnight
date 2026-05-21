@@ -75,9 +75,9 @@ export function Footer() {
               href={href}
               target={href.startsWith("mailto:") ? undefined : "_blank"}
               rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-              className="group relative w-12 h-12 sm:w-16 sm:h-16 border-[3px] border-[#C89B3C] flex items-center justify-center transition-all duration-500 hover:bg-[#C89B3C] hover:scale-110 hover:shadow-[0_0_40px_rgba(200,155,60,0.8)]"
+              className="group relative w-12 h-12 sm:w-16 sm:h-16 border-[3px] border-[#C89B3C] flex items-center justify-center transition-all duration-500 hover:bg-[#C89B3C] hover:scale-110 hover:shadow-[0_0_40px_rgba(200,155,60,0.8)] active:bg-[#C89B3C] active:scale-110"
             >
-              <Icon className="w-7 h-7 transition-colors duration-500 group-hover:text-[#0D1A2A]" style={{ color: "#C89B3C" }} />
+              <Icon className="w-7 h-7 transition-colors duration-500 group-hover:text-[#0D1A2A] group-active:text-[#0D1A2A]" style={{ color: "#C89B3C" }} />
               <div className="absolute -top-1 -left-1 w-3 h-3 border-l-2 border-t-2 border-[#F5EDD8] opacity-50" />
               <div className="absolute -top-1 -right-1 w-3 h-3 border-r-2 border-t-2 border-[#F5EDD8] opacity-50" />
               <div className="absolute -bottom-1 -left-1 w-3 h-3 border-l-2 border-b-2 border-[#F5EDD8] opacity-50" />
@@ -95,7 +95,7 @@ export function Footer() {
                   href={link === "Handbook" ? "https://drive.google.com/file/d/1dh7xJAXCiE-ESUq8xlgnXEcx8Gx9K98f/view" : `#${link.toLowerCase()}`}
                   target={link === "Handbook" ? "_blank" : undefined}
                   rel={link === "Handbook" ? "noopener noreferrer" : undefined}
-                  className="uppercase tracking-[0.2em] transition-all duration-300 hover:text-[#C89B3C] hover:tracking-[0.3em]"
+                  className="uppercase tracking-[0.2em] transition-all duration-300 hover:text-[#C89B3C] hover:tracking-[0.3em] active:text-[#C89B3C]"
                   style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif" }}
                 >
                   {link}

@@ -103,13 +103,13 @@ export function Urgency() {
             <div className="absolute -inset-3 sm:-inset-8 border border-[#C89B3C]/30 pointer-events-none" />
             <button
               onClick={scrollToTickets}
-              className="group relative px-8 py-5 sm:px-16 sm:py-8 bg-gradient-to-b from-[#C89B3C] to-[#8B6914] overflow-hidden transition-all duration-700 hover:shadow-[0_0_80px_rgba(200,155,60,0.8)] hover:scale-105 cursor-pointer"
+              className="group relative px-8 py-5 sm:px-16 sm:py-8 bg-gradient-to-b from-[#C89B3C] to-[#8B6914] overflow-hidden transition-all duration-700 hover:shadow-[0_0_80px_rgba(200,155,60,0.8)] hover:scale-105 active:shadow-[0_0_80px_rgba(200,155,60,0.8)] active:scale-105 cursor-pointer"
               style={{ fontFamily: "Cinzel, serif" }}
             >
               <span className="relative z-10 text-lg tracking-[0.12em] sm:text-2xl sm:tracking-[0.2em] md:text-3xl uppercase text-[#0D1A2A] font-bold">
                 Reserve your seat now
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -translate-x-full group-hover:translate-x-full group-active:translate-x-full transition-transform duration-1000" />
               <div className="absolute inset-0 border-2 border-[#FFD700]/50 group-hover:border-[#FFD700] transition-colors duration-500" />
             </button>
           </div>

@@ -70,7 +70,7 @@ export function Experience() {
             return (
               <Reveal key={index} delay={index * 0.12}>
               <div
-                className="group relative bg-gradient-to-b from-[#0A1628] to-[#0D1A2A] transition-all duration-700 hover:shadow-[0_30px_90px_rgba(200,155,60,0.3)] hover:-translate-y-4"
+                className="group relative bg-gradient-to-b from-[#0A1628] to-[#0D1A2A] transition-all duration-700 hover:shadow-[0_30px_90px_rgba(200,155,60,0.3)] hover:-translate-y-4 active:shadow-[0_30px_90px_rgba(200,155,60,0.3)] active:-translate-y-2"
                 style={{
                   border: "2px solid",
                   borderImage: "linear-gradient(180deg, #C89B3C, #8B6914) 1",
