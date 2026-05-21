@@ -7,23 +7,6 @@ export function About() {
       className="relative py-16 sm:py-24 md:py-32 px-4 bg-[#080F1B] overflow-hidden"
     >
 
-      {/* Chandelier glow from above */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none z-[1]"
-        style={{
-          width: "900px",
-          height: "450px",
-          background: "radial-gradient(ellipse at top, rgba(200,155,60,0.07) 0%, transparent 68%)",
-        }}
-      />
-      {/* Curtain Effects */}
-      <div className="absolute left-0 top-0 bottom-0 w-1/4 z-[1] pointer-events-none">
-        <div className="w-full h-full bg-linear-to-r from-[#0A1628] via-[#0D2840]/60 to-transparent" />
-      </div>
-      <div className="absolute right-0 top-0 bottom-0 w-1/4 z-[1] pointer-events-none">
-        <div className="w-full h-full bg-linear-to-l from-[#0A1628] via-[#0D2840]/60 to-transparent" />
-      </div>
-
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Title */}
         <Reveal><div className="text-center mb-14 md:mb-20">
