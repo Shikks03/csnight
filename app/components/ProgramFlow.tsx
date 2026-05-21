@@ -246,10 +246,9 @@ const ActCard = forwardRef<
 
       {/* Watermark numeral */}
       <div
-        className="absolute right-4 top-2 select-none pointer-events-none leading-none transition-opacity duration-300"
+        className="absolute right-4 top-2 select-none pointer-events-none leading-none transition-opacity duration-300 text-[5rem] md:text-[9rem]"
         style={{
           fontFamily: "Cinzel, serif",
-          fontSize: "9rem",
           color: "#C89B3C",
           opacity: isOpen ? 0.05 : 0.04,
           lineHeight: 1,
