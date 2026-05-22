@@ -176,6 +176,58 @@ export function Faq() {
           <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent to-[#C89B3C]/50" />
         </div>
 
+        {/* More questions CTA */}
+        <motion.div
+          className="mt-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <p
+            className="text-xl mb-2"
+            style={{ fontFamily: "Cinzel, serif", color: "#C89B3C", fontWeight: 700 }}
+          >
+            More questions?
+          </p>
+          <p
+            className="text-sm mb-6"
+            style={{ fontFamily: "Montserrat, sans-serif", color: "#8BA3BF" }}
+          >
+            Ask us on our page or check out the handbook.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="https://www.facebook.com/feutechACM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm uppercase tracking-widest transition-all duration-300 hover:bg-[#C89B3C]/10"
+              style={{
+                fontFamily: "Montserrat, sans-serif",
+                color: "#C89B3C",
+                border: "1px solid rgba(200,155,60,0.5)",
+                letterSpacing: "0.15em",
+              }}
+            >
+              Ask on our page
+            </a>
+            <a
+              href="https://drive.google.com/file/d/1dh7xJAXCiE-ESUq8xlgnXEcx8Gx9K98f/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm uppercase tracking-widest transition-all duration-300 hover:bg-[#C89B3C]/10"
+              style={{
+                fontFamily: "Montserrat, sans-serif",
+                color: "#C89B3C",
+                border: "1px solid rgba(200,155,60,0.5)",
+                letterSpacing: "0.15em",
+              }}
+            >
+              Read the Handbook
+            </a>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );

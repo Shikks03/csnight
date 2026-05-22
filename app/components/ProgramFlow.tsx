@@ -13,7 +13,8 @@ type Act = {
 };
 
 const moments: Moment[] = [
-  { timeRange: "3:20 – 5:00 PM", title: "Doors Open", description: "Find your seat and settle in." },
+  { timeRange: "3:00 – 4:30 PM", title: "Doors Open", description: "Find your seat and settle in." },
+  { timeRange: "4:30 – 5:00 PM", title: "Mini-Games", description: "Warm up with some fun and games before the night kicks off." },
   { timeRange: "5:00 – 5:05 PM", title: "Opening Video", description: "Sit back as the night begins." },
   { timeRange: "5:05 – 5:10 PM", title: "Opening Ceremony", description: "Welcome to CS Night." },
   { timeRange: "5:10 – 5:20 PM", title: "Welcome & Program Overview", description: "What's in store for the evening." },
@@ -39,23 +40,23 @@ const actGroups: Act[] = [
   {
     numeral: "I",
     title: "The Welcome",
-    timeRange: "3:20 – 5:35 PM",
+    timeRange: "3:00 – 5:35 PM",
     mood: "Doors open. The night begins.",
-    moments: moments.slice(0, 6),
+    moments: moments.slice(0, 7),
   },
   {
     numeral: "II",
     title: "The Feast & the Honours",
     timeRange: "5:35 – 7:30 PM",
     mood: "A feast, then the moments that matter.",
-    moments: moments.slice(6, 13),
+    moments: moments.slice(7, 14),
   },
   {
     numeral: "III",
     title: "After Dark",
     timeRange: "7:30 – 10:00 PM",
     mood: "Lights down, music up — the floor is yours.",
-    moments: moments.slice(13, 20),
+    moments: moments.slice(14, 21),
   },
 ];
 
@@ -110,7 +111,7 @@ export function ProgramFlow() {
             className="text-lg mt-6 italic"
             style={{ color: "#F5EDD8", fontFamily: "Cinzel, serif", opacity: 0.7 }}
           >
-            Twenty moments. One unforgettable evening.
+            Twenty-one moments. One unforgettable evening.
           </p>
           {/* Ornamental divider */}
           <div className="flex items-center justify-center gap-3 mt-10">
