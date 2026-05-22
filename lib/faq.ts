@@ -34,4 +34,29 @@ export const FAQ_ITEMS: FaqItem[] = [
     answer:
       "Fill out the reservation form via the \"Reserve a Seat\" button on this page. Once your registration and payment have been verified, your confirmation will be sent to the email address you provided — there is no physical ticket pickup. Make sure to double-check your email when registering.",
   },
+  {
+    question: "What is the registration deadline for CS Night 2026?",
+    answer:
+      "Registration closes on June 5, 2026, or earlier once the 220-guest capacity is reached — whichever comes first. Seats are first come, first served, so early registration is strongly encouraged. No walk-ins will be accommodated on the day of the event.",
+  },
+  {
+    question: "Can I bring a guest or plus-one to CS Night?",
+    answer:
+      "Yes. Each enrolled FEU Tech CS student may bring one (1) external guest. External guests — including alumni, plus-ones, and students from other schools or programs — are charged the External Participant rate of ₱1,099. A maximum of 50 external slots are available across all guests.",
+  },
+  {
+    question: "What can I expect at CS Night 2026?",
+    answer:
+      "CS Night 2026 features a full evening programme across three acts: a Masquerade Reception, a formal Buffet Dinner paired with an Awarding Ceremony and ACM Turnover, and a DJ-led Dance Floor to close the night. Highlights include live performances, ice breaker games with prizes, a Best Couple & Group Outfit contest, and a Raffle Draw. The programme runs from 4:30 PM to 9:00 PM.",
+  },
+  {
+    question: "Is there food at CS Night?",
+    answer:
+      "Yes. A buffet dinner is included in all ticket tiers and is served during the Feast segment of the programme (5:40 PM – 6:20 PM). All ticket holders get full access to the dinner at no extra cost.",
+  },
+  {
+    question: "Are there prizes and a raffle at CS Night?",
+    answer:
+      "Yes. The evening includes ice breaker games with prizes, a Best Couple & Group Outfit contest, and a Raffle Draw near the end of the night. Keep your registration confirmation — raffle participation is tied to your ticket.",
+  },
 ];
