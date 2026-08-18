@@ -134,6 +134,18 @@ export function Footer() {
             <div className="w-2 h-2 rotate-45 bg-[#C89B3C]/30" />
             <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-[#C89B3C]/30" />
           </div>
+          <p className="text-xs uppercase tracking-[0.2em] mt-6" style={{ color: "#8BA3BF", opacity: 0.6 }}>
+            Site by{" "}
+            <a
+              href="https://riku.works"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors duration-300 hover:text-[#C89B3C] active:text-[#C89B3C]"
+              style={{ color: "#8BA3BF" }}
+            >
+              RIKU
+            </a>
+          </p>
         </div>
       </Reveal>
     </footer>
